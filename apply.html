@@ -219,17 +219,17 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(253,250,245,
 
     <div class="sidebar-section">
       <div class="sidebar-label">Select Your Batch</div>
-      <div class="batch-pick">
+   <div class="batch-pick">
         <div class="batch-opt active" onclick="selectBatch(this)">
-          <div class="batch-opt-name">🎓 Class 5 - Main Batch</div>
-          <div class="batch-opt-detail">Fri & Sat · 11 :00-12:30 AM</div>
-          <div class="batch-opt-detail">Math · Science · General Knowledge</div>
-          <div class="batch-opt-fee" style="color:var(--teal-dark)">Monthly fee - no admission fee - no hidden charges</div>
-        </div>
-        <div class="batch-opt" onclick="selectBatch(this)">
           <div class="batch-opt-name">🎯 LTE Special Batch</div>
           <div class="batch-opt-detail">Friday only · 3:00-4:30 PM</div>
           <div class="batch-opt-detail">Cadet Admission Review</div>
+          <div class="batch-opt-fee" style="color:var(--teal-dark)">Monthly fee - no admission fee - no hidden charges</div>
+        </div>
+        <div class="batch-opt" onclick="selectBatch(this)">
+          <div class="batch-opt-name">🎓 Class 5 - Main Batch</div>
+          <div class="batch-opt-detail">Fri & Sat · 11:00 AM - 12:30 PM</div>
+          <div class="batch-opt-detail">Math · Science · General Knowledge</div>
           <div class="batch-opt-fee" style="color:var(--teal-dark)">Monthly fee - no admission fee - no hidden charges</div>
         </div>
       </div>
@@ -406,8 +406,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(253,250,245,
 
 <script>
 const batchForms = {
-  0: 'https://forms.clickup.com/3375150/f/3701e-99418/0Z37RSGRGIXY3CF349?Fee=2200',
-  1: 'https://forms.clickup.com/3375150/f/3701e-105198/96ZZ16IA6EMHD8FE8U?Fee=2200'
+  0: 'https://forms.clickup.com/3375150/f/3701e-105198/96ZZ16IA6EMHD8FE8U?Fee=2200',
+  1: 'https://forms.clickup.com/3375150/f/3701e-99418/0Z37RSGRGIXY3CF349?Fee=2200'
 };
 
 function selectBatch(el) {
