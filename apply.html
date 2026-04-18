@@ -961,6 +961,18 @@ function selectBatch(el) {
   });
   el.classList.add('active');
 }
+// Auto-select batch from homepage
+window.addEventListener('load', function(){
+  const saved = localStorage.getItem('selectedBatch');
+  if(saved !== null){
+    const opts = document.querySelectorAll('.batch-opt');
+    if(opts[saved]){
+      selectBatch(opts[saved]);
+    }
+    localStorage.removeItem('selectedBatch');
+  }
+});
+  
 function openPayModal() {
   document.getElementById('payModal').classList.add('open');
   document.body.style.overflow = 'hidden';
