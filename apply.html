@@ -94,6 +94,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(253,250,245,
 .modal-overlay{position:fixed;inset:0;background:rgba(26,12,3,0.70);z-index:500;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity 0.3s}
 .modal-overlay.open{opacity:1;pointer-events:all}
 .modal{background:var(--cream);border-radius:24px;width:100%;max-width:480px;max-height:90vh;overflow-y:auto;box-shadow:0 32px 80px rgba(0,0,0,0.30);transform:translateY(20px);transition:transform 0.3s}
+.modal-overlay .modal{width:480px !important;max-width:90vw !important}
 .modal-overlay.open .modal{transform:translateY(0)}
 .modal-header{background:var(--brown);padding:28px 28px 24px;border-radius:24px 24px 0 0;position:relative}
 .modal-header h3{font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--white);font-weight:900;margin-bottom:6px}
