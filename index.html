@@ -1576,49 +1576,78 @@ function scrollTestimonials(direction) {
   viewport.scrollBy({ left: direction * amount, behavior: 'smooth' });
 }
 // Infinite auto-scroll
-let paused = false;
-(function(){
+<script>
+document.addEventListener('DOMContentLoaded', function () {
   const viewport = document.getElementById('testiViewport');
-  const track = viewport.querySelector('.testi-track');
-  if (!viewport || !track) return;
+  if (!viewport) return;
 
+  const track = viewport.querySelector('.testi-track');
+  if (!track) return;
+
+  let paused = false;
+  let scrollAmount = 0;
+  const speed = 2.5; // increase for faster auto scroll
+
+  // Clone cards once for infinite effect
   const cards = Array.from(track.children);
   cards.forEach(card => {
-    const clone = card.cloneNode(true);
-    track.appendChild(clone);
+    track.appendChild(card.cloneNode(true));
   });
-
-  let scrollAmount = 0;
-  const speed = 1.2;
-
-  viewport.addEventListener('mouseenter', () => paused = true);
-  viewport.addEventListener('mouseleave', () => paused = false);
-  viewport.addEventListener('touchstart', () => paused = true);
-  viewport.addEventListener('touchend', () => setTimeout(() => paused = false, 2000));
 
   function animate() {
     if (!paused) {
       scrollAmount += speed;
-      viewport.scrollLeft = scrollAmount;
+
       if (scrollAmount >= track.scrollWidth / 2) {
         scrollAmount = 0;
-        viewport.scrollLeft = 0;
       }
+
+      viewport.scrollLeft = scrollAmount;
     }
+
     requestAnimationFrame(animate);
   }
+
+  viewport.addEventListener('mouseenter', () => {
+    paused = true;
+  });
+
+  viewport.addEventListener('mouseleave', () => {
+    paused = false;
+    scrollAmount = viewport.scrollLeft;
+  });
+
+  viewport.addEventListener('touchstart', () => {
+    paused = true;
+  }, { passive: true });
+
+  viewport.addEventListener('touchend', () => {
+    scrollAmount = viewport.scrollLeft;
+    setTimeout(() => {
+      paused = false;
+    }, 1500);
+  }, { passive: true });
+
+  window.scrollTestimonials = function(direction) {
+    paused = true;
+
+    const amount = Math.round(viewport.clientWidth * 0.92);
+    scrollAmount = viewport.scrollLeft + (direction * amount);
+
+    viewport.scrollTo({
+      left: scrollAmount,
+      behavior: 'smooth'
+    });
+
+    setTimeout(() => {
+      scrollAmount = viewport.scrollLeft;
+      paused = false;
+    }, 600);
+  };
+
   requestAnimationFrame(animate);
-})();
-
-function scrollTestimonials(direction) {
-  const viewport = document.getElementById('testiViewport');
-  if (!viewport) return;
-  paused = true;
-  const amount = Math.round(viewport.clientWidth * 0.92);
-  viewport.scrollLeft += direction * amount;
-  setTimeout(() => paused = false, 2000);
-}
-
+});
+</script>
 <!-- FLOATING CHAT BUTTON -->
 <div class="float-chat" id="floatChat">
   <div class="float-options" id="floatOptions">
