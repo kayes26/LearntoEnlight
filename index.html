@@ -1295,7 +1295,7 @@ footer {
 <div class="fee-card fade-up" style="transition-delay:0.15s;padding:0;overflow:hidden">
   <div style="padding:16px 20px;background:rgba(255,255,255,0.05)">
     <div class="fee-card-title" style="margin-bottom:4px">⏱️ Exam Submission Tracker</div>
-    <p style="font-size:0.78rem;color:rgba(255,255,255,0.50);margin:0">On time · Late · No submission — tracked live</p>
+    <p style="font-size:0.78rem;color:rgba(255,255,255,0.50);margin:0">On time · Late · No submission - tracked live</p>
   </div>
   <img src="https://res.cloudinary.com/ddvfu3qon/image/upload/v1776541380/Image_19-04-2026_at_1.42_AM_pod3ee.png"
     alt="Exam submission tracker"
@@ -1325,6 +1325,11 @@ footer {
     <h2 class="section-title">Real feedback from real families</h2>
   </div>
 
+ <div class="fade-up" style="margin-top:32px;border-radius:16px;overflow:hidden;border:1px solid rgba(62,32,5,0.10)">
+    <img src="https://res.cloudinary.com/ddvfu3qon/image/upload/v1776379654/Image_17-04-2026_at_4.45_AM_x3j21q.png"
+      alt="Parent feedback dashboard"
+      style="width:100%;display:block;object-fit:cover">
+  </div>
   <div class="testi-carousel-wrap fade-up">
     <div class="testi-carousel-head">
       <div style="font-size:0.82rem;color:var(--text-light)">Swipe or use arrows to scroll</div>
@@ -1559,6 +1564,44 @@ function scrollTestimonials(direction) {
   const amount = Math.round(viewport.clientWidth * 0.92);
   viewport.scrollBy({ left: direction * amount, behavior: 'smooth' });
 }
+
+// Infinite auto-scroll
+(function(){
+  const viewport = document.getElementById('testiViewport');
+  const track = viewport.querySelector('.testi-track');
+  if (!viewport || !track) return;
+
+  // Clone all cards and append for infinite loop
+  const cards = Array.from(track.children);
+  cards.forEach(card => {
+    const clone = card.cloneNode(true);
+    track.appendChild(clone);
+  });
+
+  let scrollAmount = 0;
+  const speed = 0.5; // px per frame - adjust for faster/slower
+  let paused = false;
+
+  viewport.addEventListener('mouseenter', () => paused = true);
+  viewport.addEventListener('mouseleave', () => paused = false);
+  viewport.addEventListener('touchstart', () => paused = true);
+  viewport.addEventListener('touchend', () => setTimeout(() => paused = false, 2000));
+
+  function animate() {
+    if (!paused) {
+      scrollAmount += speed;
+      viewport.scrollLeft = scrollAmount;
+
+      // Reset to start when halfway through (seamless loop)
+      if (scrollAmount >= track.scrollWidth / 2) {
+        scrollAmount = 0;
+        viewport.scrollLeft = 0;
+      }
+    }
+    requestAnimationFrame(animate);
+  }
+  requestAnimationFrame(animate);
+})();
 </script>
 
 <!-- FLOATING CHAT BUTTON -->
