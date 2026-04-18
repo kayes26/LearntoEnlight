@@ -277,18 +277,35 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(253,250,245,
       <p>Fill all required fields carefully. After submitting, click the payment button below to complete your admission.</p>
     </div>
 
-<div class="clickup-wrap">
-  <iframe class="clickup-embed clickup-dynamic-height"
-    id="batchIframe"
-    src="https://forms.clickup.com/3375150/f/3701e-99418/0Z37RSGRGIXY3CF349?Fee=2200"
-    onwheel=""
-    width="100%"
-    style="background: transparent; border: none;">
-  </iframe>
-  <script async src="https://app-cdn.clickup.com/assets/js/forms-embed/v1.js"></script>
+<div id="pay" style="margin-top:28px;background:linear-gradient(135deg,var(--brown),#5C3010);border-radius:20px;padding:32px 40px;text-align:center;box-shadow:0 8px 32px rgba(62,32,5,0.25)">
+  
+  <!-- Step indicator -->
+  <div style="display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:24px">
+    <div style="display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.10);padding:8px 16px;border-radius:100px">
+      <span style="width:22px;height:22px;border-radius:50%;background:#4CAF50;display:inline-flex;align-items:center;justify-content:center;font-size:0.75rem;font-weight:700;color:white">✓</span>
+      <span style="font-size:0.82rem;color:rgba(255,255,255,0.80);font-weight:600">Step 1: Form Submitted</span>
+    </div>
+    <div style="color:rgba(255,255,255,0.30);font-size:1.2rem">→</div>
+    <div style="display:flex;align-items:center;gap:8px;background:rgba(0,180,200,0.20);border:1px solid rgba(0,180,200,0.40);padding:8px 16px;border-radius:100px">
+      <span style="width:22px;height:22px;border-radius:50%;background:var(--teal);display:inline-flex;align-items:center;justify-content:center;font-size:0.75rem;font-weight:700;color:white">2</span>
+      <span style="font-size:0.82rem;color:var(--teal);font-weight:700">Step 2: Complete Payment</span>
+    </div>
+  </div>
+
+  <h3 style="font-family:'Playfair Display',serif;font-size:1.3rem;color:white;font-weight:900;margin-bottom:8px">One last step to confirm your seat</h3>
+  <p style="font-size:0.88rem;color:rgba(255,255,255,0.60);margin-bottom:24px;line-height:1.6">Your form has been received. Complete the payment below to secure your child's place in the batch. Seats are limited.</p>
+
+  <button class="btn-pay-trigger" onclick="openPayModal()" style="background:var(--teal);font-size:1rem;padding:16px 40px;box-shadow:0 4px 20px rgba(0,180,200,0.40)">
+    💳 Proceed to Payment →
+  </button>
+
+  <p style="font-size:0.73rem;color:rgba(255,255,255,0.35);margin-top:16px">
+    By proceeding you agree to our 
+    <a href="https://drive.google.com/file/d/1fqLg1zkJLScobzrq5UE5F4Ok3LMolckc/view?usp=sharing" target="_blank" style="color:rgba(255,255,255,0.55);font-weight:600;text-decoration:underline">Terms & Conditions</a>
+  </p>
 </div>
 
-   <div class="pay-trigger-section">
+   <div class="pay-trigger-section" id="pay">
   <p>✅ <strong>Submitted the form?</strong> Great! Now complete your payment to confirm your admission. Click the button below to see payment options.</p>
   <button class="btn-pay-trigger" onclick="openPayModal()">
     💳 Proceed to Payment →
