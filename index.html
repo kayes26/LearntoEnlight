@@ -458,23 +458,33 @@ section { padding: 90px 5%; }
 .testi-carousel-wrap { margin-top: 48px; position: relative; }
 .testi-carousel-head {
   display: flex; align-items: center; justify-content: flex-end;
-  gap: 10px; margin-bottom: 18px;
+  gap: 10px; margin-bottom: 18px; flex-wrap: wrap;
 }
 .testi-nav {
   width: 42px; height: 42px; border-radius: 50%; border: none;
   background: var(--white); color: var(--brown); cursor: pointer;
-  box-shadow: var(--shadow); font-size: 1rem; transition: transform 0.2s, background 0.2s;
+  box-shadow: var(--shadow); font-size: 1rem;
+  transition: transform 0.2s, background 0.2s, box-shadow 0.2s;
 }
-.testi-nav:hover { transform: translateY(-1px); background: var(--cream); }
+.testi-nav:hover { transform: translateY(-1px); background: var(--cream); box-shadow: var(--shadow-lg); }
+.testi-nav:active { transform: scale(0.97); }
 .testi-viewport {
-  overflow-x: auto; overflow-y: visible; scroll-behavior: smooth;
-  scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch;
-  scrollbar-width: none; padding-bottom: 8px;
+  overflow-x: auto;
+  overflow-y: visible;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding-bottom: 8px;
 }
 .testi-viewport::-webkit-scrollbar { display: none; }
 .testi-track {
-  display: grid; grid-auto-flow: column; grid-auto-columns: calc((100% - 48px) / 3);
-  gap: 24px; align-items: stretch;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: calc((100% - 48px) / 3);
+  gap: 24px;
+  align-items: stretch;
+  will-change: transform;
 }
 .testi-card {
   background: var(--white); border-radius: 20px; padding: 28px;
@@ -489,29 +499,115 @@ section { padding: 90px 5%; }
 
 /* ── FAQ ── */
 #faq { background: var(--white); }
-.faq-list { max-width: 720px; margin: 48px auto 0; display: flex; flex-direction: column; gap: 12px; }
-.faq-item {
-  border: 1px solid rgba(62,32,5,0.10); border-radius: 14px; overflow: hidden;
-  transition: border-color 0.2s;
+
+.faq-head {
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto;
 }
+
+.faq-layout {
+  display: grid;
+  grid-template-columns: 0.92fr 1.08fr;
+  gap: 36px;
+  align-items: start;
+  margin-top: 48px;
+}
+
+.faq-layout .faq-list {
+  max-width: none;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.faq-visual {
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid rgba(62,32,5,0.10);
+  background: var(--white);
+  box-shadow: var(--shadow);
+}
+
+.faq-visual-top {
+  padding: 16px 20px;
+  background: var(--cream-dark);
+}
+
+.faq-panel-title {
+  font-weight: 700;
+  color: var(--brown);
+  margin-bottom: 4px;
+}
+
+.faq-visual-top p {
+  font-size: 0.78rem;
+  color: var(--text-light);
+  margin: 0;
+}
+
+.faq-visual img {
+  width: 100%;
+  display: block;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  object-position: top;
+}
+
+.faq-item {
+  border: 1px solid rgba(62,32,5,0.10);
+  border-radius: 14px;
+  overflow: hidden;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  background: var(--white);
+}
+
+.faq-item:hover {
+  box-shadow: 0 6px 18px rgba(62,32,5,0.05);
+}
+
 .faq-item.open { border-color: var(--teal); }
+
 .faq-q {
-  padding: 18px 22px; font-size: 0.92rem; font-weight: 600; color: var(--brown);
-  cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+  padding: 18px 22px;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--brown);
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
   user-select: none;
 }
+
 .faq-q:hover { background: var(--cream); }
-.faq-icon { font-size: 1.2rem; color: var(--teal); transition: transform 0.3s; }
+
+.faq-icon {
+  font-size: 1.3rem;
+  color: var(--teal);
+  transition: transform 0.3s;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
 .faq-item.open .faq-icon { transform: rotate(45deg); }
+
 .faq-a {
-  max-height: 0; overflow: hidden;
-  font-size: 0.88rem; color: var(--text-mid); line-height: 1.7;
+  max-height: 0;
+  overflow: hidden;
+  font-size: 0.88rem;
+  color: var(--text-mid);
+  line-height: 1.7;
   transition: max-height 0.35s ease, padding 0.35s ease;
   padding: 0 22px;
 }
+
 .faq-item.open .faq-a { max-height: 300px; padding: 0 22px 18px; }
 
 /* ── APPLY ── */
+
 #apply { background: var(--cream); }
 .apply-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; margin-top: 48px; }
 
@@ -565,8 +661,15 @@ footer {
 
 /* ── MOBILE ── */
 @media (max-width: 900px) {
-  #faq > div:last-child {
+  .faq-layout {
     grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .faq-list-col {
+    order: 1;
+  }
+  .faq-visual-col {
+    order: 2;
   }
   nav {
     padding: 0 20px;
@@ -794,6 +897,9 @@ footer {
   }
   .faq-item.open .faq-a {
     padding: 0 16px 16px;
+  }
+  .faq-visual-top {
+    padding: 14px 16px;
   }
   .apply-option {
     padding: 16px;
@@ -1141,7 +1247,7 @@ footer {
       </div>
       <ul class="batch-details">
         <li><span class="icon">📅</span> Friday & Saturday</li>
-        <li><span class="icon">⏰</span> 9:00 AM - 10:30 PM & 3:00 PM - 4:30 PM (1 hr 30 min)</li>
+        <li><span class="icon">⏰</span> 9:00 AM - 10:30 AM & 3:00 PM - 4:30 PM (1 hr 30 min)</li>
         <li><span class="icon">📖</span> Full Class 6 Cadet prep curriculum</li>
         <li><span class="icon">🏆</span> Olympiad & Scholarship exam preparation</li>
         <li><span class="icon">📝</span> Weekly exam + monthly assessment</li>
@@ -1386,73 +1492,82 @@ footer {
 
 <!-- FAQ -->
 <section id="faq">
-  <div style="text-align:center; max-width:540px; margin:0 auto" class="fade-up">
+  <div class="faq-head fade-up">
     <div class="section-label">FAQ</div>
-    <h2 class="section-title">Questions parents usually ask</h2>
+    <h2 class="section-title">Questions Parents Usually Ask</h2>
   </div>
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start;margin-top:48px">
-    <div class="fade-up">
-      <div style="border-radius:16px;overflow:hidden;border:1px solid rgba(62,32,5,0.10)">
-        <div style="padding:16px 20px;background:var(--cream-dark)">
-          <div style="font-weight:700;color:var(--brown);margin-bottom:4px">📊 Parent Feedback Tracker</div>
-          <p style="font-size:0.78rem;color:var(--text-light);margin:0">Real satisfaction tracked every month</p>
+
+  <div class="faq-layout">
+    <div class="faq-visual-col fade-up">
+      <div class="faq-visual">
+        <div class="faq-visual-top">
+          <div class="faq-panel-title">📊 Parent Feedback Tracker</div>
+          <p>Real satisfaction tracked every month</p>
         </div>
-        <img src="https://res.cloudinary.com/ddvfu3qon/image/upload/v1776379654/Image_17-04-2026_at_4.45_AM_x3j21q.png"
+        <img
+          src="https://res.cloudinary.com/ddvfu3qon/image/upload/v1776379654/Image_17-04-2026_at_4.45_AM_x3j21q.png"
           alt="Parent feedback dashboard"
-          style="width:100%;display:block;object-fit:cover">
+        >
       </div>
     </div>
-    <div class="faq-list" style="margin:0">
-    <div class="faq-item">
-      <div class="faq-q" onclick="toggleFaq(this)">
-        Who is Learn to Enlight for?
-        <span class="faq-icon">+</span>
+
+    <div class="faq-list faq-list-col">
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span>Who is Learn to Enlight for?</span>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-a">LTE is designed for students in Pre-Cadet, Cadet College Admission, and Senior Class up to SSC/O Level. Our batches focus on structured learning, weekly exams, and the key topics students need to build strong academic performance with full parent transparency.</div>
       </div>
-      <div class="faq-a">LTE is designed for students in Pre-Cadet, Cadet College Admission, and Senior Class up to SSC/O Level. Our batches focus on structured learning, weekly exams, and the key topics students need to build strong academic performance with full parent transparency.</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q" onclick="toggleFaq(this)">
-        Are classes fully online?
-        <span class="faq-icon">+</span>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span>Are classes fully online?</span>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-a">Yes. All classes are conducted online via Google Meet. Students can join from anywhere. Every class is recorded and available in the student's personal portal for rewatching.</div>
       </div>
-      <div class="faq-a">Yes. All classes are conducted online via Google Meet. Students can join from anywhere. Every class is recorded and available in the student's personal portal for rewatching.</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q" onclick="toggleFaq(this)">
-        How do parents stay updated?
-        <span class="faq-icon">+</span>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span>How do parents stay updated?</span>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-a">Parents receive real-time Telegram notifications for everything - exam results with feedback, homework updates, and instant notices if a class is missed or an exam is not attended. Nothing goes unnoticed.</div>
       </div>
-      <div class="faq-a">Parents receive real-time Telegram notifications for everything - exam results with feedback, homework updates, and instant notices if a class is missed or an exam is not attended. Nothing goes unnoticed.</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q" onclick="toggleFaq(this)">
-        What is the student portal?
-        <span class="faq-icon">+</span>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span>What is the student portal?</span>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-a">Each enrolled student gets a unique private dashboard where they can access all class recordings, notes and question papers, exam copies, marks, instructor feedback, and homework submissions - organized by date.</div>
       </div>
-      <div class="faq-a">Each enrolled student gets a unique private dashboard where they can access all class recordings, notes and question papers, exam copies, marks, instructor feedback, and homework submissions - organized by date.</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q" onclick="toggleFaq(this)">
-        Can I pay monthly instead of full year?
-        <span class="faq-icon">+</span>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span>Can I pay monthly instead of full year?</span>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-a">Yes. Monthly payment plans are available and are due by the 10th of each month. We also offer 3-month, 6-month, and full-year options with attractive discounts. Students who choose the full-year plan get full-year access to all materials.</div>
       </div>
-      <div class="faq-a">Yes. Monthly payment plans are available and are due by the 10th of each month. We also offer 3-month, 6-month, and full-year options with attractive discounts. Students who choose the full-year plan get full-year access to all materials.</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q" onclick="toggleFaq(this)">
-        Is there a referral benefit?
-        <span class="faq-icon">+</span>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span>Is there a referral benefit?</span>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-a">Yes! If a student refers 3 new students who enroll in a single month, they get 20% off their next month's fee. Top students are also recognized and rewarded every 6 months.</div>
       </div>
-      <div class="faq-a">Yes! If a student refers 3 new students who enroll in a single month, they get 20% off their next month's fee. Top students are also recognized and rewarded every 6 months.</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q" onclick="toggleFaq(this)">
-        How do I apply?
-        <span class="faq-icon">+</span>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span>How do I apply?</span>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-a">Click "Apply Now" and fill in the admission form - it takes about 3 minutes. After submitting, you'll receive payment instructions. Once payment is confirmed, your child's student portal is activated.</div>
       </div>
-      <div class="faq-a">Click "Apply Now" and fill in the admission form - it takes about 3 minutes. After submitting, you'll receive payment instructions. Once payment is confirmed, your child's student portal is activated.</div>
     </div>
- </div>
   </div>
 </section>
 
@@ -1569,14 +1684,6 @@ window.addEventListener('scroll', () => {
   });
 }, { passive: true });
 
-function scrollTestimonials(direction) {
-  const viewport = document.getElementById('testiViewport');
-  if (!viewport) return;
-  const amount = Math.round(viewport.clientWidth * 0.92);
-  viewport.scrollBy({ left: direction * amount, behavior: 'smooth' });
-}
-// Infinite auto-scroll
-<script>
 document.addEventListener('DOMContentLoaded', function () {
   const viewport = document.getElementById('testiViewport');
   if (!viewport) return;
@@ -1584,69 +1691,75 @@ document.addEventListener('DOMContentLoaded', function () {
   const track = viewport.querySelector('.testi-track');
   if (!track) return;
 
-  let paused = false;
-  let scrollAmount = 0;
-  const speed = 2.5; // increase for faster auto scroll
+  const gap = () => parseFloat(getComputedStyle(track).gap) || 24;
+  const halfTrackWidth = () => track.scrollWidth / 2;
+  const cardStep = () => {
+    const firstCard = track.querySelector('.testi-card');
+    if (!firstCard) return Math.round(viewport.clientWidth * 0.92);
+    return Math.round(firstCard.getBoundingClientRect().width + gap());
+  };
 
-  // Clone cards once for infinite effect
-  const cards = Array.from(track.children);
-  cards.forEach(card => {
-    track.appendChild(card.cloneNode(true));
-  });
+  let paused = false;
+  let scrollAmount = viewport.scrollLeft;
+  const speed = 1.1;
+  let rafId = null;
+
+  if (!track.dataset.cloned) {
+    const cards = Array.from(track.children);
+    cards.forEach(card => track.appendChild(card.cloneNode(true)));
+    track.dataset.cloned = 'true';
+  }
+
+  function normalizeScroll() {
+    const half = halfTrackWidth();
+    if (scrollAmount >= half) {
+      scrollAmount -= half;
+      viewport.scrollLeft = scrollAmount;
+    } else if (scrollAmount < 0) {
+      scrollAmount += half;
+      viewport.scrollLeft = scrollAmount;
+    }
+  }
 
   function animate() {
     if (!paused) {
       scrollAmount += speed;
-
-      if (scrollAmount >= track.scrollWidth / 2) {
-        scrollAmount = 0;
-      }
-
+      normalizeScroll();
       viewport.scrollLeft = scrollAmount;
     }
-
-    requestAnimationFrame(animate);
+    rafId = requestAnimationFrame(animate);
   }
 
-  viewport.addEventListener('mouseenter', () => {
+  function pauseCarousel() {
     paused = true;
-  });
+  }
 
-  viewport.addEventListener('mouseleave', () => {
-    paused = false;
-    scrollAmount = viewport.scrollLeft;
-  });
-
-  viewport.addEventListener('touchstart', () => {
-    paused = true;
-  }, { passive: true });
-
-  viewport.addEventListener('touchend', () => {
-    scrollAmount = viewport.scrollLeft;
+  function resumeCarousel(delay = 0) {
     setTimeout(() => {
+      scrollAmount = viewport.scrollLeft;
       paused = false;
-    }, 1500);
-  }, { passive: true });
+    }, delay);
+  }
 
-  window.scrollTestimonials = function(direction) {
-    paused = true;
-
-    const amount = Math.round(viewport.clientWidth * 0.92);
-    scrollAmount = viewport.scrollLeft + (direction * amount);
-
+  window.scrollTestimonials = function (direction) {
+    pauseCarousel();
+    scrollAmount = viewport.scrollLeft + (direction * cardStep());
+    normalizeScroll();
     viewport.scrollTo({
       left: scrollAmount,
       behavior: 'smooth'
     });
-
-    setTimeout(() => {
-      scrollAmount = viewport.scrollLeft;
-      paused = false;
-    }, 600);
+    resumeCarousel(650);
   };
 
-  requestAnimationFrame(animate);
+  viewport.addEventListener('mouseenter', pauseCarousel);
+  viewport.addEventListener('mouseleave', () => resumeCarousel());
+  viewport.addEventListener('touchstart', pauseCarousel, { passive: true });
+  viewport.addEventListener('touchend', () => resumeCarousel(1400), { passive: true });
+
+  animate();
 });
+
 </script>
 <!-- FLOATING CHAT BUTTON -->
 <div class="float-chat" id="floatChat">
