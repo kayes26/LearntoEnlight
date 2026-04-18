@@ -220,13 +220,15 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(253,250,245,
     <div class="sidebar-section">
       <div class="sidebar-label">Select Your Batch</div>
    <div class="batch-pick">
-        <div class="batch-opt active" onclick="selectBatch(this)">
-          <div class="batch-opt-name">🎯 Class 6 - New Batch</div>
-          <div class="batch-opt-detail">Friday & Saturrday only · 9:00-10:15 PM</div>
-          <div class="batch-opt-detail">Cadet Admission Course</div>
-          <div class="batch-opt-fee" style="color:var(--teal-dark)">Advance payment - Only Monthly fee - No extra admission fee - No hidden charges</div>
-             <div class="batch-opt-fee" style="color:var(--teal-dark)"></div>
-        </div>
+    <div class="batch-opt active" onclick="selectBatch(this)">
+    <div class="batch-opt-name">🎯 Class 6 - New Batch</div>
+    <div class="batch-opt-detail">Friday & Saturday only · 9:00–10:15 AM & 3:00–4:15 PM</div>
+    <div class="batch-opt-detail">গণিত + সাধারণ জ্ঞান · Cadet Admission Course</div>
+    <div style="margin-top:8px;padding-top:8px;border-top:1px solid rgba(62,32,5,0.08);font-size:0.73rem;color:var(--text-light);line-height:1.6">
+    📌 ক্যাডেট ভর্তি পরীক্ষার সকল প্রশ্ন আলোচনা + ষষ্ঠ শ্রেণীর গণিত বই সম্পূর্ণ শেষ করা
+  </div>
+  <div class="batch-opt-fee" style="color:var(--teal-dark);margin-top:6px">Only monthly fee · No admission fee · No hidden charges</div>
+</div>
         <div class="batch-opt" onclick="selectBatch(this)">
           <div class="batch-opt-name">🎓 Class 5 - Main Batch</div>
           <div class="batch-opt-detail">Fri & Sat · 11:00 AM - 12:30 PM</div>
@@ -236,19 +238,79 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(253,250,245,
       </div>
     </div>
 
-    <div class="sidebar-section">
-      <div class="sidebar-label">What You Get</div>
-      <ul class="what-you-get">
-        <li class="wyg-item"><span class="wyg-icon">📹</span>All classes recorded - rewatch anytime</li>
-        <li class="wyg-item"><span class="wyg-icon">📊</span>Personal student portal with marks & feedback</li>
-        <li class="wyg-item"><span class="wyg-icon">📝</span>Weekly exam every class + monthly assessment</li>
-        <li class="wyg-item"><span class="wyg-icon">🔔</span>Real-time Telegram notifications to parents</li>
-        <li class="wyg-item"><span class="wyg-icon">📚</span>Notes, question papers & homework tracking</li>
-        <li class="wyg-item"><span class="wyg-icon">⏱️</span>Timed exams - delayed submission alerts</li>
-        <li class="wyg-item"><span class="wyg-icon">🎯</span>100% focused on Cadet College admission</li>
-        <li class="wyg-item"><span class="wyg-icon">✅</span><strong>No admission fee - no hidden charges</strong></li>
-      </ul>
-    </div>
+ <div class="sidebar-section">
+  <div class="sidebar-label">What You Get</div>
+  <ul class="what-you-get">
+    <li class="wyg-item"><span class="wyg-icon">📹</span>All classes recorded - rewatch anytime</li>
+    <li class="wyg-item"><span class="wyg-icon">📊</span>Personal student portal with marks & feedback</li>
+    <li class="wyg-item"><span class="wyg-icon">📝</span>Weekly exam every class + monthly assessment</li>
+    <li class="wyg-item"><span class="wyg-icon">🔔</span>Real-time Telegram notifications to parents</li>
+    <li class="wyg-item"><span class="wyg-icon">📚</span>Notes, question papers & homework tracking</li>
+    <li class="wyg-item"><span class="wyg-icon">⏱️</span>Timed exams - delayed submission alerts</li>
+    <li class="wyg-item"><span class="wyg-icon">🎯</span>100% focused on Cadet College admission</li>
+    <li class="wyg-item"><span class="wyg-icon">🖥️</span>Monthly payment active = dashboard access active. Stop payment = access paused</li>
+    <li class="wyg-item"><span class="wyg-icon">🔓</span>Pay for the full year = permanent access for the entire year</li>
+    <li class="wyg-item"><span class="wyg-icon">✅</span><strong>No admission fee - no hidden charges</strong></li>
+  </ul>
+</div>
+
+<!-- PRICING TABLE — shows only for Class 6 -->
+<div class="sidebar-section" id="class6-pricing" style="display:block">
+  <div class="sidebar-label">Payment Plans — Class 6</div>
+  <table style="width:100%;border-collapse:collapse;font-size:0.78rem">
+    <thead>
+      <tr style="background:var(--brown);color:white;text-align:left">
+        <th style="padding:8px 10px;border-radius:8px 0 0 0">Plan</th>
+        <th style="padding:8px 10px">Total</th>
+        <th style="padding:8px 10px">Per Month</th>
+        <th style="padding:8px 10px;border-radius:0 8px 0 0">You Save</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="background:var(--white);border-bottom:1px solid rgba(62,32,5,0.08)">
+        <td style="padding:8px 10px;color:var(--text-mid);font-weight:600">মাসিক</td>
+        <td style="padding:8px 10px;color:var(--text-mid)">২,২০০৳</td>
+        <td style="padding:8px 10px;color:var(--text-mid)">২,২০০৳</td>
+        <td style="padding:8px 10px;color:var(--text-light)">—</td>
+      </tr>
+      <tr style="background:var(--cream);border-bottom:1px solid rgba(62,32,5,0.08)">
+        <td style="padding:8px 10px;color:var(--text-mid);font-weight:600">৩ মাস</td>
+        <td style="padding:8px 10px;color:var(--text-mid)">৬,০০০৳</td>
+        <td style="padding:8px 10px;color:var(--text-mid)">২,০০০৳</td>
+        <td style="padding:8px 10px;color:#2a7a2a;font-weight:700">৬০০৳ সাশ্রয়</td>
+      </tr>
+      <tr style="background:var(--white);border-bottom:1px solid rgba(62,32,5,0.08)">
+        <td style="padding:8px 10px;color:var(--text-mid);font-weight:600">৬ মাস</td>
+        <td style="padding:8px 10px;color:var(--text-mid)">১১,০০০৳</td>
+        <td style="padding:8px 10px;color:var(--text-mid)">১,৮৩৩৳</td>
+        <td style="padding:8px 10px;color:#2a7a2a;font-weight:700">২,২০০৳ সাশ্রয়</td>
+      </tr>
+      <tr style="background:rgba(0,180,200,0.06);border-bottom:1px solid rgba(62,32,5,0.08)">
+        <td style="padding:8px 10px;color:var(--teal-dark);font-weight:700">৮ মাস ⭐</td>
+        <td style="padding:8px 10px;color:var(--teal-dark);font-weight:700">১৪,০০০৳</td>
+        <td style="padding:8px 10px;color:var(--teal-dark);font-weight:700">১,৭৫০৳</td>
+        <td style="padding:8px 10px;color:#2a7a2a;font-weight:700">৩,৬০০৳ সাশ্রয়</td>
+      </tr>
+    </tbody>
+  </table>
+  <div style="font-size:0.70rem;color:var(--text-light);margin-top:6px;line-height:1.5">⭐ ৮ মাস = পুরো বছর · সর্বোচ্চ সাশ্রয় + স্থায়ী ড্যাশবোর্ড এক্সেস</div>
+</div>
+
+<!-- REFERRAL — generic, all batches -->
+<div class="sidebar-section">
+  <div class="sidebar-label">🎁 Referral Program</div>
+  <div style="background:rgba(245,166,35,0.10);border:1px solid rgba(245,166,35,0.25);border-radius:10px;padding:12px 14px;font-size:0.80rem;color:var(--text-mid);line-height:1.65">
+    কোনো শিক্ষার্থী যদি <strong>৩ জন নতুন শিক্ষার্থী</strong> ভর্তি করায়, পরের মাসে তার জন্য <strong style="color:var(--brown-mid)">২০% ফি ছাড়</strong> প্রযোজ্য হবে।
+  </div>
+</div>
+
+<!-- BEST STUDENT — generic, all batches -->
+<div class="sidebar-section">
+  <div class="sidebar-label">🏆 Best Student Award</div>
+  <div style="background:rgba(0,180,200,0.07);border:1px solid rgba(0,180,200,0.20);border-radius:10px;padding:12px 14px;font-size:0.80rem;color:var(--text-mid);line-height:1.65">
+    প্রতি <strong>কোয়ার্টারে</strong> সামগ্রিক পারফরম্যান্সের ভিত্তিতে সেরা শিক্ষার্থীকে <strong style="color:var(--teal-dark)">বিশেষ উপহার</strong> প্রদান করা হবে।
+  </div>
+</div>
 
     <div class="sidebar-section">
       <div class="sidebar-label">Instructor</div>
@@ -427,6 +489,9 @@ function selectBatch(el) {
     b.classList.remove('active');
     if (b === el) {
       document.getElementById('batchIframe').src = batchForms[i];
+      // Show pricing table only for Class 6 (index 0)
+      const pricing = document.getElementById('class6-pricing');
+      if (pricing) pricing.style.display = i === 0 ? 'block' : 'none';
     }
   });
   el.classList.add('active');
