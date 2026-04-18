@@ -1,4 +1,4 @@
-wa <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -142,15 +142,477 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(253,250,245,
 .btn-telegram{display:block;background:linear-gradient(135deg,#2AABEE,#229ED9);color:var(--white);padding:14px;border-radius:100px;font-size:0.92rem;font-weight:700;text-decoration:none;text-align:center;transition:all 0.2s}
 .btn-telegram:hover{opacity:0.9;transform:translateY(-1px)}
 
-@media(max-width:900px){
-  .apply-main{grid-template-columns:1fr}
-  .apply-sidebar{border-right:none;border-bottom:1px solid rgba(62,32,5,0.08)}
-  .apply-form-area{padding:28px 20px}
+html, body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
 }
-@media(max-width:600px){
-  .apply-hero{padding:90px 5% 40px}
-  .demo-banner{flex-wrap:wrap}
-  .demo-btn{margin-left:0}
+
+.apply-hero,
+.demo-banner,
+.apply-main,
+.apply-sidebar,
+.apply-form-area,
+.clickup-wrap,
+.modal,
+.float-chat {
+  max-width: 100%;
+}
+
+.apply-main {
+  grid-template-columns: minmax(0, 600px) minmax(0, 1fr);
+}
+
+.apply-hero-grid,
+.bank-acc-wrap,
+.step-indicator {
+  min-width: 0;
+}
+
+@media (max-width: 1024px) {
+  .apply-main {
+    grid-template-columns: 1fr !important;
+  }
+
+  .apply-sidebar {
+    border-right: none !important;
+    border-bottom: 1px solid rgba(62,32,5,0.08);
+    padding: 32px 20px !important;
+  }
+
+  .apply-form-area {
+    padding: 28px 20px !important;
+  }
+
+  .apply-hero-grid {
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
+  }
+
+  .clickup-wrap {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  nav {
+    padding: 0 16px;
+    height: 62px;
+  }
+
+  .nav-logo {
+    gap: 8px;
+    min-width: 0;
+  }
+
+  .nav-logo-text {
+    font-size: 0.95rem;
+  }
+
+  .nav-logo-sub {
+    font-size: 0.55rem;
+  }
+
+  .nav-back {
+    padding: 7px 14px;
+    font-size: 0.75rem;
+    white-space: nowrap;
+  }
+
+  .apply-hero {
+    padding: 88px 16px 32px;
+    min-height: auto !important;
+  }
+
+  .apply-hero-grid {
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
+  }
+
+  .apply-hero h1 {
+    font-size: 2rem;
+  }
+
+  .apply-hero p {
+    font-size: 0.95rem;
+    margin-bottom: 20px;
+  }
+
+  .hero-inner {
+    max-width: 100%;
+  }
+
+  .hero-chips {
+    gap: 8px;
+  }
+
+  .hero-chip {
+    font-size: 0.72rem;
+    padding: 6px 10px;
+  }
+
+  .hero-video-note {
+    padding: 9px 12px !important;
+  }
+
+  .demo-banner {
+    margin: 20px 16px 0;
+    padding: 14px 16px;
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+
+  .demo-btn {
+    margin-left: 0;
+    width: 100%;
+    text-align: center;
+  }
+
+  .apply-sidebar,
+  .apply-form-area {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .sidebar-section {
+    margin-bottom: 24px;
+  }
+
+  .batch-opt {
+    padding: 12px;
+  }
+
+  .wyg-item {
+    font-size: 0.8rem;
+  }
+
+  .pricing-table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin: 0 -4px;
+  }
+
+  .pricing-table-wrap table {
+    min-width: 500px;
+  }
+
+  .form-header {
+    text-align: left;
+  }
+
+  .form-header h2 {
+    font-size: 1.25rem;
+  }
+
+  .form-header p {
+    font-size: 0.82rem;
+  }
+
+  .pay-section {
+    padding: 24px 18px !important;
+    border-radius: 16px !important;
+  }
+
+  .step-indicator {
+    flex-direction: column !important;
+    gap: 10px !important;
+    align-items: stretch !important;
+  }
+
+  .step-badge {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .step-arrow {
+    transform: rotate(90deg);
+    font-size: 1rem !important;
+    text-align: center;
+  }
+
+  .pay-section h3 {
+    font-size: 1.15rem !important;
+  }
+
+  .btn-pay-trigger {
+    width: 100%;
+    justify-content: center;
+    padding: 15px 20px !important;
+    font-size: 0.95rem !important;
+  }
+
+  .modal-overlay {
+    padding: 12px;
+  }
+
+  .modal {
+    max-width: 100%;
+    max-height: 88vh;
+    border-radius: 18px;
+  }
+
+  .modal-header {
+    padding: 22px 18px 18px;
+    border-radius: 18px 18px 0 0;
+  }
+
+  .modal-header h3 {
+    font-size: 1.1rem;
+  }
+
+  .modal-close {
+    top: 14px;
+    right: 14px;
+  }
+
+  .modal-tab {
+    padding: 12px 10px;
+    font-size: 0.8rem;
+  }
+
+  .modal-body {
+    padding: 18px;
+  }
+
+  .bank-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .bank-acc-wrap {
+    width: 100%;
+    justify-content: space-between;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .bank-row-val.acc {
+    font-size: 0.95rem;
+    word-break: break-all;
+  }
+
+  .bank-step,
+  .bkash-step {
+    font-size: 0.82rem;
+  }
+
+  .btn-telegram,
+  .btn-bkash {
+    font-size: 0.9rem;
+    padding: 13px;
+  }
+
+  .float-chat {
+    bottom: 18px;
+    right: 16px;
+  }
+
+  .float-option {
+    font-size: 0.8rem;
+    padding: 9px 14px 9px 12px;
+  }
+
+  .float-main-btn {
+    width: 52px;
+    height: 52px;
+  }
+}
+
+@media (max-width: 480px) {
+  .apply-hero h1 {
+    font-size: 1.8rem;
+  }
+
+  .hero-badge {
+    font-size: 0.68rem;
+    padding: 5px 10px;
+  }
+
+  .hero-chip {
+    width: calc(50% - 4px);
+    justify-content: center;
+    text-align: center;
+  }
+
+  .nav-back {
+    padding: 6px 10px;
+    font-size: 0.7rem;
+  }
+
+  .pricing-table-wrap table {
+    min-width: 460px;
+  }
+}
+
+@media (hover: none) and (pointer: coarse) {
+  nav {
+    padding: 0 14px !important;
+    height: 62px !important;
+    gap: 10px;
+  }
+
+  .nav-logo {
+    min-width: 0;
+    gap: 8px;
+  }
+
+  .nav-logo-text {
+    font-size: 0.9rem !important;
+  }
+
+  .nav-logo-sub {
+    font-size: 0.52rem !important;
+  }
+
+  .nav-back {
+    padding: 7px 12px !important;
+    font-size: 0.72rem !important;
+    white-space: nowrap;
+  }
+
+  .apply-hero {
+    padding: 84px 16px 28px !important;
+    min-height: auto !important;
+  }
+
+  .apply-hero-grid {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+    width: 100% !important;
+  }
+
+  .hero-inner {
+    max-width: 100% !important;
+  }
+
+  .apply-hero h1 {
+    font-size: 1.9rem !important;
+    line-height: 1.15 !important;
+  }
+
+  .apply-hero p {
+    font-size: 0.95rem !important;
+    margin-bottom: 18px !important;
+  }
+
+  .hero-chips {
+    gap: 8px !important;
+  }
+
+  .hero-chip {
+    font-size: 0.72rem !important;
+    padding: 6px 10px !important;
+  }
+
+  .hero-video-note {
+    padding: 9px 12px !important;
+  }
+
+  .demo-banner {
+    margin: 20px 16px 0 !important;
+    padding: 14px 16px !important;
+    flex-wrap: wrap !important;
+    align-items: flex-start !important;
+  }
+
+  .demo-btn {
+    width: 100% !important;
+    margin-left: 0 !important;
+    text-align: center !important;
+  }
+
+  .apply-main {
+    display: block !important;
+    min-height: auto !important;
+  }
+
+  .apply-sidebar,
+  .apply-form-area {
+    width: 100% !important;
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+
+  .pricing-table-wrap {
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .pricing-table-wrap table {
+    min-width: 480px;
+  }
+
+  .form-header {
+    text-align: left !important;
+  }
+
+  .pay-section {
+    padding: 22px 18px !important;
+    border-radius: 16px !important;
+  }
+
+  .step-indicator {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 10px !important;
+  }
+
+  .step-badge {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .step-arrow {
+    transform: rotate(90deg);
+    text-align: center;
+  }
+
+  .btn-pay-trigger {
+    width: 100% !important;
+    justify-content: center !important;
+    padding: 15px 20px !important;
+  }
+
+  .modal-overlay {
+    padding: 12px !important;
+  }
+
+  .modal {
+    width: 100% !important;
+    max-width: 100% !important;
+    max-height: 88vh !important;
+    border-radius: 18px !important;
+  }
+
+  .modal-header {
+    padding: 22px 18px 18px !important;
+  }
+
+  .modal-body {
+    padding: 18px !important;
+  }
+
+  .bank-row {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 6px !important;
+  }
+
+  .bank-acc-wrap {
+    width: 100% !important;
+    justify-content: space-between !important;
+    flex-wrap: wrap !important;
+  }
+
+  .bank-row-val.acc {
+    word-break: break-all;
+  }
+
+  .float-chat {
+    right: 16px !important;
+    bottom: 18px !important;
+  }
 }
 </style>
 </head>
@@ -169,7 +631,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(253,250,245,
 
 <!-- HERO -->
 <div class="apply-hero" style="min-height:480px;display:flex;align-items:center">
-  <div style="display:grid;grid-template-columns:1fr 1.4fr;gap:48px;align-items:center;width:100%">
+  <div class="apply-hero-grid" style="display:grid;grid-template-columns:1fr 1.4fr;gap:48px;align-items:center;width:100%">
     <div class="hero-inner">
       <div class="hero-badge">📋 Admission Open - 2026</div>
       <h1>Apply for <span>Admission</span><br>to LTE Online Course</h1>
@@ -193,7 +655,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(253,250,245,
           style="position:absolute;top:0;left:0;width:100%;height:100%;border:none">
         </iframe>
       </div>
-      <div style="background:rgba(255,255,255,0.06);padding:10px 16px;display:flex;align-items:center;gap:8px">
+      <div class="hero-video-note" style="background:rgba(255,255,255,0.06);padding:10px 16px;display:flex;align-items:center;gap:8px">
         <span style="font-size:0.75rem;color:rgba(255,255,255,0.60)">▶ Watch a real class before you apply</span>
       </div>
     </div>
@@ -257,6 +719,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(253,250,245,
 <!-- PRICING TABLE — shows only for Class 6 -->
 <div class="sidebar-section" id="class6-pricing" style="display:block">
   <div class="sidebar-label">Payment Plans — Class 6</div>
+  <div class="pricing-table-wrap">
   <table style="width:100%;border-collapse:collapse;font-size:0.78rem">
     <thead>
       <tr style="background:var(--brown);color:white;text-align:left">
@@ -271,7 +734,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(253,250,245,
         <td style="padding:8px 10px;color:var(--text-mid);font-weight:600">মাসিক</td>
         <td style="padding:8px 10px;color:var(--text-mid)">২,২০০৳</td>
         <td style="padding:8px 10px;color:var(--text-mid)">২,২০০৳</td>
-        <td style="padding:8px 10px;color:var(--text-light)">—</td>
+        <td style="padding:8px 10px;color:var(--text-light)">-</td>
       </tr>
       <tr style="background:var(--cream);border-bottom:1px solid rgba(62,32,5,0.08)">
         <td style="padding:8px 10px;color:var(--text-mid);font-weight:600">৩ মাস</td>
@@ -293,6 +756,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(253,250,245,
       </tr>
     </tbody>
   </table>
+  </div>
   <div style="font-size:0.70rem;color:var(--text-light);margin-top:6px;line-height:1.5">⭐ ৮ মাস = পুরো বছর · সর্বোচ্চ সাশ্রয় + স্থায়ী ড্যাশবোর্ড এক্সেস</div>
 </div>
 
@@ -351,16 +815,16 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(253,250,245,
       <script async src="https://app-cdn.clickup.com/assets/js/forms-embed/v1.js"></script>
     </div>
 
-<div id="pay"style="margin-top:28px;background:linear-gradient(135deg,var(--brown),#5C3010);border-radius:20px;padding:32px 40px;text-align:center;box-shadow:0 8px 32px rgba(62,32,5,0.25)">
+<div id="pay" class="pay-section" style="margin-top:28px;background:linear-gradient(135deg,var(--brown),#5C3010);border-radius:20px;padding:32px 40px;text-align:center;box-shadow:0 8px 32px rgba(62,32,5,0.25)">
   
   <!-- Step indicator -->
-  <div style="display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:24px">
-    <div style="display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.10);padding:8px 16px;border-radius:100px">
+  <div class="step-indicator" style="display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:24px">
+    <div class="step-badge" style="display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.10);padding:8px 16px;border-radius:100px">
       <span style="width:22px;height:22px;border-radius:50%;background:#4CAF50;display:inline-flex;align-items:center;justify-content:center;font-size:0.75rem;font-weight:700;color:white">✓</span>
       <span style="font-size:0.82rem;color:rgba(255,255,255,0.80);font-weight:600">Step 1: Form Submitted</span>
     </div>
-    <div style="color:rgba(255,255,255,0.30);font-size:1.2rem">→</div>
-    <div style="display:flex;align-items:center;gap:8px;background:rgba(0,180,200,0.20);border:1px solid rgba(0,180,200,0.40);padding:8px 16px;border-radius:100px">
+    <div class="step-arrow" style="color:rgba(255,255,255,0.30);font-size:1.2rem">→</div>
+    <div class="step-badge" style="display:flex;align-items:center;gap:8px;background:rgba(0,180,200,0.20);border:1px solid rgba(0,180,200,0.40);padding:8px 16px;border-radius:100px">
       <span style="width:22px;height:22px;border-radius:50%;background:var(--teal);display:inline-flex;align-items:center;justify-content:center;font-size:0.75rem;font-weight:700;color:white">2</span>
       <span style="font-size:0.82rem;color:var(--teal);font-weight:700">Step 2: Complete Payment</span>
     </div>
@@ -391,8 +855,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(253,250,245,
     </div>
 
     <div class="modal-tabs">
-      <button class="modal-tab active" onclick="switchTab('bank')">🏦 Bank Transfer <small style="display:block;font-size:0.68rem;font-weight:400;margin-top:2px">(Preferred)</small></button>
-      <button class="modal-tab" onclick="switchTab('bkash')">📱 bKash</button>
+      <button class="modal-tab active" onclick="switchTab('bank', this)">🏦 Bank Transfer <small style="display:block;font-size:0.68rem;font-weight:400;margin-top:2px">(Preferred)</small></button>
+      <button class="modal-tab" onclick="switchTab('bkash', this)">📱 bKash</button>
     </div>
 
     <div class="modal-body">
@@ -410,9 +874,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(253,250,245,
           </div>
           <div class="bank-row">
             <span class="bank-row-label">Account Number</span>
-            <div style="display:flex;align-items:center;gap:8px">
+            <div class="bank-acc-wrap" style="display:flex;align-items:center;gap:8px">
               <span class="bank-row-val acc" id="accNum">20501270202959812</span>
-              <button class="copy-btn" onclick="copyAcc()">Copy</button>
+              <button class="copy-btn" onclick="copyAcc(this)">Copy</button>
             </div>
           </div>
           <div class="bank-row">
@@ -507,19 +971,22 @@ function closePayModal() {
 function closeIfOutside(e) {
   if (e.target === document.getElementById('payModal')) closePayModal();
 }
-function switchTab(tab) {
+function switchTab(tab, btn) {
   document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
   document.querySelectorAll('.modal-tab').forEach(t => t.classList.remove('active'));
   document.getElementById('tab-' + tab).classList.add('active');
-  event.target.classList.add('active');
+  btn.classList.add('active');
 }
-function copyAcc() {
+function copyAcc(btn) {
   navigator.clipboard.writeText('20501270202959812');
-  const btn = event.target;
   btn.textContent = 'Copied!';
   btn.style.background = 'var(--teal)';
   btn.style.color = 'white';
-  setTimeout(() => { btn.textContent = 'Copy'; btn.style.background = ''; btn.style.color = ''; }, 2000);
+  setTimeout(() => {
+    btn.textContent = 'Copy';
+    btn.style.background = '';
+    btn.style.color = '';
+  }, 2000);
 }
 </script>
 
