@@ -1122,30 +1122,40 @@ footer {
   </div>
   <div class="batches-grid" style="margin-top:48px">
 
-    <!-- Class 6 Batch -->
-    <div class="batch-card featured fade-up">
+
+        <!-- Class 6 Batch -->
+    <div class="batch-card fade-up" style="transition-delay:0.24s">
       <div class="batch-coming-tag">⭐ Most Focused</div>
       <div class="batch-emoji">🌟</div>
       <div class="batch-name">Class 6 - Cadet Admission New Batch</div>
-      <div class="batch-grade">ষষ্ঠ শ্রেণি · ক্যাডেট কলেজ ভর্তি প্রস্তুতি</div>
+      <div class="batch-grade">ক্ষষ্ঠ শ্রেণি · ক্যাডেট কলেজ ভর্তি প্রস্তুতি (মে - ডিসেম্বর)/div>
       <div class="batch-subjects">
         <span class="subject-tag">📐 Math</span>
         <span class="subject-tag">🔬 Science</span>
         <span class="subject-tag">🌍 GK</span>
       </div>
       <ul class="batch-details">
-        <li><span class="icon">📅</span> Friday & Saturday (schedule TBA)</li>
+        <li><span class="icon">📅</span> Friday & Saturday</li>
+        <li><span class="icon">⏰</span> 9:00 AM - 10:30 PM & 3:00 PM - 4:30 PM (1 hr 30 min)</li>
         <li><span class="icon">📖</span> Full Class 6 Cadet prep curriculum</li>
-        <li><span class="icon">📝</span> Weekly exams & homework</li>
-        <li><span class="icon">🔔</span> Real-time parent notifications</li>
+        <li><span class="icon">🏆</span> Olympiad & Scholarship exam preparation</li>
+        <li><span class="icon">📝</span> Weekly exam + monthly assessment</li>
+        <li><span class="icon">📹</span> All classes recorded</li>
       </ul>
       <div class="batch-fee-box">
-        <div class="batch-fee-label">Fee</div>
-        <div class="batch-fee-main" style="font-size:1.1rem;color:var(--text-light)">To be announced</div>
-        <div class="batch-fee-note">Register interest to get notified first</div>
+        <div class="batch-fee-label">Monthly Fee</div>
+        <div class="batch-fee-main" style="font-size:1rem;color:var(--teal-dark)">Monthly fee - contact us</div>
+        <div class="batch-fee-note" style="color:var(--teal-dark);font-weight:700">✓ No admission fee · No hidden charges</div>
+        <div class="batch-fee-discounts">
+          <small>✓ 3-month, 6-month and full-year payment options available</small>
+          <small>✓ Bigger commitment = bigger discount</small>
+        </div>
       </div>
-      <a href="lead.html" target="_blank" class="btn-batch outline">Register Interest →</a>
+        <a href="apply.html" class="btn-batch primary" onclick="localStorage.setItem('selectedBatch','0')">Apply for Cadet Admission Batch →</a>
     </div>
+
+  </div>
+</section>
 
     <!-- Class 5 Batch -->
     <div class="batch-card fade-up" style="transition-delay:0.12s">
@@ -1161,38 +1171,9 @@ footer {
         <li><span class="icon">📅</span> Friday & Saturday</li>
         <li><span class="icon">⏰</span> 11:00 AM - 12:30 PM (1 hr 30 min)</li>
         <li><span class="icon">📖</span> Full Math book + Cadet Q&A discussion</li>
+        <li><span class="icon">📘</span> Full Science book + General knowledge discussion</li> 
         <li><span class="icon">🏆</span> Olympiad & competitive exam prep</li>
         <li><span class="icon">📝</span> Weekly quiz + monthly exam</li>
-        <li><span class="icon">📹</span> All classes recorded</li>
-      </ul>
-      <div class="batch-fee-box">
-        <div class="batch-fee-label">Monthly Fee</div>
-        <div class="batch-fee-main" style="font-size:1rem;color:var(--teal-dark)">Monthly fee - contact us</div>
-        <div class="batch-fee-note" style="color:var(--teal-dark);font-weight:700">✓ No admission fee · No hidden charges</div>
-        <div class="batch-fee-discounts">
-          <small>✓ 3-month, 6-month and full-year payment options available</small>
-          <small>✓ Bigger commitment = bigger discount</small>
-        </div>
-      </div>
-      <a href="apply.html" target="_blank" class="btn-batch primary">Apply for Class 5 Batch →</a>
-    </div>
-
-    <!-- Special Batch -->
-    <div class="batch-card fade-up" style="transition-delay:0.24s">
-      <div class="batch-popular">🔜 Coming Soon</div>
-      <div class="batch-emoji">🎯</div>
-      <div class="batch-name">LTE Special Batch</div>
-      <div class="batch-grade">ক্যাডেট কলেজ ভর্তি রিভিউ কোর্স · অক্টোবর-ডিসেম্বর</div>
-      <div class="batch-subjects">
-        <span class="subject-tag">📐 Math</span>
-        <span class="subject-tag">🏫 Cadet Admission Focus</span>
-      </div>
-      <ul class="batch-details">
-        <li><span class="icon">📅</span> Friday only</li>
-        <li><span class="icon">⏰</span> 3:00 PM - 4:30 PM (1 hr 30 min)</li>
-        <li><span class="icon">📖</span> Math revision + weak area fixing</li>
-        <li><span class="icon">🏆</span> Olympiad & cadet exam-specific prep</li>
-        <li><span class="icon">📝</span> Weekly exam + monthly assessment</li>
         <li><span class="icon">📹</span> All classes recorded</li>
       </ul>
       <div class="batch-fee-box">
@@ -1207,9 +1188,36 @@ footer {
       <a href="apply.html?batch=class5" class="btn-batch primary" onclick="localStorage.setItem('selectedBatch','1')">Apply for Class 5 Batch →</a>
     </div>
 
-  </div>
-</section>
+    <!-- General Query -->
+<div class="batch-card featured fade-up">
+  <div class="batch-popular">💬 General Enquiry</div>
+  <div class="batch-emoji">📘</div>
+  <div class="batch-name">Want to join Learn to Enlight?</div>
+  <div class="batch-grade">Science · Math · ICT · Up to SSC / O Level Equivalent</div>
 
+  <div class="batch-subjects">
+    <span class="subject-tag">🧮 Math</span>
+    <span class="subject-tag">🔬 Science</span>
+    <span class="subject-tag">💻 ICT</span>
+  </div>
+
+  <ul class="batch-details">
+    <li><span class="icon">🎯</span> Choose the subject or class you want to study</li>
+    <li><span class="icon">📚</span> Support available up to SSC / O Level equivalent</li>
+    <li><span class="icon">🧑‍🏫</span> Structured online guidance with regular follow-up</li>
+    <li><span class="icon">🔔</span> Parent-friendly communication and progress updates</li>
+  </ul>
+
+  <div class="batch-fee-box">
+    <div class="batch-fee-label">Enquiry</div>
+    <div class="batch-fee-main" style="font-size:1rem;color:var(--teal-dark)">Tell us what you want to study</div>
+    <div class="batch-fee-note">We will guide you to the right class or subject</div>
+  </div>
+
+  <a href="enquiry.html" target="_blank" class="btn-batch primary">Send Enquiry →</a>
+</div>
+
+  
 <!-- INSTRUCTOR -->
 <section id="instructor">
   <div class="instructor-grid">
