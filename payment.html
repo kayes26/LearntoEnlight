@@ -1,0 +1,1168 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Payment — Learn with Kayes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --brown:        #3E2005;
+    --brown-mid:    #7A4010;
+    --teal:         #00B4C8;
+    --teal-dark:    #007A8A;
+    --cream:        #FAF7F2;
+    --cream-dark:   #F2EDE4;
+    --white:        #FFFFFF;
+    --text-mid:     #5A4030;
+    --text-light:   #9A8070;
+    --success:      #1A9E5A;
+    --danger:       #C02020;
+    --bkash:        #E2136E;
+    --nagad:        #EF1C26;
+    --bank-green:   #1D6E3F;
+    --cellfin:      #0055A4;
+    --radius-sm:    8px;
+    --radius-md:    14px;
+    --radius-lg:    20px;
+    --radius-pill:  100px;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    font-family: 'Inter', sans-serif;
+    background: var(--cream);
+    color: var(--brown);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    height: 64px;
+    background: rgba(250,247,242,0.94);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgba(62,32,5,0.08);
+    display: flex; align-items: center; padding: 0 5%; gap: 12px;
+  }
+  .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+
+  /* ── LOGO SWAP ZONE ──
+     To update logo later: replace the <img> inside .logo-img-wrap
+     with your own logo file. If no image, the text fallback shows. */
+  .logo-img-wrap {
+    width: 38px; height: 38px; border-radius: 10px; overflow: hidden;
+    background: var(--brown);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .logo-img-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .logo-fallback {
+    color: var(--white); font-weight: 900; font-size: 0.85rem;
+    letter-spacing: -0.02em; line-height: 1;
+  }
+  .nav-brand { line-height: 1.15; }
+  .nav-brand-name { font-weight: 800; font-size: 0.92rem; color: var(--brown); }
+  .nav-brand-sub  { font-size: 0.58rem; color: var(--text-light); font-weight: 500; letter-spacing: 0.04em; }
+  .nav-back {
+    margin-left: auto;
+    background: var(--cream-dark); border: 1px solid rgba(62,32,5,0.12);
+    color: var(--text-mid); padding: 7px 14px;
+    border-radius: var(--radius-pill); font-size: 0.75rem; font-weight: 600;
+    text-decoration: none; transition: all 0.2s; white-space: nowrap;
+  }
+  .nav-back:hover { background: var(--teal); color: var(--white); border-color: var(--teal); }
+
+  /* ── HERO ── */
+  .pay-hero {
+    background: var(--brown);
+    padding: 104px 5% 44px;
+    text-align: center;
+  }
+
+  /* hero logo card */
+  .hero-logo-card {
+    display: inline-flex; align-items: center; gap: 12px;
+    background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12);
+    border-radius: var(--radius-md); padding: 10px 18px; margin-bottom: 22px;
+  }
+  .hero-logo-icon {
+    width: 40px; height: 40px; border-radius: 9px; overflow: hidden;
+    background: rgba(255,255,255,0.12);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .hero-logo-icon img { width: 100%; height: 100%; object-fit: cover; }
+  .hero-logo-icon .logo-fallback { color: var(--white); font-size: 0.80rem; }
+  .hero-logo-text-name { font-weight: 800; font-size: 0.95rem; color: var(--white); }
+  .hero-logo-text-sub  { font-size: 0.65rem; color: rgba(255,255,255,0.45); margin-top: 1px; }
+
+  .pay-hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.7rem, 4vw, 2.6rem);
+    color: var(--white); font-weight: 900; line-height: 1.12; margin-bottom: 14px;
+  }
+  .pay-hero h1 span { color: var(--teal); }
+
+  .quran-quote {
+    display: inline-block; max-width: 480px;
+    background: rgba(0,180,200,0.10); border: 1px solid rgba(0,180,200,0.20);
+    border-radius: var(--radius-md); padding: 12px 20px; margin-top: 4px;
+  }
+  .quran-arabic {
+    font-size: 1.05rem; color: rgba(255,255,255,0.80);
+    line-height: 1.8; margin-bottom: 4px;
+    font-family: 'Times New Roman', serif;
+    direction: rtl;
+  }
+  .quran-translation {
+    font-size: 0.72rem; color: rgba(255,255,255,0.42); font-style: italic; line-height: 1.5;
+  }
+  .quran-ref { font-size: 0.68rem; color: var(--teal); font-weight: 600; margin-top: 4px; }
+
+  /* ── MAIN CARD ── */
+  .pay-wrap {
+    max-width: 560px; margin: 0 auto;
+    padding: 28px 20px 60px;
+  }
+  .pay-card {
+    background: var(--white);
+    border: 1px solid rgba(62,32,5,0.09);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: 0 4px 32px rgba(62,32,5,0.07);
+  }
+
+  /* ── STEP HEADER ── */
+  .step-header {
+    background: var(--cream-dark);
+    padding: 20px 24px;
+    border-bottom: 1px solid rgba(62,32,5,0.08);
+  }
+  .step-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.12rem; color: var(--brown); font-weight: 900; margin-bottom: 3px;
+  }
+  .step-header p { font-size: 0.76rem; color: var(--text-light); }
+
+  /* ── FORM ── */
+  .pay-form { padding: 24px; }
+  .field-group { margin-bottom: 18px; }
+  .field-label {
+    display: block; font-size: 0.72rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.07em;
+    color: var(--text-light); margin-bottom: 7px;
+  }
+  .field-req { color: var(--danger); }
+  .field-input {
+    width: 100%; padding: 12px 14px;
+    border: 1.5px solid rgba(62,32,5,0.14);
+    border-radius: var(--radius-sm);
+    font-family: 'Inter', sans-serif; font-size: 0.92rem; color: var(--brown);
+    background: var(--cream); outline: none; transition: border-color 0.2s;
+  }
+  .field-input:focus { border-color: var(--teal); background: var(--white); }
+  .field-input::placeholder { color: var(--text-light); }
+  .field-hint { font-size: 0.70rem; color: var(--text-light); margin-top: 5px; line-height: 1.5; }
+  .field-hint.info {
+    background: rgba(0,180,200,0.07); border: 1px solid rgba(0,180,200,0.18);
+    border-radius: 6px; padding: 7px 10px; color: var(--teal-dark);
+  }
+
+  /* amount */
+  .amount-row {
+    display: flex; align-items: center;
+    border: 1.5px solid rgba(62,32,5,0.14);
+    border-radius: var(--radius-sm);
+    background: var(--cream); overflow: hidden; transition: border-color 0.2s;
+  }
+  .amount-row:focus-within { border-color: var(--teal); background: var(--white); }
+  .amount-prefix {
+    padding: 12px 12px 12px 14px; font-weight: 700;
+    color: var(--teal-dark); font-size: 1.05rem;
+    border-right: 1px solid rgba(62,32,5,0.10);
+  }
+  .amount-input {
+    flex: 1; padding: 12px 14px; border: none; outline: none;
+    background: transparent; font-family: 'Inter', sans-serif;
+    font-size: 1rem; font-weight: 700; color: var(--brown);
+  }
+  .amount-input::placeholder { font-weight: 400; color: var(--text-light); }
+
+  /* ── METHOD GRID ── */
+  .method-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 9px;
+  }
+  .method-btn-full { grid-column: 1 / -1; flex-direction: row; justify-content: center; gap: 10px; padding: 12px 16px; }
+  .method-btn {
+    border: 2px solid rgba(62,32,5,0.11);
+    border-radius: var(--radius-md);
+    padding: 12px 8px 10px;
+    background: var(--cream);
+    cursor: pointer; text-align: center;
+    transition: all 0.18s; position: relative;
+    display: flex; flex-direction: column; align-items: center; gap: 6px;
+  }
+  .method-btn:hover { border-color: var(--teal); background: rgba(0,180,200,0.04); }
+  .method-btn.active { border-color: var(--teal); background: rgba(0,180,200,0.07); }
+  .method-btn.active::after {
+    content: '✓'; position: absolute; top: 6px; right: 8px;
+    font-size: 0.62rem; font-weight: 900; color: var(--teal);
+  }
+
+  /* real brand logos via SVG inline */
+  .method-logo { height: 28px; display: flex; align-items: center; justify-content: center; }
+  .method-logo svg { height: 28px; width: auto; }
+
+  /* bKash pill logo */
+  .logo-bkash-pill {
+    background: var(--bkash); color: var(--white);
+    font-weight: 900; font-size: 0.78rem; padding: 4px 10px;
+    border-radius: 6px; letter-spacing: -0.01em;
+  }
+  /* Nagad pill */
+  .logo-nagad-pill {
+    background: var(--nagad); color: var(--white);
+    font-weight: 900; font-size: 0.78rem; padding: 4px 10px;
+    border-radius: 6px;
+  }
+  /* Cellfin pill */
+  .logo-cellfin-pill {
+    background: var(--cellfin); color: var(--white);
+    font-weight: 900; font-size: 0.74rem; padding: 4px 10px;
+    border-radius: 6px; letter-spacing: 0.01em;
+  }
+  /* Bank pill */
+  .logo-bank-pill {
+    background: var(--bank-green); color: var(--white);
+    font-weight: 900; font-size: 0.72rem; padding: 4px 8px;
+    border-radius: 6px;
+  }
+
+  .method-name { font-size: 0.75rem; font-weight: 700; color: var(--brown); line-height: 1.2; }
+  .method-sub  { font-size: 0.62rem; color: var(--text-light); }
+
+  /* ── PAY NOW ── */
+  .btn-pay-now {
+    width: 100%; padding: 15px; margin-top: 20px;
+    background: var(--teal); color: var(--white);
+    border: none; border-radius: var(--radius-pill);
+    font-family: 'Inter', sans-serif; font-size: 1rem; font-weight: 700;
+    cursor: pointer; transition: all 0.2s;
+    box-shadow: 0 4px 18px rgba(0,180,200,0.35);
+  }
+  .btn-pay-now:hover  { background: var(--teal-dark); transform: translateY(-1px); }
+  .btn-pay-now:disabled { background: #AACDD2; cursor: not-allowed; transform: none; box-shadow: none; }
+  .terms-note {
+    font-size: 0.68rem; color: var(--text-light);
+    text-align: center; margin-top: 10px; line-height: 1.5;
+  }
+  .terms-note a { color: var(--teal-dark); font-weight: 600; }
+
+  /* ══════════════════════════════════
+     PAYMENT PANELS
+  ══════════════════════════════════ */
+  .pay-panel { display: none; padding: 24px; }
+  .pay-panel.active { display: block; }
+
+  /* panel brand header */
+  .panel-brand {
+    display: flex; align-items: center; gap: 12px; margin-bottom: 18px;
+    padding-bottom: 16px; border-bottom: 1px solid rgba(62,32,5,0.07);
+  }
+  .panel-brand-logo {
+    height: 36px; display: flex; align-items: center;
+  }
+  .pbadge {
+    color: var(--white); font-weight: 900; font-size: 0.92rem;
+    padding: 7px 14px; border-radius: 9px;
+  }
+  .pbadge-bkash   { background: var(--bkash); }
+  .pbadge-nagad   { background: var(--nagad); }
+  .pbadge-bank    { background: var(--bank-green); }
+  .pbadge-cellfin { background: var(--cellfin); }
+  .panel-brand-title    { font-weight: 700; font-size: 0.95rem; color: var(--brown); }
+  .panel-brand-subtitle { font-size: 0.72rem; color: var(--text-light); margin-top: 2px; }
+
+  /* invoice */
+  .invoice-box {
+    background: var(--cream-dark); border-radius: var(--radius-md);
+    padding: 14px 16px; margin-bottom: 16px;
+  }
+  .invoice-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 7px 0; border-bottom: 1px solid rgba(62,32,5,0.06); font-size: 0.81rem;
+  }
+  .invoice-row:last-child { border-bottom: none; }
+  .inv-label { color: var(--text-light); }
+  .inv-val   { font-weight: 700; color: var(--brown); }
+  .inv-val.big { color: var(--teal-dark); font-size: 1.05rem; }
+
+  /* send-to box */
+  .send-to-box {
+    background: var(--cream);
+    border: 1.5px dashed rgba(62,32,5,0.16);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 16px;
+  }
+  .send-to-lbl {
+    font-size: 0.68rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.07em; color: var(--text-light); margin-bottom: 8px;
+  }
+  .send-to-num-row { display: flex; align-items: center; gap: 10px; }
+  .send-to-num {
+    font-size: 1.45rem; font-weight: 900; color: var(--brown);
+    letter-spacing: 0.04em; flex: 1;
+  }
+  .copy-btn {
+    background: var(--brown); color: var(--white);
+    border: none; padding: 8px 14px; border-radius: var(--radius-pill);
+    font-size: 0.72rem; font-weight: 700; cursor: pointer; transition: all 0.2s;
+    white-space: nowrap; flex-shrink: 0;
+  }
+  .copy-btn:hover  { background: var(--teal-dark); }
+  .copy-btn.copied { background: var(--success); }
+  .send-to-amount {
+    margin-top: 8px; padding-top: 8px;
+    border-top: 1px solid rgba(62,32,5,0.07);
+    font-size: 0.78rem; color: var(--text-mid);
+  }
+  .send-to-amount strong { color: var(--danger); font-size: 1rem; }
+
+  /* step-by-step instructions */
+  .steps-box {
+    background: rgba(0,180,200,0.05); border: 1px solid rgba(0,180,200,0.15);
+    border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 16px;
+  }
+  .steps-box-title {
+    font-size: 0.70rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.07em; color: var(--teal-dark); margin-bottom: 12px;
+  }
+  .steps-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .step-item  { display: flex; gap: 10px; align-items: flex-start; font-size: 0.81rem; color: var(--text-mid); line-height: 1.5; }
+  .step-num {
+    width: 22px; height: 22px; border-radius: 50%; flex-shrink: 0;
+    background: var(--teal); color: var(--white);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.65rem; font-weight: 800;
+  }
+  .step-item strong { color: var(--brown); }
+
+  /* waiting */
+  .btn-waiting {
+    width: 100%; padding: 14px; margin-top: 4px;
+    background: #F0A500; color: var(--white);
+    border: none; border-radius: var(--radius-pill);
+    font-family: 'Inter', sans-serif; font-size: 0.92rem; font-weight: 700;
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+    cursor: default;
+  }
+  .spinner {
+    width: 17px; height: 17px;
+    border: 2.5px solid rgba(255,255,255,0.35);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: spin 0.75s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* bKash retailer */
+  .retailer-note {
+    background: rgba(226,19,110,0.06); border: 1px solid rgba(226,19,110,0.18);
+    border-radius: var(--radius-md); padding: 13px 15px; margin-bottom: 16px;
+    font-size: 0.79rem; color: #8B1050; line-height: 1.6;
+  }
+  .btn-bkash-go {
+    display: block; width: 100%; padding: 15px;
+    background: var(--bkash); color: var(--white);
+    border: none; border-radius: var(--radius-pill);
+    font-family: 'Inter', sans-serif; font-size: 1rem; font-weight: 700;
+    text-align: center; text-decoration: none;
+    transition: all 0.2s; box-shadow: 0 4px 16px rgba(226,19,110,0.28);
+    cursor: pointer;
+  }
+  .btn-bkash-go:hover { background: #B01059; transform: translateY(-1px); }
+
+  /* cellfin */
+  .cellfin-note {
+    background: rgba(0,85,164,0.06); border: 1px solid rgba(0,85,164,0.18);
+    border-radius: var(--radius-md); padding: 13px 15px; margin-bottom: 16px;
+    font-size: 0.79rem; color: #003A7A; line-height: 1.6;
+  }
+  .btn-cellfin-go {
+    display: block; width: 100%; padding: 15px;
+    background: var(--cellfin); color: var(--white);
+    border: none; border-radius: var(--radius-pill);
+    font-family: 'Inter', sans-serif; font-size: 1rem; font-weight: 700;
+    text-align: center; text-decoration: none;
+    transition: all 0.2s; box-shadow: 0 4px 16px rgba(0,85,164,0.25);
+    cursor: pointer;
+  }
+  .btn-cellfin-go:hover { background: #004090; transform: translateY(-1px); }
+
+  /* bank */
+  .bank-details-box {
+    background: var(--cream-dark); border-radius: var(--radius-md);
+    padding: 16px; margin-bottom: 14px;
+  }
+  .bank-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 8px 0; border-bottom: 1px solid rgba(62,32,5,0.07); font-size: 0.82rem;
+  }
+  .bank-row:last-child { border-bottom: none; }
+  .bank-lbl { color: var(--text-light); font-size: 0.75rem; }
+  .bank-val { font-weight: 700; color: var(--brown); }
+  .bank-val.acc { color: var(--teal-dark); font-size: 0.92rem; letter-spacing: 0.03em; }
+  .bank-acc-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .npsb-badge {
+    display: inline-flex; align-items: center; gap: 5px;
+    background: rgba(29,110,63,0.10); border: 1px solid rgba(29,110,63,0.22);
+    color: var(--bank-green); padding: 5px 12px; border-radius: var(--radius-pill);
+    font-size: 0.70rem; font-weight: 700; margin-bottom: 12px;
+  }
+  .btn-telegram {
+    display: block; width: 100%; padding: 13px; margin-top: 10px;
+    background: linear-gradient(135deg,#2AABEE,#229ED9); color: var(--white);
+    border: none; border-radius: var(--radius-pill);
+    font-family: 'Inter', sans-serif; font-size: 0.90rem; font-weight: 700;
+    text-align: center; text-decoration: none; transition: all 0.2s; cursor: pointer;
+  }
+  .btn-telegram:hover { opacity: 0.9; transform: translateY(-1px); }
+
+  /* back link */
+  .btn-back {
+    display: block; text-align: center; margin-top: 14px;
+    font-size: 0.76rem; color: var(--text-light); cursor: pointer;
+    text-decoration: underline; transition: color 0.2s;
+  }
+  .btn-back:hover { color: var(--brown); }
+
+  /* ══════════════════════════════════
+     SUCCESS OVERLAY
+  ══════════════════════════════════ */
+  .success-overlay {
+    display: none; position: fixed; inset: 0; z-index: 200;
+    background: rgba(15,8,3,0.78); backdrop-filter: blur(8px);
+    align-items: center; justify-content: center; padding: 20px;
+  }
+  .success-overlay.active { display: flex; }
+  .success-card {
+    background: linear-gradient(160deg,#0F2A3F,#081820);
+    border: 1px solid rgba(0,180,200,0.18);
+    border-radius: var(--radius-lg); padding: 36px 26px;
+    max-width: 380px; width: 100%; text-align: center;
+    animation: pop-in 0.35s cubic-bezier(.34,1.56,.64,1) both;
+  }
+  @keyframes pop-in {
+    from { transform: scale(0.82); opacity: 0; }
+    to   { transform: scale(1);    opacity: 1; }
+  }
+  .success-check {
+    width: 70px; height: 70px; border-radius: 50%;
+    background: var(--success); margin: 0 auto 16px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 2rem; box-shadow: 0 0 0 12px rgba(26,158,90,0.14);
+  }
+  .success-chip {
+    display: inline-block; background: rgba(0,180,200,0.14);
+    border: 1px solid rgba(0,180,200,0.25); color: var(--teal);
+    font-size: 0.68rem; font-weight: 700; letter-spacing: 0.10em;
+    text-transform: uppercase; padding: 4px 12px; border-radius: var(--radius-pill);
+    margin-bottom: 12px;
+  }
+  .success-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem; font-weight: 900; color: var(--white); margin-bottom: 6px;
+  }
+  .success-title span { color: #4FE09A; }
+  .success-sub { font-size: 0.80rem; color: rgba(255,255,255,0.45); line-height: 1.65; margin-bottom: 20px; }
+  .txn-box {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.07);
+    border-radius: var(--radius-md); padding: 14px; text-align: left; margin-bottom: 20px;
+  }
+  .txn-title {
+    font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em;
+    color: rgba(255,255,255,0.30); margin-bottom: 10px;
+  }
+  .txn-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 0.79rem;
+  }
+  .txn-row:last-child { border-bottom: none; }
+  .txn-key { color: rgba(255,255,255,0.40); }
+  .txn-val { font-weight: 700; color: rgba(255,255,255,0.82); }
+  .txn-val.ok { color: #4FE09A; }
+  .btn-continue {
+    display: block; width: 100%; padding: 14px;
+    background: var(--teal); color: var(--white);
+    border: none; border-radius: var(--radius-pill);
+    font-family: 'Inter', sans-serif; font-size: 0.92rem; font-weight: 700;
+    text-align: center; text-decoration: none; cursor: pointer; transition: all 0.2s;
+  }
+  .btn-continue:hover { background: var(--teal-dark); }
+
+  /* ── TOAST ── */
+  .toast {
+    position: fixed; bottom: 24px; left: 50%;
+    transform: translateX(-50%) translateY(70px);
+    background: var(--danger); color: var(--white);
+    padding: 11px 20px; border-radius: var(--radius-pill);
+    font-size: 0.80rem; font-weight: 600; z-index: 300;
+    transition: transform 0.28s; white-space: nowrap;
+    box-shadow: 0 4px 18px rgba(192,32,32,0.30);
+  }
+  .toast.show { transform: translateX(-50%) translateY(0); }
+
+  /* ── FOOTER ── */
+  .pay-footer {
+    text-align: center; padding: 24px 20px;
+    font-size: 0.71rem; color: var(--text-light);
+    border-top: 1px solid rgba(62,32,5,0.07);
+  }
+  .pay-footer a { color: var(--teal-dark); font-weight: 600; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 540px) {
+    .pay-hero { padding: 86px 16px 36px; }
+    .pay-wrap { padding: 18px 12px 50px; }
+    .pay-form, .pay-panel { padding: 16px; }
+    .step-header { padding: 14px 16px; }
+    .send-to-num { font-size: 1.2rem; }
+    .bank-row { flex-wrap: wrap; gap: 4px; }
+    .bank-acc-row { flex-wrap: wrap; }
+    .hero-logo-card { flex-direction: column; text-align: center; gap: 8px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══ NAV ══ -->
+<nav>
+  <a class="nav-logo" href="https://kayesmd.com">
+    <div class="logo-img-wrap">
+      <!--
+        TO UPDATE LOGO LATER:
+        Replace the .logo-fallback div below with:
+        <img src="your-logo.png" alt="Learn with Kayes">
+        Example: <img src="https://yourcdn.com/lwk-logo.png" alt="Learn with Kayes">
+      -->
+      <div class="logo-fallback">LwK</div>
+    </div>
+    <div class="nav-brand">
+      <div class="nav-brand-name">Learn with Kayes</div>
+      <div class="nav-brand-sub">FORMERLY LEARN TO ENLIGHT</div>
+    </div>
+  </a>
+  <a class="nav-back" href="https://kayesmd.com">← Back</a>
+</nav>
+
+<!-- ══ HERO ══ -->
+<div class="pay-hero">
+
+  <!-- LOGO CARD — same swap zone as nav -->
+  <div class="hero-logo-card">
+    <div class="hero-logo-icon">
+      <!--
+        TO UPDATE HERO LOGO:
+        Replace .logo-fallback with <img src="your-logo.png" alt="LwK">
+      -->
+      <div class="logo-fallback">LwK</div>
+    </div>
+    <div>
+      <div class="hero-logo-text-name">Learn with Kayes</div>
+      <div class="hero-logo-text-sub">Secure Payment Portal</div>
+    </div>
+  </div>
+
+  <h1>Complete Your <span>Payment</span> Securely</h1>
+  <p style="font-size:0.88rem;color:rgba(255,255,255,0.45);margin-top:10px;line-height:1.6;max-width:400px;margin-left:auto;margin-right:auto;">Fast, simple, and trusted. Choose your preferred method and we'll confirm your payment automatically.</p>
+
+  <!-- Quran quote on fulfilling financial obligations -->
+  <div class="quran-quote">
+    <div class="quran-arabic">يَا أَيُّهَا الَّذِينَ آمَنُوا أَوْفُوا بِالْعُقُودِ</div>
+    <div class="quran-translation">"O you who believe, fulfil your obligations (contracts)."</div>
+    <div class="quran-ref">— Surah Al-Ma'idah 5:1</div>
+  </div>
+
+</div>
+
+<!-- ══ MAIN CARD ══ -->
+<div class="pay-wrap">
+  <div class="pay-card">
+
+    <!-- STEP 1: FORM -->
+    <div id="step-form">
+      <div class="step-header">
+        <h2>Payment Details</h2>
+        <p>Fill in your details and choose a payment method to continue</p>
+      </div>
+
+      <div class="pay-form">
+
+        <!-- Phone -->
+        <div class="field-group">
+          <label class="field-label" for="phone">
+            Your Phone Number <span class="field-req">*</span>
+          </label>
+          <input class="field-input" type="tel" id="phone"
+            placeholder="01XXXXXXXXX" maxlength="11" inputmode="numeric"
+            oninput="this.value=this.value.replace(/\D/g,'')">
+          <div class="field-hint">Enter the bKash / Nagad / Cellfin number you will pay FROM</div>
+        </div>
+
+        <!-- Student Name (optional) -->
+        <div class="field-group">
+          <label class="field-label" for="student-name">
+            Student Name
+            <span style="font-weight:500;text-transform:none;letter-spacing:0;font-size:0.68rem;color:var(--text-light);margin-left:4px">(optional — if paying student fee)</span>
+          </label>
+          <input class="field-input" type="text" id="student-name"
+            placeholder="e.g. Mohammed Raihan">
+          <div class="field-hint info">
+            📌 Paying a student fee? Write the student's full name exactly as registered — this is how we match your payment.
+          </div>
+        </div>
+
+        <!-- Amount -->
+        <div class="field-group">
+          <label class="field-label" for="amount">Amount <span class="field-req">*</span></label>
+          <div class="amount-row">
+            <span class="amount-prefix">৳</span>
+            <input class="amount-input" type="number" id="amount"
+              placeholder="0.00" min="1" inputmode="decimal">
+          </div>
+          <div class="field-hint">Enter the exact amount you will send</div>
+        </div>
+
+        <!-- Method -->
+        <div class="field-group">
+          <label class="field-label">Payment Method <span class="field-req">*</span></label>
+          <div style="background:rgba(29,110,63,0.07);border:1px solid rgba(29,110,63,0.20);border-radius:8px;padding:9px 12px;margin-bottom:10px;font-size:0.76rem;color:var(--bank-green);line-height:1.55;">
+            🏦 <strong>We encourage bank transfer</strong> — it is more reliable, has no extra charge, and makes record-keeping cleaner for both sides.
+          </div>
+          <div class="method-grid">
+
+            <!-- bKash Payment (Retailer) -->
+            <button class="method-btn" id="m-bkash" onclick="selectMethod('bkash')">
+              <div class="method-logo"><span class="logo-bkash-pill">bKash</span></div>
+              <div class="method-name">bKash</div>
+              <div class="method-sub">Payment</div>
+            </button>
+
+            <!-- bKash Send Money -->
+            <button class="method-btn" id="m-bkash-send" onclick="selectMethod('bkash-send')">
+              <div class="method-logo"><span class="logo-bkash-pill">bKash</span></div>
+              <div class="method-name">bKash</div>
+              <div class="method-sub">Send Money</div>
+            </button>
+
+            <!-- Nagad -->
+            <button class="method-btn" id="m-nagad" onclick="selectMethod('nagad')">
+              <div class="method-logo"><span class="logo-nagad-pill">নগদ</span></div>
+              <div class="method-name">Nagad</div>
+              <div class="method-sub">Send Money</div>
+            </button>
+
+            <!-- Cellfin -->
+            <button class="method-btn" id="m-cellfin" onclick="selectMethod('cellfin')">
+              <div class="method-logo"><span class="logo-cellfin-pill">Cellfin</span></div>
+              <div class="method-name">Cellfin</div>
+              <div class="method-sub">Fund Transfer</div>
+            </button>
+
+            <!-- Islami Bank — full width -->
+            <button class="method-btn method-btn-full" id="m-bank" onclick="selectMethod('bank')">
+              <div class="method-logo"><span class="logo-bank-pill">Islami Bank</span></div>
+              <div class="method-name">Bank Transfer</div>
+              <div class="method-sub">NPSB / Any Bank</div>
+            </button>
+
+          </div>
+        </div>
+
+        <button class="btn-pay-now" id="pay-now-btn" onclick="proceedPayment()" disabled>
+          Pay Now →
+        </button>
+        <p class="terms-note">
+          By proceeding you agree to our
+          <a href="https://drive.google.com/file/d/1fqLg1zkJLScobzrq5UE5F4Ok3LMolckc/view?usp=sharing" target="_blank">Terms & Conditions</a>
+        </p>
+
+      </div>
+    </div>
+
+    <!-- ══ PANEL: bKash (Retailer redirect) ══ -->
+    <div class="pay-panel" id="panel-bkash">
+      <div class="panel-brand">
+        <div class="panel-brand-logo"><span class="pbadge pbadge-bkash">bKash</span></div>
+        <div>
+          <div class="panel-brand-title">bKash Payment</div>
+          <div class="panel-brand-subtitle">You will be redirected to the bKash payment page</div>
+        </div>
+      </div>
+
+      <div class="invoice-box">
+        <div class="invoice-row"><span class="inv-label">Student Name</span><span class="inv-val" id="bk-name">—</span></div>
+        <div class="invoice-row"><span class="inv-label">Phone Number</span><span class="inv-val" id="bk-phone">—</span></div>
+        <div class="invoice-row"><span class="inv-label">Amount</span><span class="inv-val big" id="bk-amount">—</span></div>
+        <div class="invoice-row"><span class="inv-label">Method</span><span class="inv-val">bKash Payment</span></div>
+      </div>
+
+      <div class="retailer-note">
+        ⚠️ <strong>Important:</strong> The bKash page will open. Enter exactly <strong id="bk-amount2">৳0</strong> as the amount.<br><br>
+        In the <strong>Payment Reference</strong> field — write the <strong>student's full name</strong> if paying a student fee, so we can match your payment correctly.
+      </div>
+
+      <div class="steps-box">
+        <div class="steps-box-title">📋 Steps to complete</div>
+        <ul class="steps-list">
+          <li class="step-item"><span class="step-num">1</span><span>Click the button below — bKash payment page will open in a new tab</span></li>
+          <li class="step-item"><span class="step-num">2</span><span>Enter <strong id="bk-amount3">৳0</strong> as the amount</span></li>
+          <li class="step-item"><span class="step-num">3</span><span>In <strong>Payment Reference</strong> field, write the <strong>student's full name</strong></span></li>
+          <li class="step-item"><span class="step-num">4</span><span>Complete payment using your bKash PIN — you will get a confirmation from bKash</span></li>
+        </ul>
+      </div>
+
+      <a class="btn-bkash-go"
+        href="https://shop.bkash.com/hedayeter-sondhane-islamic-sho/paymentlink/default-payment"
+        target="_blank">
+        Open bKash Payment Page →
+      </a>
+
+      <span class="btn-back" onclick="goBack()">← Change details</span>
+    </div>
+
+    <!-- ══ PANEL: bKash Send Money (polling) ══ -->
+    <div class="pay-panel" id="panel-bkash-send">
+      <div class="panel-brand">
+        <div class="panel-brand-logo"><span class="pbadge pbadge-bkash">bKash</span></div>
+        <div>
+          <div class="panel-brand-title">bKash Send Money</div>
+          <div class="panel-brand-subtitle">Send to the number below — confirmation is automatic</div>
+        </div>
+      </div>
+
+      <div class="invoice-box">
+        <div class="invoice-row"><span class="inv-label">Student Name</span><span class="inv-val" id="bks-name">—</span></div>
+        <div class="invoice-row"><span class="inv-label">Your Number</span><span class="inv-val" id="bks-phone">—</span></div>
+        <div class="invoice-row"><span class="inv-label">Amount to Send</span><span class="inv-val big" id="bks-amount">—</span></div>
+        <div class="invoice-row"><span class="inv-label">Charge</span><span class="inv-val">৳0.00</span></div>
+      </div>
+
+      <div class="send-to-box">
+        <div class="send-to-lbl">Send Money to This bKash Number</div>
+        <div class="send-to-num-row">
+          <div class="send-to-num">01701-064194</div>
+          <button class="copy-btn" id="copy-bks" onclick="copyNum('01701064194','copy-bks')">Copy</button>
+        </div>
+        <div class="send-to-amount">
+          পাঠানোর পরিমাণ: <strong id="bks-amount2">৳0</strong>
+        </div>
+      </div>
+
+      <div class="steps-box">
+        <div class="steps-box-title">📋 How to send via bKash</div>
+        <ul class="steps-list">
+          <li class="step-item"><span class="step-num">1</span><span>Open your <strong>bKash app</strong></span></li>
+          <li class="step-item"><span class="step-num">2</span><span>Tap <strong>"Send Money"</strong></span></li>
+          <li class="step-item"><span class="step-num">3</span><span>Paste the number: <strong>01701064194</strong> (use Copy button above)</span></li>
+          <li class="step-item"><span class="step-num">4</span><span>Enter amount: <strong id="bks-amount3">৳0</strong></span></li>
+          <li class="step-item"><span class="step-num">5</span><span>Enter your <strong>bKash PIN</strong> to confirm</span></li>
+          <li class="step-item"><span class="step-num">6</span><span>bKash will send you a <strong>confirmation SMS</strong> — your payment will be verified automatically ✅</span></li>
+        </ul>
+      </div>
+
+      <div class="btn-waiting">
+        <div class="spinner"></div>
+        <span>Waiting for confirmation...</span>
+      </div>
+
+      <span class="btn-back" onclick="goBack()">← Change details</span>
+    </div>
+
+    <!-- ══ PANEL: Nagad Send Money (polling) ══ -->
+    <div class="pay-panel" id="panel-nagad">
+      <div class="panel-brand">
+        <div class="panel-brand-logo"><span class="pbadge pbadge-nagad">নগদ</span></div>
+        <div>
+          <div class="panel-brand-title">Nagad Send Money</div>
+          <div class="panel-brand-subtitle">Send to the number below — confirmation is automatic</div>
+        </div>
+      </div>
+
+      <div class="invoice-box">
+        <div class="invoice-row"><span class="inv-label">Student Name</span><span class="inv-val" id="ng-name">—</span></div>
+        <div class="invoice-row"><span class="inv-label">Your Number</span><span class="inv-val" id="ng-phone">—</span></div>
+        <div class="invoice-row"><span class="inv-label">Amount to Send</span><span class="inv-val big" id="ng-amount">—</span></div>
+        <div class="invoice-row"><span class="inv-label">Charge</span><span class="inv-val">৳0.00</span></div>
+      </div>
+
+      <div class="send-to-box">
+        <div class="send-to-lbl">Send Money to This Number</div>
+        <div class="send-to-num-row">
+          <div class="send-to-num">01701-064194</div>
+          <button class="copy-btn" id="copy-ng" onclick="copyNum('01701064194','copy-ng')">Copy</button>
+        </div>
+        <div class="send-to-amount">
+          পাঠানোর পরিমাণ: <strong id="ng-amount2">৳0</strong>
+        </div>
+      </div>
+
+      <div class="steps-box">
+        <div class="steps-box-title">📋 How to send via Nagad</div>
+        <ul class="steps-list">
+          <li class="step-item"><span class="step-num">1</span><span>Open your <strong>Nagad app</strong></span></li>
+          <li class="step-item"><span class="step-num">2</span><span>Tap <strong>"Send Money"</strong></span></li>
+          <li class="step-item"><span class="step-num">3</span><span>Paste the number: <strong>01701064194</strong> (use Copy button above)</span></li>
+          <li class="step-item"><span class="step-num">4</span><span>Enter amount: <strong id="ng-amount3">৳0</strong></span></li>
+          <li class="step-item"><span class="step-num">5</span><span>Enter your <strong>Nagad PIN</strong> to confirm</span></li>
+          <li class="step-item"><span class="step-num">6</span><span>Nagad will send you a <strong>confirmation SMS</strong> — your payment will be verified automatically ✅</span></li>
+        </ul>
+      </div>
+
+      <div class="btn-waiting">
+        <div class="spinner"></div>
+        <span>Waiting for confirmation...</span>
+      </div>
+
+      <span class="btn-back" onclick="goBack()">← Change details</span>
+    </div>
+
+    <!-- ══ PANEL: Cellfin ══ -->
+    <div class="pay-panel" id="panel-cellfin">
+      <div class="panel-brand">
+        <div class="panel-brand-logo"><span class="pbadge pbadge-cellfin">Cellfin</span></div>
+        <div>
+          <div class="panel-brand-title">Cellfin — Islami Bank App</div>
+          <div class="panel-brand-subtitle">Send directly from your Cellfin app</div>
+        </div>
+      </div>
+
+      <div class="invoice-box">
+        <div class="invoice-row"><span class="inv-label">Student Name</span><span class="inv-val" id="cf-name">—</span></div>
+        <div class="invoice-row"><span class="inv-label">Your Number</span><span class="inv-val" id="cf-phone">—</span></div>
+        <div class="invoice-row"><span class="inv-label">Amount</span><span class="inv-val big" id="cf-amount">—</span></div>
+      </div>
+
+      <div class="send-to-box">
+        <div class="send-to-lbl">Send to This Cellfin / Islami Bank Number</div>
+        <div class="send-to-num-row">
+          <div class="send-to-num">01701-064194</div>
+          <button class="copy-btn" id="copy-cf" onclick="copyNum('01701064194','copy-cf')">Copy</button>
+        </div>
+        <div class="send-to-amount">
+          পাঠানোর পরিমাণ: <strong id="cf-amount2">৳0</strong>
+        </div>
+      </div>
+
+      <div class="steps-box">
+        <div class="steps-box-title">📋 How to pay via Cellfin</div>
+        <ul class="steps-list">
+          <li class="step-item"><span class="step-num">1</span><span>Open your <strong>Cellfin app</strong></span></li>
+          <li class="step-item"><span class="step-num">2</span><span>Tap <strong>"Fund Transfer"</strong></span></li>
+          <li class="step-item"><span class="step-num">3</span><span>Paste the number: <strong>01701064194</strong></span></li>
+          <li class="step-item"><span class="step-num">4</span><span>Enter amount: <strong id="cf-amount3">৳0</strong></span></li>
+          <li class="step-item"><span class="step-num">5</span><span>Confirm with your <strong>Cellfin PIN</strong></span></li>
+          <li class="step-item"><span class="step-num">6</span><span>You will receive a confirmation SMS — payment will be verified automatically ✅</span></li>
+        </ul>
+      </div>
+
+      <div class="btn-waiting">
+        <div class="spinner"></div>
+        <span>Waiting for confirmation...</span>
+      </div>
+
+      <span class="btn-back" onclick="goBack()">← Change details</span>
+    </div>
+
+    <!-- ══ PANEL: Islami Bank Transfer ══ -->
+    <div class="pay-panel" id="panel-bank">
+      <div class="panel-brand">
+        <div class="panel-brand-logo"><span class="pbadge pbadge-bank">Islami Bank</span></div>
+        <div>
+          <div class="panel-brand-title">Bank Transfer</div>
+          <div class="panel-brand-subtitle">NPSB supported — transfer from any bank</div>
+        </div>
+      </div>
+
+      <div class="invoice-box">
+        <div class="invoice-row"><span class="inv-label">Student Name</span><span class="inv-val" id="bnk-name">—</span></div>
+        <div class="invoice-row"><span class="inv-label">Your Number</span><span class="inv-val" id="bnk-phone">—</span></div>
+        <div class="invoice-row"><span class="inv-label">Amount</span><span class="inv-val big" id="bnk-amount">—</span></div>
+        <div class="invoice-row"><span class="inv-label">Transfer Type</span><span class="inv-val">NPSB / Bank Transfer</span></div>
+      </div>
+
+      <div class="npsb-badge">✅ NPSB — transfer from any bank in Bangladesh</div>
+
+      <div class="bank-details-box">
+        <div class="bank-row">
+          <span class="bank-lbl">Account Name</span>
+          <span class="bank-val">Md Kayes</span>
+        </div>
+        <div class="bank-row">
+          <span class="bank-lbl">Account Number</span>
+          <div class="bank-acc-row">
+            <span class="bank-val acc">20501270202959812</span>
+            <button class="copy-btn" id="copy-acc" onclick="copyNum('20501270202959812','copy-acc')" style="font-size:0.67rem;padding:5px 10px">Copy</button>
+          </div>
+        </div>
+        <div class="bank-row">
+          <span class="bank-lbl">Bank</span>
+          <span class="bank-val">Islami Bank Bangladesh Ltd</span>
+        </div>
+        <div class="bank-row">
+          <span class="bank-lbl">Branch</span>
+          <span class="bank-val">Zinzira</span>
+        </div>
+        <div class="bank-row">
+          <span class="bank-lbl">Routing No</span>
+          <span class="bank-val">125277097</span>
+        </div>
+      </div>
+
+      <div class="steps-box">
+        <div class="steps-box-title">📋 Steps to complete bank transfer</div>
+        <ul class="steps-list">
+          <li class="step-item"><span class="step-num">1</span><span>Open your <strong>bank app</strong> or any mobile banking app that supports NPSB</span></li>
+          <li class="step-item"><span class="step-num">2</span><span>Choose <strong>NPSB Transfer</strong> or <strong>Fund Transfer</strong></span></li>
+          <li class="step-item"><span class="step-num">3</span><span>Enter account number: <strong>20501270202959812</strong> (Islami Bank, Zinzira)</span></li>
+          <li class="step-item"><span class="step-num">4</span><span>Enter amount: <strong id="bnk-amount2">৳0</strong></span></li>
+          <li class="step-item"><span class="step-num">5</span><span>Complete the transfer and <strong>take a screenshot</strong></span></li>
+          <li class="step-item"><span class="step-num">6</span><span>Send the screenshot to our Telegram with the <strong>student's full name</strong></span></li>
+        </ul>
+      </div>
+
+      <div class="btn-waiting">
+        <div class="spinner"></div>
+        <span>Waiting for confirmation...</span>
+      </div>
+
+      <a href="https://t.me/LearntoEnlightbot" target="_blank" class="btn-telegram">
+        📤 Send Payment Screenshot on Telegram
+      </a>
+
+      <span class="btn-back" onclick="goBack()">← Change details</span>
+    </div>
+
+  </div><!-- /pay-card -->
+
+  <div class="pay-footer">
+    ⏰ Payment deadline: 10th of every month <span style="color:var(--teal-dark);font-weight:600">(for students)</span> &nbsp;·&nbsp;
+    📞 <a href="tel:+8801701064194">+880 1701 064194</a> &nbsp;·&nbsp;
+    <a href="https://t.me/LearntoEnlightbot" target="_blank">Telegram Support</a>
+  </div>
+</div>
+
+<!-- ══ SUCCESS OVERLAY ══ -->
+<div class="success-overlay" id="success-overlay">
+  <div class="success-card">
+    <div class="success-check">✓</div>
+    <div class="success-chip">• COMPLETED</div>
+    <div class="success-title">পেমেন্ট <span>সফল!</span></div>
+    <p class="success-sub">আপনার পেমেন্ট সফলভাবে সম্পন্ন হয়েছে।<br>ধন্যবাদ আপনার লেনদেনের জন্য।</p>
+    <div class="txn-box">
+      <div class="txn-title">🧾 Transaction Details</div>
+      <div class="txn-row"><span class="txn-key">Student Name</span><span class="txn-val" id="s-name">—</span></div>
+      <div class="txn-row"><span class="txn-key">Payment Method</span><span class="txn-val" id="s-method">—</span></div>
+      <div class="txn-row"><span class="txn-key">Phone Number</span><span class="txn-val" id="s-phone">—</span></div>
+      <div class="txn-row"><span class="txn-key">Amount</span><span class="txn-val" id="s-amount">—</span></div>
+      <div class="txn-row"><span class="txn-key">Status</span><span class="txn-val ok">SUCCESS</span></div>
+    </div>
+    <a class="btn-continue" href="https://kayesmd.com">← Back to Home</a>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+/* ══════════════════════════════════════
+   CONFIG — update before going live
+══════════════════════════════════════ */
+const N8N_POLL_URL   = 'https://dqfll391.n8n.runn.to/webhook/payment-check';
+// n8n should accept: GET ?phone=01XXX&amount=500&method=nagad&name=Raihan
+// and return: { "confirmed": true } or { "confirmed": false }
+
+const POLL_INTERVAL  = 5000;  // 5 seconds
+const POLL_MAX       = 72;    // 6 minutes max (72 × 5s)
+
+/* ══════════════════════════════════════
+   STATE
+══════════════════════════════════════ */
+let activeMethod = null;
+let pollTimer    = null;
+let pollCount    = 0;
+
+/* ══════════════════════════════════════
+   HELPERS
+══════════════════════════════════════ */
+function showToast(msg) {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.classList.add('show');
+  setTimeout(() => el.classList.remove('show'), 3200);
+}
+
+function fmt(n) {
+  return '৳' + parseFloat(n).toLocaleString('en-BD', { minimumFractionDigits: 2 });
+}
+
+function fmtPhone(p) {
+  return p.length >= 11 ? p.slice(0,5) + '-' + p.slice(5) : p;
+}
+
+/* ══════════════════════════════════════
+   METHOD SELECT + VALIDATION
+══════════════════════════════════════ */
+function selectMethod(m) {
+  activeMethod = m;
+  ['bkash','bkash-send','nagad','cellfin','bank'].forEach(k => {
+    document.getElementById('m-' + k).classList.toggle('active', k === m);
+  });
+  validate();
+}
+
+function validate() {
+  const phone  = document.getElementById('phone').value.trim();
+  const amount = parseFloat(document.getElementById('amount').value);
+  const ok     = phone.length === 11 && phone.startsWith('0') && amount > 0 && activeMethod;
+  document.getElementById('pay-now-btn').disabled = !ok;
+}
+
+document.getElementById('phone').addEventListener('input', validate);
+document.getElementById('amount').addEventListener('input', validate);
+
+/* ══════════════════════════════════════
+   PROCEED
+══════════════════════════════════════ */
+function proceedPayment() {
+  const name   = document.getElementById('student-name').value.trim();
+  const phone  = document.getElementById('phone').value.trim();
+  const amount = parseFloat(document.getElementById('amount').value);
+
+  if (phone.length !== 11 || !phone.startsWith('0')) { showToast('সঠিক ফোন নম্বর দিন (১১ ডিজিট)'); return; }
+  if (!amount || amount <= 0)                          { showToast('সঠিক পরিমাণ দিন'); return; }
+  if (!activeMethod)                                   { showToast('পেমেন্ট মেথড বেছে নিন'); return; }
+
+  document.getElementById('step-form').style.display = 'none';
+
+  const displayName = name || '—';
+
+  if (activeMethod === 'bkash') {
+    document.getElementById('bk-name').textContent    = displayName;
+    document.getElementById('bk-phone').textContent   = fmtPhone(phone);
+    document.getElementById('bk-amount').textContent  = fmt(amount);
+    document.getElementById('bk-amount2').textContent = fmt(amount);
+    document.getElementById('bk-amount3').textContent = fmt(amount);
+    showPanel('panel-bkash');
+
+  } else if (activeMethod === 'bkash-send') {
+    document.getElementById('bks-name').textContent    = displayName;
+    document.getElementById('bks-phone').textContent   = fmtPhone(phone);
+    document.getElementById('bks-amount').textContent  = fmt(amount);
+    document.getElementById('bks-amount2').textContent = fmt(amount);
+    document.getElementById('bks-amount3').textContent = fmt(amount);
+    showPanel('panel-bkash-send');
+    startPolling(phone, amount, 'bkash-send', name);
+
+  } else if (activeMethod === 'nagad') {
+    document.getElementById('ng-name').textContent    = displayName;
+    document.getElementById('ng-phone').textContent   = fmtPhone(phone);
+    document.getElementById('ng-amount').textContent  = fmt(amount);
+    document.getElementById('ng-amount2').textContent = fmt(amount);
+    document.getElementById('ng-amount3').textContent = fmt(amount);
+    showPanel('panel-nagad');
+    startPolling(phone, amount, 'nagad', name);
+
+  } else if (activeMethod === 'cellfin') {
+    document.getElementById('cf-name').textContent    = displayName;
+    document.getElementById('cf-phone').textContent   = fmtPhone(phone);
+    document.getElementById('cf-amount').textContent  = fmt(amount);
+    document.getElementById('cf-amount2').textContent = fmt(amount);
+    document.getElementById('cf-amount3').textContent = fmt(amount);
+    showPanel('panel-cellfin');
+    startPolling(phone, amount, 'cellfin', name);
+
+  } else if (activeMethod === 'bank') {
+    document.getElementById('bnk-name').textContent    = displayName;
+    document.getElementById('bnk-phone').textContent   = fmtPhone(phone);
+    document.getElementById('bnk-amount').textContent  = fmt(amount);
+    document.getElementById('bnk-amount2').textContent = fmt(amount);
+    showPanel('panel-bank');
+    startPolling(phone, amount, 'bank', name);
+  }
+}
+
+function showPanel(id) {
+  ['panel-bkash','panel-bkash-send','panel-nagad','panel-cellfin','panel-bank'].forEach(p => {
+    document.getElementById(p).classList.remove('active');
+  });
+  document.getElementById(id).classList.add('active');
+}
+
+/* ══════════════════════════════════════
+   POLLING
+══════════════════════════════════════ */
+async function startPolling(phone, amount, method, name) {
+  pollCount = 0;
+  clearInterval(pollTimer);
+
+  pollTimer = setInterval(async () => {
+    pollCount++;
+    if (pollCount > POLL_MAX) {
+      clearInterval(pollTimer);
+      showToast('⏱ Time out — please contact us on Telegram if you already paid');
+      return;
+    }
+    try {
+      const params = new URLSearchParams({ phone, amount, method, name });
+      const res  = await fetch(`${N8N_POLL_URL}?${params}`);
+      const data = await res.json();
+      if (data && data.confirmed === true) {
+        clearInterval(pollTimer);
+        showSuccess(name, phone, amount, method);
+      }
+    } catch (_) { /* silent — keep polling */ }
+  }, POLL_INTERVAL);
+}
+
+/* ══════════════════════════════════════
+   SUCCESS
+══════════════════════════════════════ */
+function showSuccess(name, phone, amount, method) {
+  const labels = { bkash: 'bKash Payment', 'bkash-send': 'bKash Send Money', nagad: 'Nagad', cellfin: 'Cellfin', bank: 'Islami Bank Transfer' };
+  document.getElementById('s-name').textContent   = name || '—';
+  document.getElementById('s-method').textContent = labels[method] || method;
+  document.getElementById('s-phone').textContent  = fmtPhone(phone);
+  document.getElementById('s-amount').textContent = fmt(amount);
+  document.getElementById('success-overlay').classList.add('active');
+}
+
+/* ══════════════════════════════════════
+   BACK
+══════════════════════════════════════ */
+function goBack() {
+  clearInterval(pollTimer);
+  ['panel-bkash','panel-bkash-send','panel-nagad','panel-cellfin','panel-bank'].forEach(p => {
+    document.getElementById(p).classList.remove('active');
+  });
+  document.getElementById('step-form').style.display = 'block';
+}
+
+/* ══════════════════════════════════════
+   COPY
+══════════════════════════════════════ */
+function copyNum(val, btnId) {
+  navigator.clipboard.writeText(val).then(() => {
+    const btn = document.getElementById(btnId);
+    const orig = btn.textContent;
+    btn.textContent = 'Copied!';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = orig; btn.classList.remove('copied'); }, 2000);
+  }).catch(() => showToast('Copy failed — please copy manually'));
+}
+</script>
+</body>
+</html>
