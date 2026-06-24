@@ -1130,10 +1130,12 @@ async function startPolling(phone, amount, method, name) {
       return;
     }
     try {
-      const params = new URLSearchParams({ phone, amount, method, name });
+      const last4     = String(phone).replace(/\D/g, '').slice(-4);
+      const amountInt = String(Math.round(parseFloat(amount)));
+      const params    = new URLSearchParams({ amount: amountInt, last4 });
       const res  = await fetch(`${N8N_POLL_URL}?${params}`);
       const data = await res.json();
-      if (data && data.confirmed === true) {
+      if (data && data.status === 'confirmed') {
         clearInterval(pollTimer);
         showSuccess(name, phone, amount, method);
       }
