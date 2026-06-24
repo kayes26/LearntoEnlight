@@ -385,6 +385,17 @@
   }
   .btn-bkash-go:hover { background: #B01059; transform: translateY(-1px); }
 
+  /* confirm pay button */
+  .btn-confirm-pay {
+    display: block; width: 100%; padding: 15px; margin-top: 4px;
+    background: var(--success); color: var(--white);
+    border: none; border-radius: var(--radius-pill);
+    font-family: 'Inter', sans-serif; font-size: 0.95rem; font-weight: 700;
+    cursor: pointer; transition: all 0.2s;
+    box-shadow: 0 4px 16px rgba(26,158,90,0.30);
+  }
+  .btn-confirm-pay:hover { background: #158a4e; transform: translateY(-1px); }
+
   /* cellfin */
   .cellfin-note {
     background: rgba(0,85,164,0.06); border: 1px solid rgba(0,85,164,0.18);
@@ -780,7 +791,8 @@
         </ul>
       </div>
 
-      <div class="btn-waiting">
+      <button class="btn-confirm-pay" onclick="confirmAndPoll('bkash-send','bks-waiting')">✅ আমি পেমেন্ট করেছি — নিশ্চিত করুন</button>
+      <div class="btn-waiting" id="bks-waiting" style="display:none;margin-top:12px">
         <div class="spinner"></div>
         <span>Waiting for confirmation...</span>
       </div>
@@ -828,7 +840,8 @@
         </ul>
       </div>
 
-      <div class="btn-waiting">
+      <button class="btn-confirm-pay" onclick="confirmAndPoll('nagad','ng-waiting')">✅ আমি পেমেন্ট করেছি — নিশ্চিত করুন</button>
+      <div class="btn-waiting" id="ng-waiting" style="display:none;margin-top:12px">
         <div class="spinner"></div>
         <span>Waiting for confirmation...</span>
       </div>
@@ -875,7 +888,8 @@
         </ul>
       </div>
 
-      <div class="btn-waiting">
+      <button class="btn-confirm-pay" onclick="confirmAndPoll('cellfin','cf-waiting')">✅ আমি পেমেন্ট করেছি — নিশ্চিত করুন</button>
+      <div class="btn-waiting" id="cf-waiting" style="display:none;margin-top:12px">
         <div class="spinner"></div>
         <span>Waiting for confirmation...</span>
       </div>
@@ -940,7 +954,8 @@
         </ul>
       </div>
 
-      <div class="btn-waiting">
+      <button class="btn-confirm-pay" onclick="confirmAndPoll('bank','bnk-waiting')">✅ আমি পেমেন্ট করেছি — নিশ্চিত করুন</button>
+      <div class="btn-waiting" id="bnk-waiting" style="display:none;margin-top:12px">
         <div class="spinner"></div>
         <span>Waiting for confirmation...</span>
       </div>
@@ -1001,6 +1016,7 @@ let activeMethod   = null;
 let pollTimer      = null;
 let pollCount      = 0;
 let bkashPayData   = {};
+let payData        = {};
 
 /* ══════════════════════════════════════
    HELPERS
@@ -1056,6 +1072,7 @@ function proceedPayment() {
   document.getElementById('step-form').style.display = 'none';
 
   const displayName = name || '—';
+  payData = { phone, amount, name };
 
   if (activeMethod === 'bkash') {
     document.getElementById('bk-name').textContent    = displayName;
@@ -1073,7 +1090,6 @@ function proceedPayment() {
     document.getElementById('bks-amount2').textContent = fmt(amount);
     document.getElementById('bks-amount3').textContent = fmt(amount);
     showPanel('panel-bkash-send');
-    startPolling(phone, amount, 'bkash-send', name);
 
   } else if (activeMethod === 'nagad') {
     document.getElementById('ng-name').textContent    = displayName;
@@ -1082,7 +1098,6 @@ function proceedPayment() {
     document.getElementById('ng-amount2').textContent = fmt(amount);
     document.getElementById('ng-amount3').textContent = fmt(amount);
     showPanel('panel-nagad');
-    startPolling(phone, amount, 'nagad', name);
 
   } else if (activeMethod === 'cellfin') {
     document.getElementById('cf-name').textContent    = displayName;
@@ -1091,7 +1106,6 @@ function proceedPayment() {
     document.getElementById('cf-amount2').textContent = fmt(amount);
     document.getElementById('cf-amount3').textContent = fmt(amount);
     showPanel('panel-cellfin');
-    startPolling(phone, amount, 'cellfin', name);
 
   } else if (activeMethod === 'bank') {
     document.getElementById('bnk-name').textContent    = displayName;
@@ -1099,7 +1113,6 @@ function proceedPayment() {
     document.getElementById('bnk-amount').textContent  = fmt(amount);
     document.getElementById('bnk-amount2').textContent = fmt(amount);
     showPanel('panel-bank');
-    startPolling(phone, amount, 'bank', name);
   }
 }
 
@@ -1113,6 +1126,11 @@ function showPanel(id) {
 function startBkashPolling() {
   document.getElementById('bkash-waiting').style.display = 'flex';
   startPolling(bkashPayData.phone, bkashPayData.amount, 'bkash', bkashPayData.name);
+}
+
+function confirmAndPoll(method, waitingId) {
+  document.getElementById(waitingId).style.display = 'flex';
+  startPolling(payData.phone, payData.amount, method, payData.name);
 }
 
 /* ══════════════════════════════════════
@@ -1160,7 +1178,9 @@ function showSuccess(name, phone, amount, method) {
 ══════════════════════════════════════ */
 function goBack() {
   clearInterval(pollTimer);
-  document.getElementById('bkash-waiting').style.display = 'none';
+  ['bkash-waiting','bks-waiting','ng-waiting','cf-waiting','bnk-waiting'].forEach(id => {
+    document.getElementById(id).style.display = 'none';
+  });
   ['panel-bkash','panel-bkash-send','panel-nagad','panel-cellfin','panel-bank'].forEach(p => {
     document.getElementById(p).classList.remove('active');
   });
