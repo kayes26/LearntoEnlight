@@ -727,9 +727,15 @@
 
       <a class="btn-bkash-go"
         href="https://shop.bkash.com/hedayeter-sondhane-islamic-sho/paymentlink/default-payment"
-        target="_blank">
+        target="_blank"
+        onclick="startBkashPolling()">
         Open bKash Payment Page →
       </a>
+
+      <div class="btn-waiting" id="bkash-waiting" style="display:none;margin-top:12px">
+        <div class="spinner"></div>
+        <span>Waiting for confirmation...</span>
+      </div>
 
       <span class="btn-back" onclick="goBack()">← Change details</span>
     </div>
@@ -991,9 +997,10 @@ const POLL_MAX       = 72;    // 6 minutes max (72 × 5s)
 /* ══════════════════════════════════════
    STATE
 ══════════════════════════════════════ */
-let activeMethod = null;
-let pollTimer    = null;
-let pollCount    = 0;
+let activeMethod   = null;
+let pollTimer      = null;
+let pollCount      = 0;
+let bkashPayData   = {};
 
 /* ══════════════════════════════════════
    HELPERS
@@ -1056,6 +1063,7 @@ function proceedPayment() {
     document.getElementById('bk-amount').textContent  = fmt(amount);
     document.getElementById('bk-amount2').textContent = fmt(amount);
     document.getElementById('bk-amount3').textContent = fmt(amount);
+    bkashPayData = { phone, amount, name };
     showPanel('panel-bkash');
 
   } else if (activeMethod === 'bkash-send') {
@@ -1102,6 +1110,11 @@ function showPanel(id) {
   document.getElementById(id).classList.add('active');
 }
 
+function startBkashPolling() {
+  document.getElementById('bkash-waiting').style.display = 'flex';
+  startPolling(bkashPayData.phone, bkashPayData.amount, 'bkash', bkashPayData.name);
+}
+
 /* ══════════════════════════════════════
    POLLING
 ══════════════════════════════════════ */
@@ -1145,6 +1158,7 @@ function showSuccess(name, phone, amount, method) {
 ══════════════════════════════════════ */
 function goBack() {
   clearInterval(pollTimer);
+  document.getElementById('bkash-waiting').style.display = 'none';
   ['panel-bkash','panel-bkash-send','panel-nagad','panel-cellfin','panel-bank'].forEach(p => {
     document.getElementById(p).classList.remove('active');
   });
