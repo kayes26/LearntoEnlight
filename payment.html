@@ -1006,8 +1006,8 @@ const N8N_POLL_URL   = 'https://dqfll391.n8n.runn.to/webhook/payment-check';
 // n8n should accept: GET ?phone=01XXX&amount=500&method=nagad&name=Raihan
 // and return: { "confirmed": true } or { "confirmed": false }
 
-const POLL_INTERVAL  = 5000;  // 5 seconds
-const POLL_MAX       = 72;    // 6 minutes max (72 × 5s)
+const POLL_INTERVAL  = 15000; // 15 seconds
+const POLL_MAX       = 24;    // 6 minutes max (24 × 15s)
 
 /* ══════════════════════════════════════
    STATE
