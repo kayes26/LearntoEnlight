@@ -782,7 +782,7 @@
       <div class="steps-box">
         <div class="steps-box-title">📋 How to send via bKash</div>
         <ul class="steps-list">
-          <li class="step-item"><span class="step-num">1</span><span>Open your <strong>bKash app</strong></span></li>
+          <li class="step-item"><span class="step-num">1</span><span>Open your <strong>bKash app</strong> or dial <strong>*247#</strong></span></li>
           <li class="step-item"><span class="step-num">2</span><span>Tap <strong>"Send Money"</strong></span></li>
           <li class="step-item"><span class="step-num">3</span><span>Paste the number: <strong>01701064194</strong> (use Copy button above)</span></li>
           <li class="step-item"><span class="step-num">4</span><span>Enter amount: <strong id="bks-amount3">৳0</strong></span></li>
@@ -791,7 +791,7 @@
         </ul>
       </div>
 
-      <button class="btn-confirm-pay" onclick="confirmAndPoll('bkash-send','bks-waiting')">✅ আমি পেমেন্ট করেছি — নিশ্চিত করুন</button>
+      <button class="btn-confirm-pay" onclick="confirmAndPoll('bkash-send','bks-waiting')">Press here &amp; Pay via bKash →</button>
       <div class="btn-waiting" id="bks-waiting" style="display:none;margin-top:12px">
         <div class="spinner"></div>
         <span>Waiting for confirmation...</span>
@@ -831,7 +831,7 @@
       <div class="steps-box">
         <div class="steps-box-title">📋 How to send via Nagad</div>
         <ul class="steps-list">
-          <li class="step-item"><span class="step-num">1</span><span>Open your <strong>Nagad app</strong></span></li>
+          <li class="step-item"><span class="step-num">1</span><span>Open your <strong>Nagad app</strong> or dial <strong>*167#</strong></span></li>
           <li class="step-item"><span class="step-num">2</span><span>Tap <strong>"Send Money"</strong></span></li>
           <li class="step-item"><span class="step-num">3</span><span>Paste the number: <strong>01701064194</strong> (use Copy button above)</span></li>
           <li class="step-item"><span class="step-num">4</span><span>Enter amount: <strong id="ng-amount3">৳0</strong></span></li>
@@ -840,7 +840,7 @@
         </ul>
       </div>
 
-      <button class="btn-confirm-pay" onclick="confirmAndPoll('nagad','ng-waiting')">✅ আমি পেমেন্ট করেছি — নিশ্চিত করুন</button>
+      <button class="btn-confirm-pay" onclick="confirmAndPoll('nagad','ng-waiting')">Press here &amp; Pay via Nagad →</button>
       <div class="btn-waiting" id="ng-waiting" style="display:none;margin-top:12px">
         <div class="spinner"></div>
         <span>Waiting for confirmation...</span>
@@ -888,7 +888,7 @@
         </ul>
       </div>
 
-      <button class="btn-confirm-pay" onclick="confirmAndPoll('cellfin','cf-waiting')">✅ আমি পেমেন্ট করেছি — নিশ্চিত করুন</button>
+      <button class="btn-confirm-pay" onclick="confirmAndPoll('cellfin','cf-waiting')">Press here &amp; Pay via Cellfin →</button>
       <div class="btn-waiting" id="cf-waiting" style="display:none;margin-top:12px">
         <div class="spinner"></div>
         <span>Waiting for confirmation...</span>
@@ -954,7 +954,7 @@
         </ul>
       </div>
 
-      <button class="btn-confirm-pay" onclick="confirmAndPoll('bank','bnk-waiting')">✅ আমি পেমেন্ট করেছি — নিশ্চিত করুন</button>
+      <button class="btn-confirm-pay" onclick="confirmAndPoll('bank','bnk-waiting','bank')">Press here &amp; Pay via Islami Bank →</button>
       <div class="btn-waiting" id="bnk-waiting" style="display:none;margin-top:12px">
         <div class="spinner"></div>
         <span>Waiting for confirmation...</span>
@@ -1146,15 +1146,32 @@ function startBkashPolling() {
   startPolling(bkashPayData.phone, bkashPayData.amount, 'bkash', bkashPayData.name);
 }
 
-function confirmAndPoll(method, waitingId) {
+function confirmAndPoll(method, waitingId, forceLast4 = null) {
+  const last4     = forceLast4 || payData.phone.slice(-4);
+  const amountInt = String(Math.round(payData.amount));
+
+  fetch('https://dqfll391.n8n.runn.to/webhook/payment-store', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      match_key:    amountInt + '_' + last4,
+      amount:       amountInt,
+      last4:        last4,
+      student_name: payData.name  || '—',
+      phone:        payData.phone || '—',
+      method:       method,
+      confirmed:    false
+    })
+  });
+
   document.getElementById(waitingId).style.display = 'flex';
-  startPolling(payData.phone, payData.amount, method, payData.name);
+  startPolling(payData.phone, payData.amount, method, payData.name, forceLast4);
 }
 
 /* ══════════════════════════════════════
    POLLING
 ══════════════════════════════════════ */
-async function startPolling(phone, amount, method, name) {
+async function startPolling(phone, amount, method, name, forceLast4 = null) {
   pollCount = 0;
   clearInterval(pollTimer);
 
@@ -1166,7 +1183,7 @@ async function startPolling(phone, amount, method, name) {
       return;
     }
     try {
-      const last4     = String(phone).replace(/\D/g, '').slice(-4);
+      const last4     = forceLast4 || String(phone).replace(/\D/g, '').slice(-4);
       const amountInt = String(Math.round(parseFloat(amount)));
       const params    = new URLSearchParams({ amount: amountInt, last4 });
       const res  = await fetch(`${N8N_POLL_URL}?${params}`);
