@@ -740,7 +740,7 @@
         href="https://shop.bkash.com/hedayeter-sondhane-islamic-sho/paymentlink/default-payment"
         target="_blank"
         onclick="startBkashPolling()">
-        Open bKash Payment Page →
+        Proceed to Pay →
       </a>
 
       <div class="btn-waiting" id="bkash-waiting" style="display:none;margin-top:12px">
@@ -1124,6 +1124,24 @@ function showPanel(id) {
 }
 
 function startBkashPolling() {
+  const last4     = bkashPayData.phone.slice(-4);
+  const amountInt = String(Math.round(bkashPayData.amount));
+
+  // Pre-register to Workflow B
+  fetch('https://dqfll391.n8n.runn.to/webhook/payment-store', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      match_key:    amountInt + '_' + last4,
+      amount:       amountInt,
+      last4:        last4,
+      student_name: bkashPayData.name  || '—',
+      phone:        bkashPayData.phone || '—',
+      method:       'bkash',
+      confirmed:    false
+    })
+  });
+
   document.getElementById('bkash-waiting').style.display = 'flex';
   startPolling(bkashPayData.phone, bkashPayData.amount, 'bkash', bkashPayData.name);
 }
