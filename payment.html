@@ -1154,11 +1154,13 @@ function confirmAndPoll(method, waitingId, forceLast4 = null) {
   const last4     = forceLast4 || payData.phone.slice(-4);
   const amountInt = String(Math.round(payData.amount));
 
+  const matchKey = method === 'bank' ? 'amount_' + amountInt : amountInt + '_' + last4;
+
   fetch('https://dqfll391.n8n.runn.to/webhook/payment-store', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
-      match_key:    amountInt + '_' + last4,
+      match_key:    matchKey,
       amount:       amountInt,
       last4:        last4,
       student_name: payData.name  || '—',
@@ -1189,7 +1191,8 @@ async function startPolling(phone, amount, method, name, forceLast4 = null) {
     try {
       const last4     = forceLast4 || String(phone).replace(/\D/g, '').slice(-4);
       const amountInt = String(Math.round(parseFloat(amount)));
-      const params    = new URLSearchParams({ amount: amountInt, last4 });
+      const pollKey   = (method === 'bank') ? 'amount_' + amountInt : amountInt + '_' + last4;
+      const params    = new URLSearchParams({ match_key: pollKey });
       const res  = await fetch(`${N8N_POLL_URL}?${params}`);
       const data = await res.json();
       if (data && data.status === 'confirmed') {
