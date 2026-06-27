@@ -786,8 +786,9 @@
           <li class="step-item"><span class="step-num">2</span><span>Tap <strong>"Send Money"</strong></span></li>
           <li class="step-item"><span class="step-num">3</span><span>Paste the number: <strong>01701064194</strong> (use Copy button above)</span></li>
           <li class="step-item"><span class="step-num">4</span><span>Enter amount: <strong id="bks-amount3">৳0</strong></span></li>
-          <li class="step-item"><span class="step-num">5</span><span>Enter your <strong>bKash PIN</strong> to confirm</span></li>
-          <li class="step-item"><span class="step-num">6</span><span>bKash will send you a <strong>confirmation SMS</strong> — your payment will be verified automatically ✅</span></li>
+          <li class="step-item"><span class="step-num">5</span><span>In the <strong>Reference</strong> field, write the student's name: <strong id="bks-ref-name">—</strong></span></li>
+          <li class="step-item"><span class="step-num">6</span><span>Enter your <strong>bKash PIN</strong> to confirm</span></li>
+          <li class="step-item"><span class="step-num">7</span><span>bKash will send you a <strong>confirmation SMS</strong> — your payment will be verified automatically ✅</span></li>
         </ul>
       </div>
 
@@ -835,8 +836,9 @@
           <li class="step-item"><span class="step-num">2</span><span>Tap <strong>"Send Money"</strong></span></li>
           <li class="step-item"><span class="step-num">3</span><span>Paste the number: <strong>01701064194</strong> (use Copy button above)</span></li>
           <li class="step-item"><span class="step-num">4</span><span>Enter amount: <strong id="ng-amount3">৳0</strong></span></li>
-          <li class="step-item"><span class="step-num">5</span><span>Enter your <strong>Nagad PIN</strong> to confirm</span></li>
-          <li class="step-item"><span class="step-num">6</span><span>Nagad will send you a <strong>confirmation SMS</strong> — your payment will be verified automatically ✅</span></li>
+          <li class="step-item"><span class="step-num">5</span><span>In the <strong>Reference</strong> field, write the student's name: <strong id="ng-ref-name">—</strong></span></li>
+          <li class="step-item"><span class="step-num">6</span><span>Enter your <strong>Nagad PIN</strong> to confirm</span></li>
+          <li class="step-item"><span class="step-num">7</span><span>Nagad will send you a <strong>confirmation SMS</strong> — your payment will be verified automatically ✅</span></li>
         </ul>
       </div>
 
@@ -1084,19 +1086,21 @@ function proceedPayment() {
     showPanel('panel-bkash');
 
   } else if (activeMethod === 'bkash-send') {
-    document.getElementById('bks-name').textContent    = displayName;
-    document.getElementById('bks-phone').textContent   = fmtPhone(phone);
-    document.getElementById('bks-amount').textContent  = fmt(amount);
-    document.getElementById('bks-amount2').textContent = fmt(amount);
-    document.getElementById('bks-amount3').textContent = fmt(amount);
+    document.getElementById('bks-name').textContent     = displayName;
+    document.getElementById('bks-ref-name').textContent = displayName;
+    document.getElementById('bks-phone').textContent    = fmtPhone(phone);
+    document.getElementById('bks-amount').textContent   = fmt(amount);
+    document.getElementById('bks-amount2').textContent  = fmt(amount);
+    document.getElementById('bks-amount3').textContent  = fmt(amount);
     showPanel('panel-bkash-send');
 
   } else if (activeMethod === 'nagad') {
-    document.getElementById('ng-name').textContent    = displayName;
-    document.getElementById('ng-phone').textContent   = fmtPhone(phone);
-    document.getElementById('ng-amount').textContent  = fmt(amount);
-    document.getElementById('ng-amount2').textContent = fmt(amount);
-    document.getElementById('ng-amount3').textContent = fmt(amount);
+    document.getElementById('ng-name').textContent     = displayName;
+    document.getElementById('ng-ref-name').textContent = displayName;
+    document.getElementById('ng-phone').textContent    = fmtPhone(phone);
+    document.getElementById('ng-amount').textContent   = fmt(amount);
+    document.getElementById('ng-amount2').textContent  = fmt(amount);
+    document.getElementById('ng-amount3').textContent  = fmt(amount);
     showPanel('panel-nagad');
 
   } else if (activeMethod === 'cellfin') {
