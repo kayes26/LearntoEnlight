@@ -191,6 +191,21 @@
   }
   .amount-input::placeholder { font-weight: 400; color: var(--text-light); }
 
+  /* months dropdown */
+  .months-select {
+    width: 100%; padding: 12px 14px;
+    border: 1.5px solid rgba(62,32,5,0.14);
+    border-radius: var(--radius-sm);
+    font-family: 'Inter', sans-serif; font-size: 0.92rem; color: var(--brown);
+    background: var(--cream); outline: none; transition: border-color 0.2s;
+    appearance: none; cursor: pointer;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23888' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: right 14px center;
+    padding-right: 36px;
+  }
+  .months-select:focus { border-color: var(--teal); background-color: var(--white); }
+  .months-select option[value=""] { color: var(--text-light); }
+
   /* ── METHOD GRID ── */
   .method-grid {
     display: grid; grid-template-columns: 1fr 1fr;
@@ -636,15 +651,27 @@
           </div>
         </div>
 
+        <!-- Duration -->
+        <div class="field-group">
+          <label class="field-label" for="months">Payment Duration <span class="field-req">*</span></label>
+          <select class="months-select" id="months" onchange="onMonthsChange()">
+            <option value="">— Select how many months —</option>
+            <option value="1">1 Month</option>
+            <option value="3">3 Months</option>
+            <option value="6">6 Months</option>
+          </select>
+          <div class="field-hint">Choose your preferred payment period</div>
+        </div>
+
         <!-- Amount -->
         <div class="field-group">
           <label class="field-label" for="amount">Amount <span class="field-req">*</span></label>
           <div class="amount-row">
             <span class="amount-prefix">৳</span>
             <input class="amount-input" type="number" id="amount"
-              placeholder="0.00" min="1" inputmode="decimal">
+              placeholder="e.g. 2200" min="1" inputmode="decimal">
           </div>
-          <div class="field-hint">Enter the exact amount you will send</div>
+          <div class="field-hint">Amount auto-fills when you select a duration — you can still edit it</div>
         </div>
 
         <!-- Method -->
@@ -1036,6 +1063,19 @@ function fmt(n) {
 
 function fmtPhone(p) {
   return p.length >= 11 ? p.slice(0,5) + '-' + p.slice(5) : p;
+}
+
+/* ══════════════════════════════════════
+   MONTHS → AUTO-FILL AMOUNT
+══════════════════════════════════════ */
+const MONTH_PRICES = { '1': 2200, '3': 6000, '6': 11000 };
+
+function onMonthsChange() {
+  const months = document.getElementById('months').value;
+  if (months && MONTH_PRICES[months]) {
+    document.getElementById('amount').value = MONTH_PRICES[months];
+  }
+  validate();
 }
 
 /* ══════════════════════════════════════
