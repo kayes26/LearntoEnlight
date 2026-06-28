@@ -1182,6 +1182,7 @@ function startBkashPolling() {
       student_name: bkashPayData.name  || '—',
       phone:        bkashPayData.phone || '—',
       method:       'bkash',
+      duration:     String(document.getElementById('months').value || ''),
       confirmed:    false
     })
   });
@@ -1206,6 +1207,7 @@ function confirmAndPoll(method, waitingId, forceLast4 = null) {
       student_name: payData.name  || '—',
       phone:        payData.phone || '—',
       method:       method,
+      duration:     String(document.getElementById('months').value || ''),
       confirmed:    false
     })
   });
