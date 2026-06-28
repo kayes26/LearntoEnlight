@@ -1111,6 +1111,19 @@ function proceedPayment() {
   if (!amount || amount <= 0)                          { showToast('সঠিক পরিমাণ দিন'); return; }
   if (!activeMethod)                                   { showToast('পেমেন্ট মেথড বেছে নিন'); return; }
 
+  // Log payment attempt to ClickUp via n8n
+  fetch('https://dqfll391.n8n.runn.to/webhook/website-payment-log', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      student_name: name  || '—',
+      phone:        phone,
+      amount:       String(Math.round(amount)),
+      method:       activeMethod,
+      duration:     String(document.getElementById('months').value || ''),
+    })
+  }).catch(() => {}); // silent fail — never block the user
+
   document.getElementById('step-form').style.display = 'none';
 
   const displayName = name || '—';
