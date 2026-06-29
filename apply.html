@@ -33,7 +33,13 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(253,250,245,
 .hero{background:var(--brown);padding:90px 5% 64px;position:relative;overflow:hidden}
 .hero::before{content:'';position:absolute;top:-80px;right:-80px;width:560px;height:560px;border-radius:50%;background:radial-gradient(circle,rgba(0,180,200,0.12) 0%,transparent 68%);pointer-events:none}
 .hero::after{content:'';position:absolute;bottom:-60px;left:-60px;width:320px;height:320px;border-radius:50%;background:radial-gradient(circle,rgba(245,166,35,0.07) 0%,transparent 70%);pointer-events:none}
-.hero-inner{display:grid;grid-template-columns:auto 1fr 320px;gap:40px;align-items:start;max-width:1200px;margin:0 auto;position:relative;z-index:1}
+.hero-inner{display:grid;grid-template-columns:auto 1fr 320px;column-gap:40px;row-gap:0;align-items:start;max-width:1200px;margin:0 auto;position:relative;z-index:1}
+.hero-photo-wrap{grid-column:1;grid-row:1/span 4}
+.hero-text{grid-column:2;grid-row:1}
+.hero-stats{grid-column:2;grid-row:2}
+.hero-chips{grid-column:2;grid-row:3}
+.btn-apply-mobile{grid-column:2;grid-row:4}
+.hero-video-col{grid-column:3;grid-row:1/span 4}
 
 /* Photo */
 .hero-photo-wrap{flex-shrink:0}
@@ -296,16 +302,14 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(253,250,245,
 }
 @media(max-width:900px){
   .hero-inner{display:flex;flex-direction:column;gap:0}
-  .hero-text{order:1;display:flex;flex-direction:column}
-  .hero-text .badge{order:1}
-  .hero-text h1{order:2}
-  .hero-text p{order:3}
-  .hero-photo-wrap{order:4;text-align:center;margin-top:20px}
+  .hero-text{order:1}
+  .hero-photo-wrap{order:2;text-align:center;margin-top:20px;display:flex;flex-direction:column;align-items:center}
   .hero-photo{width:130px;height:156px;margin:0 auto;display:block}
   .hero-photo-badge{text-align:center}
-  .hero-stats{order:5}
-  .hero-chips{order:6}
-  .btn-apply-mobile{order:7;display:inline-flex;margin-top:18px;width:100%;justify-content:center}
+  .hero-stats{order:3;margin-top:20px}
+  .hero-chips{order:4}
+  .btn-apply-mobile{order:5;display:inline-flex;margin-top:18px;width:100%;justify-content:center}
+  .hero-text .badge{align-self:flex-start}
   .bio-grid,.course-grid,.wyg-grid{grid-template-columns:1fr}
   .feature-cards{grid-template-columns:1fr 1fr}
   .feat-card-wide{grid-column:1/-1}
@@ -366,18 +370,18 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(253,250,245,
       <div class="badge">📋 Admission Open - 2026</div>
       <h1>The Teacher Who Gets<br><span>Your Child Results.</span></h1>
       <p>12 years of teaching. Students who got into Cadet College. Students who achieved GPA-5. One teacher, genuine care, real results.</p>
-      <div class="hero-stats">
-        <div class="hstat"><div class="hstat-num">12+</div><div class="hstat-lbl">Years Teaching</div></div>
-        <div class="hstat"><div class="hstat-num">GPA-5</div><div class="hstat-lbl">Multiple Students</div></div>
-        <div class="hstat"><div class="hstat-num">Cadet</div><div class="hstat-lbl">College Selections</div></div>
-      </div>
-      <div class="hero-chips">
-        <span class="hero-chip">🎖️ Ex-Cadet, Cumilla Cadet College</span>
-        <span class="hero-chip">💻 CSE Engineer, IUT</span>
-        <span class="hero-chip">📐 Mojaru Math Instructor</span>
-      </div>
-      <a href="#apply" class="btn-apply-now btn-apply-mobile">📋 Fill up the Admission Form →</a>
     </div>
+    <div class="hero-stats">
+      <div class="hstat"><div class="hstat-num">12+</div><div class="hstat-lbl">Years Teaching</div></div>
+      <div class="hstat"><div class="hstat-num">GPA-5</div><div class="hstat-lbl">Multiple Students</div></div>
+      <div class="hstat"><div class="hstat-num">Cadet</div><div class="hstat-lbl">College Selections</div></div>
+    </div>
+    <div class="hero-chips">
+      <span class="hero-chip">🎖️ Ex-Cadet, Cumilla Cadet College</span>
+      <span class="hero-chip">💻 CSE Engineer, IUT</span>
+      <span class="hero-chip">📐 Mojaru Math Instructor</span>
+    </div>
+    <a href="#apply" class="btn-apply-now btn-apply-mobile">📋 Fill up the Admission Form →</a>
     <div class="hero-video-col">
       <div class="hero-video-label">Watch a real class before you apply</div>
       <div class="hero-video-frame">
