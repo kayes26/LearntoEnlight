@@ -276,6 +276,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(253,250,245,
 .hero-video-apply:hover{background:rgba(255,255,255,0.16);color:#fff}
 .btn-apply-now{display:inline-flex;align-items:center;gap:8px;background:var(--teal);color:#fff;padding:13px 28px;border-radius:100px;font-size:0.92rem;font-weight:700;text-decoration:none;transition:all .2s;box-shadow:0 4px 18px rgba(0,180,200,0.35);margin-top:20px}
 .btn-apply-now:hover{background:var(--teal-dark);transform:translateY(-2px);box-shadow:0 8px 26px rgba(0,180,200,0.40)}
+.btn-apply-mobile{display:none}
 
 /* ── FEATURE CARDS ── */
 .feature-cards{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-top:32px}
@@ -294,10 +295,11 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(253,250,245,
   .hero-video-col{display:none}
 }
 @media(max-width:900px){
-  .hero-inner{grid-template-columns:1fr;gap:24px}
+  .hero-inner{display:flex;flex-direction:column;gap:0}
+  .hero-text{order:1}
+  .hero-photo-wrap{order:2;text-align:center;margin-top:20px}
   .hero-photo{width:130px;height:156px;margin:0 auto;display:block}
   .hero-photo-badge{text-align:center}
-  .hero-photo-wrap{text-align:center}
   .bio-grid,.course-grid,.wyg-grid{grid-template-columns:1fr}
   .feature-cards{grid-template-columns:1fr 1fr}
   .feat-card-wide{grid-column:1/-1}
@@ -308,6 +310,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(253,250,245,
   .pay-wrap{padding:24px 20px}
   .pay-steps{flex-direction:column;gap:6px}
   .modal-tabs{grid-template-columns:repeat(3,1fr)}
+  .btn-apply-mobile{display:inline-flex;margin-top:18px}
 }
 @media(max-width:640px){
   nav{padding:0 16px;height:60px}
@@ -367,8 +370,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(253,250,245,
         <span class="hero-chip">🎖️ Ex-Cadet, Cumilla Cadet College</span>
         <span class="hero-chip">💻 CSE Engineer, IUT</span>
         <span class="hero-chip">📐 Mojaru Math Instructor</span>
-
       </div>
+      <a href="#apply" class="btn-apply-now btn-apply-mobile">📋 Fill up the Admission Form →</a>
     </div>
     <div class="hero-video-col">
       <div class="hero-video-label">Watch a real class before you apply</div>
