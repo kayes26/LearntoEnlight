@@ -54,11 +54,11 @@
      with your own logo file. If no image, the text fallback shows. */
   .logo-img-wrap {
     width: 38px; height: 38px; border-radius: 10px; overflow: hidden;
-    background: var(--brown);
+    background: transparent;
     display: flex; align-items: center; justify-content: center;
     flex-shrink: 0;
   }
-  .logo-img-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .logo-img-wrap img { width: 100%; height: 100%; object-fit: contain; display: block; }
   .logo-fallback {
     color: var(--white); font-weight: 900; font-size: 0.85rem;
     letter-spacing: -0.02em; line-height: 1;
@@ -94,7 +94,7 @@
     display: flex; align-items: center; justify-content: center;
     flex-shrink: 0;
   }
-  .hero-logo-icon img { width: 100%; height: 100%; object-fit: cover; }
+  .hero-logo-icon img { width: 100%; height: 100%; object-fit: contain; }
   .hero-logo-icon .logo-fallback { color: var(--white); font-size: 0.80rem; }
   .hero-logo-text-name { font-weight: 800; font-size: 0.95rem; color: var(--white); }
   .hero-logo-text-sub  { font-size: 0.65rem; color: rgba(255,255,255,0.45); margin-top: 1px; }
@@ -568,13 +568,7 @@
 <nav>
   <a class="nav-logo" href="https://kayesmd.com">
     <div class="logo-img-wrap">
-      <!--
-        TO UPDATE LOGO LATER:
-        Replace the .logo-fallback div below with:
-        <img src="your-logo.png" alt="Learn with Kayes">
-        Example: <img src="https://yourcdn.com/lwk-logo.png" alt="Learn with Kayes">
-      -->
-      <div class="logo-fallback">LwK</div>
+      <img src="./Learn%20with%20Kayes%20Logo.png" alt="Learn with Kayes">
     </div>
     <div class="nav-brand">
       <div class="nav-brand-name">Learn with Kayes</div>
@@ -590,11 +584,7 @@
   <!-- LOGO CARD — same swap zone as nav -->
   <div class="hero-logo-card">
     <div class="hero-logo-icon">
-      <!--
-        TO UPDATE HERO LOGO:
-        Replace .logo-fallback with <img src="your-logo.png" alt="LwK">
-      -->
-      <div class="logo-fallback">LwK</div>
+      <img src="./Learn%20with%20Kayes%20Logo.png" alt="Learn with Kayes">
     </div>
     <div>
       <div class="hero-logo-text-name">Learn with Kayes</div>
