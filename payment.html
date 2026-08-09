@@ -383,6 +383,11 @@
   }
   .steps-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
   .step-item  { display: flex; gap: 10px; align-items: flex-start; font-size: 0.81rem; color: var(--text-mid); line-height: 1.5; }
+  .step-note {
+    display: block; margin-top: 6px; padding: 7px 10px;
+    background: rgba(226,19,110,0.08); border-left: 3px solid var(--bkash);
+    border-radius: 5px; color: #8B1050; font-size: 0.76rem; line-height: 1.5;
+  }
   .step-num {
     width: 22px; height: 22px; border-radius: 50%; flex-shrink: 0;
     background: var(--teal); color: var(--white);
@@ -765,15 +770,16 @@
 
       <div class="retailer-note">
         ⚠️ <strong>Important:</strong> This is a fixed QR — after scanning, enter the amount manually. Type exactly <strong id="bk-amount2">৳0</strong>.<br><br>
-        In the <strong>Reference</strong> field — write the <strong>student's full name</strong> if paying a student fee, so we can match your payment correctly.<br><br>
-        📱 <strong>Paying from this same phone?</strong> You can't scan your own screen — instead open your bKash app, tap <strong>"Payment"</strong> (not "Send Money"), then tap <strong>Copy</strong> on the number below the QR and paste it in.
+        In the <strong>Reference</strong> field — write the <strong>student's full name</strong> if paying a student fee, so we can match your payment correctly.
       </div>
 
       <div class="steps-box">
         <div class="steps-box-title">📋 How to pay via bKash QR</div>
         <ul class="steps-list">
           <li class="step-item"><span class="step-num">1</span><span>Open your <strong>bKash app</strong></span></li>
-          <li class="step-item"><span class="step-num">2</span><span>Tap <strong>Scan QR</strong> at the bottom of the bKash app — or select <strong>"Payment"</strong> and tap to scan QR code (if paying from this same phone, you can't scan your own screen — tap <strong>"Payment"</strong> instead and paste the number using the <strong>Copy</strong> button below the QR)</span></li>
+          <li class="step-item"><span class="step-num">2</span><span>Tap <strong>Scan QR</strong> at the bottom of the bKash app — or select <strong>"Payment"</strong> and tap to scan QR code
+            <div class="step-note">📱 <strong>Paying from this same phone?</strong> You can't scan your own screen — tap <strong>"Payment"</strong> instead and paste the number using the <strong>Copy</strong> button below the QR.</div>
+          </span></li>
           <li class="step-item"><span class="step-num">3</span><span>Scan the QR code above (skip this step if you used "Payment")</span></li>
           <li class="step-item"><span class="step-num">4</span><span>Enter amount: <strong id="bk-amount3">৳0</strong></span></li>
           <li class="step-item"><span class="step-num">5</span><span>In the <strong>Reference</strong> field, write the student's name: <strong id="bk-ref-name">—</strong></span></li>
