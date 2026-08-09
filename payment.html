@@ -346,6 +346,32 @@
   }
   .send-to-amount strong { color: var(--danger); font-size: 1rem; }
 
+  /* QR box (bKash Scan & Pay) */
+  .qr-box {
+    background: var(--cream);
+    border: 1.5px dashed rgba(62,32,5,0.16);
+    border-radius: var(--radius-md); padding: 18px 16px; margin-bottom: 16px;
+    text-align: center;
+  }
+  .qr-box-lbl {
+    font-size: 0.68rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.07em; color: var(--text-light); margin-bottom: 12px;
+  }
+  .qr-img {
+    width: 200px; max-width: 100%; height: auto;
+    border-radius: var(--radius-sm);
+    border: 1px solid rgba(62,32,5,0.10);
+    margin: 0 auto 10px; display: block;
+  }
+  .qr-merchant-row {
+    display: flex; align-items: center; justify-content: center;
+    gap: 10px; margin-top: 2px;
+  }
+  .qr-merchant-num {
+    font-size: 0.88rem; font-weight: 800; color: var(--brown);
+    letter-spacing: 0.03em;
+  }
+
   /* step-by-step instructions */
   .steps-box {
     background: rgba(0,180,200,0.05); border: 1px solid rgba(0,180,200,0.15);
@@ -389,17 +415,6 @@
     border-radius: var(--radius-md); padding: 13px 15px; margin-bottom: 16px;
     font-size: 0.79rem; color: #8B1050; line-height: 1.6;
   }
-  .btn-bkash-go {
-    display: block; width: 100%; padding: 15px;
-    background: var(--bkash); color: var(--white);
-    border: none; border-radius: var(--radius-pill);
-    font-family: 'Inter', sans-serif; font-size: 1rem; font-weight: 700;
-    text-align: center; text-decoration: none;
-    transition: all 0.2s; box-shadow: 0 4px 16px rgba(226,19,110,0.28);
-    cursor: pointer;
-  }
-  .btn-bkash-go:hover { background: #B01059; transform: translateY(-1px); }
-
   /* confirm pay button */
   .btn-confirm-pay {
     display: block; width: 100%; padding: 15px; margin-top: 4px;
@@ -559,6 +574,7 @@
     .bank-row { flex-wrap: wrap; gap: 4px; }
     .bank-acc-row { flex-wrap: wrap; }
     .hero-logo-card { flex-direction: column; text-align: center; gap: 8px; }
+    .qr-img { width: 170px; }
   }
 </style>
 </head>
@@ -672,11 +688,11 @@
           </div>
           <div class="method-grid">
 
-            <!-- bKash Payment (Retailer) -->
+            <!-- bKash Scan & Pay (QR) -->
             <button class="method-btn" id="m-bkash" onclick="selectMethod('bkash')">
               <div class="method-logo"><span class="logo-bkash-pill">bKash</span></div>
               <div class="method-name">bKash</div>
-              <div class="method-sub">Payment</div>
+              <div class="method-sub">Scan & Pay</div>
             </button>
 
             <!-- bKash Send Money -->
@@ -721,45 +737,52 @@
       </div>
     </div>
 
-    <!-- ══ PANEL: bKash (Retailer redirect) ══ -->
+    <!-- ══ PANEL: bKash (Scan & Pay via QR) ══ -->
     <div class="pay-panel" id="panel-bkash">
       <div class="panel-brand">
         <div class="panel-brand-logo"><span class="pbadge pbadge-bkash">bKash</span></div>
         <div>
-          <div class="panel-brand-title">bKash Payment</div>
-          <div class="panel-brand-subtitle">You will be redirected to the bKash payment page</div>
+          <div class="panel-brand-title">bKash Scan & Pay</div>
+          <div class="panel-brand-subtitle">Scan the QR code below — confirmation is automatic</div>
         </div>
       </div>
 
       <div class="invoice-box">
         <div class="invoice-row"><span class="inv-label">Student Name</span><span class="inv-val" id="bk-name">—</span></div>
-        <div class="invoice-row"><span class="inv-label">Phone Number</span><span class="inv-val" id="bk-phone">—</span></div>
-        <div class="invoice-row"><span class="inv-label">Amount</span><span class="inv-val big" id="bk-amount">—</span></div>
-        <div class="invoice-row"><span class="inv-label">Method</span><span class="inv-val">bKash Payment</span></div>
+        <div class="invoice-row"><span class="inv-label">Your Number</span><span class="inv-val" id="bk-phone">—</span></div>
+        <div class="invoice-row"><span class="inv-label">Amount to Pay</span><span class="inv-val big" id="bk-amount">—</span></div>
+        <div class="invoice-row"><span class="inv-label">Method</span><span class="inv-val">bKash Merchant QR</span></div>
+      </div>
+
+      <div class="qr-box">
+        <div class="qr-box-lbl">Scan This QR With Your bKash App</div>
+        <img src="./bkash-merchant-qr.png" alt="bKash Merchant QR Code" class="qr-img">
+        <div class="qr-merchant-row">
+          <div class="qr-merchant-num">01601-064195</div>
+          <button class="copy-btn" id="copy-bk-qr" onclick="copyNum('01601064195','copy-bk-qr')">Copy</button>
+        </div>
       </div>
 
       <div class="retailer-note">
-        ⚠️ <strong>Important:</strong> The bKash page will open. Enter exactly <strong id="bk-amount2">৳0</strong> as the amount.<br><br>
-        In the <strong>Payment Reference</strong> field — write the <strong>student's full name</strong> if paying a student fee, so we can match your payment correctly.
+        ⚠️ <strong>Important:</strong> This is a fixed QR — after scanning, enter the amount manually. Type exactly <strong id="bk-amount2">৳0</strong>.<br><br>
+        In the <strong>Reference</strong> field — write the <strong>student's full name</strong> if paying a student fee, so we can match your payment correctly.<br><br>
+        📱 <strong>Paying from this same phone?</strong> You can't scan your own screen — instead open your bKash app, tap <strong>"Payment"</strong> (not "Send Money"), then tap <strong>Copy</strong> on the number below the QR and paste it in.
       </div>
 
       <div class="steps-box">
-        <div class="steps-box-title">📋 Steps to complete</div>
+        <div class="steps-box-title">📋 How to pay via bKash QR</div>
         <ul class="steps-list">
-          <li class="step-item"><span class="step-num">1</span><span>Click the button below — bKash payment page will open in a new tab</span></li>
-          <li class="step-item"><span class="step-num">2</span><span>Enter <strong id="bk-amount3">৳0</strong> as the amount</span></li>
-          <li class="step-item"><span class="step-num">3</span><span>In <strong>Payment Reference</strong> field, write the <strong>student's full name</strong></span></li>
-          <li class="step-item"><span class="step-num">4</span><span>Enter the <strong>verification code</strong> sent to your bKash number, then complete payment using your <strong>bKash PIN</strong> — you will get a confirmation from bKash</span></li>
+          <li class="step-item"><span class="step-num">1</span><span>Open your <strong>bKash app</strong></span></li>
+          <li class="step-item"><span class="step-num">2</span><span>Tap <strong>"Scan & Pay"</strong> — or if you're paying from this same phone (you can't scan your own screen), tap <strong>"Payment"</strong> instead and paste the number using the <strong>Copy</strong> button below the QR</span></li>
+          <li class="step-item"><span class="step-num">3</span><span>Scan the QR code above (skip this step if you used "Payment")</span></li>
+          <li class="step-item"><span class="step-num">4</span><span>Enter amount: <strong id="bk-amount3">৳0</strong></span></li>
+          <li class="step-item"><span class="step-num">5</span><span>In the <strong>Reference</strong> field, write the student's name: <strong id="bk-ref-name">—</strong></span></li>
+          <li class="step-item"><span class="step-num">6</span><span>Enter your <strong>bKash PIN</strong> to confirm</span></li>
+          <li class="step-item"><span class="step-num">7</span><span>bKash will send you a <strong>confirmation SMS</strong> — your payment will be verified automatically ✅</span></li>
         </ul>
       </div>
 
-      <a class="btn-bkash-go"
-        href="https://shop.bkash.com/hedayeter-sondhane-islamic-sho/paymentlink/default-payment"
-        target="_blank"
-        onclick="startBkashPolling()">
-        Proceed to Pay →
-      </a>
-
+      <button class="btn-confirm-pay" onclick="confirmAndPoll('bkash','bkash-waiting')">Press here &amp; Pay via bKash →</button>
       <div class="btn-waiting" id="bkash-waiting" style="display:none;margin-top:12px">
         <div class="spinner"></div>
         <span>Waiting for confirmation...</span>
@@ -1034,7 +1057,6 @@ const POLL_MAX       = 24;    // 6 minutes max (24 × 15s)
 let activeMethod   = null;
 let pollTimer      = null;
 let pollCount      = 0;
-let bkashPayData   = {};
 let payData        = {};
 
 /* ══════════════════════════════════════
@@ -1120,12 +1142,12 @@ function proceedPayment() {
   payData = { phone, amount, name };
 
   if (activeMethod === 'bkash') {
-    document.getElementById('bk-name').textContent    = displayName;
-    document.getElementById('bk-phone').textContent   = fmtPhone(phone);
-    document.getElementById('bk-amount').textContent  = fmt(amount);
-    document.getElementById('bk-amount2').textContent = fmt(amount);
-    document.getElementById('bk-amount3').textContent = fmt(amount);
-    bkashPayData = { phone, amount, name };
+    document.getElementById('bk-name').textContent     = displayName;
+    document.getElementById('bk-ref-name').textContent = displayName;
+    document.getElementById('bk-phone').textContent    = fmtPhone(phone);
+    document.getElementById('bk-amount').textContent   = fmt(amount);
+    document.getElementById('bk-amount2').textContent  = fmt(amount);
+    document.getElementById('bk-amount3').textContent  = fmt(amount);
     showPanel('panel-bkash');
 
   } else if (activeMethod === 'bkash-send') {
@@ -1168,30 +1190,6 @@ function showPanel(id) {
     document.getElementById(p).classList.remove('active');
   });
   document.getElementById(id).classList.add('active');
-}
-
-function startBkashPolling() {
-  const last4     = bkashPayData.phone.slice(-4);
-  const amountInt = String(Math.round(bkashPayData.amount));
-
-  // Pre-register to Workflow B
-  fetch('https://dqfll391.n8n.runn.to/webhook/payment-store', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      match_key:    amountInt + '_' + last4,
-      amount:       amountInt,
-      last4:        last4,
-      student_name: bkashPayData.name  || '—',
-      phone:        bkashPayData.phone || '—',
-      method:       'bkash',
-      duration:     String(document.getElementById('months').value || ''),
-      confirmed:    false
-    })
-  });
-
-  document.getElementById('bkash-waiting').style.display = 'flex';
-  startPolling(bkashPayData.phone, bkashPayData.amount, 'bkash', bkashPayData.name);
 }
 
 function confirmAndPoll(method, waitingId, forceLast4 = null) {
@@ -1252,7 +1250,7 @@ async function startPolling(phone, amount, method, name, forceLast4 = null) {
    SUCCESS
 ══════════════════════════════════════ */
 function showSuccess(name, phone, amount, method) {
-  const labels = { bkash: 'bKash Payment', 'bkash-send': 'bKash Send Money', nagad: 'Nagad', cellfin: 'Cellfin', bank: 'Islami Bank Transfer' };
+  const labels = { bkash: 'bKash Scan & Pay', 'bkash-send': 'bKash Send Money', nagad: 'Nagad', cellfin: 'Cellfin', bank: 'Islami Bank Transfer' };
   document.getElementById('s-name').textContent   = name || '—';
   document.getElementById('s-method').textContent = labels[method] || method;
   document.getElementById('s-phone').textContent  = fmtPhone(phone);
