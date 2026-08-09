@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Payment — Learn with Kayes</title>
+<title>Payment - Learn with Kayes</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -602,7 +602,7 @@
 <!-- ══ HERO ══ -->
 <div class="pay-hero">
 
-  <!-- LOGO CARD — same swap zone as nav -->
+  <!-- LOGO CARD - same swap zone as nav -->
   <div class="hero-logo-card">
     <div class="hero-logo-icon">
       <img src="./Learn%20with%20Kayes%20Logo.png" alt="Learn with Kayes">
@@ -620,7 +620,7 @@
   <div class="quran-quote">
     <div class="quran-arabic">يَا أَيُّهَا الَّذِينَ آمَنُوا أَوْفُوا بِالْعُقُودِ</div>
     <div class="quran-translation">"O you who believe, fulfil your obligations (contracts)."</div>
-    <div class="quran-ref">— Surah Al-Ma'idah 5:1</div>
+    <div class="quran-ref">- Surah Al-Ma'idah 5:1</div>
   </div>
 
 </div>
@@ -653,12 +653,12 @@
         <div class="field-group">
           <label class="field-label" for="student-name">
             Student Name
-            <span style="font-weight:500;text-transform:none;letter-spacing:0;font-size:0.68rem;color:var(--text-light);margin-left:4px">(optional — if paying student fee)</span>
+            <span style="font-weight:500;text-transform:none;letter-spacing:0;font-size:0.68rem;color:var(--text-light);margin-left:4px">(optional - if paying student fee)</span>
           </label>
           <input class="field-input" type="text" id="student-name"
             placeholder="e.g. Mohammed Raihan">
           <div class="field-hint info">
-            📌 Paying a student fee? Write the student's full name exactly as registered — this is how we match your payment.
+            📌 Paying a student fee? Write the student's full name exactly as registered - this is how we match your payment.
           </div>
         </div>
 
@@ -666,7 +666,7 @@
         <div class="field-group">
           <label class="field-label" for="months">Payment Duration <span class="field-req">*</span></label>
           <select class="months-select" id="months" onchange="onMonthsChange()">
-            <option value="">— Select how many months —</option>
+            <option value="">- Select how many months -</option>
             <option value="1">1 Month</option>
             <option value="3">3 Months</option>
             <option value="6">6 Months</option>
@@ -682,14 +682,14 @@
             <input class="amount-input" type="number" id="amount"
               placeholder="e.g. 2200" min="1" inputmode="decimal">
           </div>
-          <div class="field-hint">Amount auto-fills when you select a duration — you can still edit it</div>
+          <div class="field-hint">Amount auto-fills when you select a duration - you can still edit it</div>
         </div>
 
         <!-- Method -->
         <div class="field-group">
           <label class="field-label">Payment Method <span class="field-req">*</span></label>
           <div style="background:rgba(29,110,63,0.07);border:1px solid rgba(29,110,63,0.20);border-radius:8px;padding:9px 12px;margin-bottom:10px;font-size:0.76rem;color:var(--bank-green);line-height:1.55;">
-            🏦 <strong>We encourage bank transfer</strong> — it is more reliable, has no extra charge, and makes record-keeping cleaner for both sides.
+            🏦 <strong>We encourage bank transfer</strong> - it is more reliable, has no extra charge, and makes record-keeping cleaner for both sides.
           </div>
           <div class="method-grid">
 
@@ -721,7 +721,7 @@
               <div class="method-sub">Fund Transfer</div>
             </button>
 
-            <!-- Islami Bank — full width -->
+            <!-- Islami Bank - full width -->
             <button class="method-btn method-btn-full" id="m-bank" onclick="selectMethod('bank')">
               <div class="method-logo"><span class="logo-bank-pill">Islami Bank</span></div>
               <div class="method-name">Bank Transfer</div>
@@ -748,14 +748,14 @@
         <div class="panel-brand-logo"><span class="pbadge pbadge-bkash">bKash</span></div>
         <div>
           <div class="panel-brand-title">bKash Scan & Pay</div>
-          <div class="panel-brand-subtitle">Scan the QR code below — confirmation is automatic</div>
+          <div class="panel-brand-subtitle">Scan the QR code below - confirmation is automatic</div>
         </div>
       </div>
 
       <div class="invoice-box">
-        <div class="invoice-row"><span class="inv-label">Student Name</span><span class="inv-val" id="bk-name">—</span></div>
-        <div class="invoice-row"><span class="inv-label">Your Number</span><span class="inv-val" id="bk-phone">—</span></div>
-        <div class="invoice-row"><span class="inv-label">Amount to Pay</span><span class="inv-val big" id="bk-amount">—</span></div>
+        <div class="invoice-row"><span class="inv-label">Student Name</span><span class="inv-val" id="bk-name">-</span></div>
+        <div class="invoice-row"><span class="inv-label">Your Number</span><span class="inv-val" id="bk-phone">-</span></div>
+        <div class="invoice-row"><span class="inv-label">Amount to Pay</span><span class="inv-val big" id="bk-amount">-</span></div>
         <div class="invoice-row"><span class="inv-label">Method</span><span class="inv-val">bKash Merchant QR</span></div>
       </div>
 
@@ -769,22 +769,22 @@
       </div>
 
       <div class="retailer-note">
-        ⚠️ <strong>Important:</strong> This is a fixed QR — after scanning, enter the amount manually. Type exactly <strong id="bk-amount2">৳0</strong>.<br><br>
-        In the <strong>Reference</strong> field — write the <strong>student's full name</strong> if paying a student fee, so we can match your payment correctly.
+        ⚠️ <strong>Important:</strong> This is a fixed QR - after scanning, enter the amount manually. Type exactly <strong id="bk-amount2">৳0</strong>.<br><br>
+        In the <strong>Reference</strong> field - write the <strong>student's full name</strong> if paying a student fee, so we can match your payment correctly.
       </div>
 
       <div class="steps-box">
         <div class="steps-box-title">📋 How to pay via bKash QR</div>
         <ul class="steps-list">
           <li class="step-item"><span class="step-num">1</span><span>Open your <strong>bKash app</strong></span></li>
-          <li class="step-item"><span class="step-num">2</span><span>Tap <strong>Scan QR</strong> at the bottom of the bKash app — or select <strong>"Payment"</strong> and tap to scan QR code
-            <div class="step-note">📱 <strong>Paying from this same phone?</strong> You can't scan your own screen — tap <strong>"Payment"</strong> instead and paste the number using the <strong>Copy</strong> button below the QR.</div>
+          <li class="step-item"><span class="step-num">2</span><span>Tap <strong>Scan QR</strong> at the bottom of the bKash app - or select <strong>"Payment"</strong> and tap to scan QR code
+            <div class="step-note">📱 <strong>Paying from this same phone?</strong> You can't scan your own screen - tap <strong>"Payment"</strong> instead and paste the number using the <strong>Copy</strong> button below the QR.</div>
           </span></li>
           <li class="step-item"><span class="step-num">3</span><span>Scan the QR code above (skip this step if you used "Payment")</span></li>
           <li class="step-item"><span class="step-num">4</span><span>Enter amount: <strong id="bk-amount3">৳0</strong></span></li>
-          <li class="step-item"><span class="step-num">5</span><span>In the <strong>Reference</strong> field, write the student's name: <strong id="bk-ref-name">—</strong></span></li>
+          <li class="step-item"><span class="step-num">5</span><span>In the <strong>Reference</strong> field, write the student's name: <strong id="bk-ref-name">-</strong></span></li>
           <li class="step-item"><span class="step-num">6</span><span>Enter your <strong>bKash PIN</strong> to confirm</span></li>
-          <li class="step-item"><span class="step-num">7</span><span>bKash will send you a <strong>confirmation SMS</strong> — your payment will be verified automatically ✅</span></li>
+          <li class="step-item"><span class="step-num">7</span><span>bKash will send you a <strong>confirmation SMS</strong> - your payment will be verified automatically ✅</span></li>
         </ul>
       </div>
 
@@ -803,14 +803,14 @@
         <div class="panel-brand-logo"><span class="pbadge pbadge-bkash">bKash</span></div>
         <div>
           <div class="panel-brand-title">bKash Send Money</div>
-          <div class="panel-brand-subtitle">Send to the number below — confirmation is automatic</div>
+          <div class="panel-brand-subtitle">Send to the number below - confirmation is automatic</div>
         </div>
       </div>
 
       <div class="invoice-box">
-        <div class="invoice-row"><span class="inv-label">Student Name</span><span class="inv-val" id="bks-name">—</span></div>
-        <div class="invoice-row"><span class="inv-label">Your Number</span><span class="inv-val" id="bks-phone">—</span></div>
-        <div class="invoice-row"><span class="inv-label">Amount to Send</span><span class="inv-val big" id="bks-amount">—</span></div>
+        <div class="invoice-row"><span class="inv-label">Student Name</span><span class="inv-val" id="bks-name">-</span></div>
+        <div class="invoice-row"><span class="inv-label">Your Number</span><span class="inv-val" id="bks-phone">-</span></div>
+        <div class="invoice-row"><span class="inv-label">Amount to Send</span><span class="inv-val big" id="bks-amount">-</span></div>
         <div class="invoice-row"><span class="inv-label">Charge</span><span class="inv-val">৳0.00</span></div>
       </div>
 
@@ -832,9 +832,9 @@
           <li class="step-item"><span class="step-num">2</span><span>Tap <strong>"Send Money"</strong></span></li>
           <li class="step-item"><span class="step-num">3</span><span>Paste the number: <strong>01701064194</strong> (use Copy button above)</span></li>
           <li class="step-item"><span class="step-num">4</span><span>Enter amount: <strong id="bks-amount3">৳0</strong></span></li>
-          <li class="step-item"><span class="step-num">5</span><span>In the <strong>Reference</strong> field, write the student's name: <strong id="bks-ref-name">—</strong></span></li>
+          <li class="step-item"><span class="step-num">5</span><span>In the <strong>Reference</strong> field, write the student's name: <strong id="bks-ref-name">-</strong></span></li>
           <li class="step-item"><span class="step-num">6</span><span>Enter your <strong>bKash PIN</strong> to confirm</span></li>
-          <li class="step-item"><span class="step-num">7</span><span>bKash will send you a <strong>confirmation SMS</strong> — your payment will be verified automatically ✅</span></li>
+          <li class="step-item"><span class="step-num">7</span><span>bKash will send you a <strong>confirmation SMS</strong> - your payment will be verified automatically ✅</span></li>
         </ul>
       </div>
 
@@ -853,14 +853,14 @@
         <div class="panel-brand-logo"><span class="pbadge pbadge-nagad">নগদ</span></div>
         <div>
           <div class="panel-brand-title">Nagad Send Money</div>
-          <div class="panel-brand-subtitle">Send to the number below — confirmation is automatic</div>
+          <div class="panel-brand-subtitle">Send to the number below - confirmation is automatic</div>
         </div>
       </div>
 
       <div class="invoice-box">
-        <div class="invoice-row"><span class="inv-label">Student Name</span><span class="inv-val" id="ng-name">—</span></div>
-        <div class="invoice-row"><span class="inv-label">Your Number</span><span class="inv-val" id="ng-phone">—</span></div>
-        <div class="invoice-row"><span class="inv-label">Amount to Send</span><span class="inv-val big" id="ng-amount">—</span></div>
+        <div class="invoice-row"><span class="inv-label">Student Name</span><span class="inv-val" id="ng-name">-</span></div>
+        <div class="invoice-row"><span class="inv-label">Your Number</span><span class="inv-val" id="ng-phone">-</span></div>
+        <div class="invoice-row"><span class="inv-label">Amount to Send</span><span class="inv-val big" id="ng-amount">-</span></div>
         <div class="invoice-row"><span class="inv-label">Charge</span><span class="inv-val">৳0.00</span></div>
       </div>
 
@@ -882,9 +882,9 @@
           <li class="step-item"><span class="step-num">2</span><span>Tap <strong>"Send Money"</strong></span></li>
           <li class="step-item"><span class="step-num">3</span><span>Paste the number: <strong>01701064194</strong> (use Copy button above)</span></li>
           <li class="step-item"><span class="step-num">4</span><span>Enter amount: <strong id="ng-amount3">৳0</strong></span></li>
-          <li class="step-item"><span class="step-num">5</span><span>In the <strong>Reference</strong> field, write the student's name: <strong id="ng-ref-name">—</strong></span></li>
+          <li class="step-item"><span class="step-num">5</span><span>In the <strong>Reference</strong> field, write the student's name: <strong id="ng-ref-name">-</strong></span></li>
           <li class="step-item"><span class="step-num">6</span><span>Enter your <strong>Nagad PIN</strong> to confirm</span></li>
-          <li class="step-item"><span class="step-num">7</span><span>Nagad will send you a <strong>confirmation SMS</strong> — your payment will be verified automatically ✅</span></li>
+          <li class="step-item"><span class="step-num">7</span><span>Nagad will send you a <strong>confirmation SMS</strong> - your payment will be verified automatically ✅</span></li>
         </ul>
       </div>
 
@@ -902,15 +902,15 @@
       <div class="panel-brand">
         <div class="panel-brand-logo"><span class="pbadge pbadge-cellfin">Cellfin</span></div>
         <div>
-          <div class="panel-brand-title">Cellfin — Islami Bank App</div>
+          <div class="panel-brand-title">Cellfin - Islami Bank App</div>
           <div class="panel-brand-subtitle">Send directly from your Cellfin app</div>
         </div>
       </div>
 
       <div class="invoice-box">
-        <div class="invoice-row"><span class="inv-label">Student Name</span><span class="inv-val" id="cf-name">—</span></div>
-        <div class="invoice-row"><span class="inv-label">Your Number</span><span class="inv-val" id="cf-phone">—</span></div>
-        <div class="invoice-row"><span class="inv-label">Amount</span><span class="inv-val big" id="cf-amount">—</span></div>
+        <div class="invoice-row"><span class="inv-label">Student Name</span><span class="inv-val" id="cf-name">-</span></div>
+        <div class="invoice-row"><span class="inv-label">Your Number</span><span class="inv-val" id="cf-phone">-</span></div>
+        <div class="invoice-row"><span class="inv-label">Amount</span><span class="inv-val big" id="cf-amount">-</span></div>
       </div>
 
       <div class="send-to-box">
@@ -932,7 +932,7 @@
           <li class="step-item"><span class="step-num">3</span><span>Paste the number: <strong>01701064194</strong></span></li>
           <li class="step-item"><span class="step-num">4</span><span>Enter amount: <strong id="cf-amount3">৳0</strong></span></li>
           <li class="step-item"><span class="step-num">5</span><span>Confirm with your <strong>Cellfin PIN</strong></span></li>
-          <li class="step-item"><span class="step-num">6</span><span>You will receive a confirmation SMS — payment will be verified automatically ✅</span></li>
+          <li class="step-item"><span class="step-num">6</span><span>You will receive a confirmation SMS - payment will be verified automatically ✅</span></li>
         </ul>
       </div>
 
@@ -951,18 +951,18 @@
         <div class="panel-brand-logo"><span class="pbadge pbadge-bank">Islami Bank</span></div>
         <div>
           <div class="panel-brand-title">Bank Transfer</div>
-          <div class="panel-brand-subtitle">NPSB supported — transfer from any bank</div>
+          <div class="panel-brand-subtitle">NPSB supported - transfer from any bank</div>
         </div>
       </div>
 
       <div class="invoice-box">
-        <div class="invoice-row"><span class="inv-label">Student Name</span><span class="inv-val" id="bnk-name">—</span></div>
-        <div class="invoice-row"><span class="inv-label">Your Number</span><span class="inv-val" id="bnk-phone">—</span></div>
-        <div class="invoice-row"><span class="inv-label">Amount</span><span class="inv-val big" id="bnk-amount">—</span></div>
+        <div class="invoice-row"><span class="inv-label">Student Name</span><span class="inv-val" id="bnk-name">-</span></div>
+        <div class="invoice-row"><span class="inv-label">Your Number</span><span class="inv-val" id="bnk-phone">-</span></div>
+        <div class="invoice-row"><span class="inv-label">Amount</span><span class="inv-val big" id="bnk-amount">-</span></div>
         <div class="invoice-row"><span class="inv-label">Transfer Type</span><span class="inv-val">NPSB / Bank Transfer</span></div>
       </div>
 
-      <div class="npsb-badge">✅ NPSB — transfer from any bank in Bangladesh</div>
+      <div class="npsb-badge">✅ NPSB - transfer from any bank in Bangladesh</div>
 
       <div class="bank-details-box">
         <div class="bank-row">
@@ -1033,10 +1033,10 @@
     <p class="success-sub">আপনার পেমেন্ট সফলভাবে সম্পন্ন হয়েছে।<br>ধন্যবাদ আপনার লেনদেনের জন্য।</p>
     <div class="txn-box">
       <div class="txn-title">🧾 Transaction Details</div>
-      <div class="txn-row"><span class="txn-key">Student Name</span><span class="txn-val" id="s-name">—</span></div>
-      <div class="txn-row"><span class="txn-key">Payment Method</span><span class="txn-val" id="s-method">—</span></div>
-      <div class="txn-row"><span class="txn-key">Phone Number</span><span class="txn-val" id="s-phone">—</span></div>
-      <div class="txn-row"><span class="txn-key">Amount</span><span class="txn-val" id="s-amount">—</span></div>
+      <div class="txn-row"><span class="txn-key">Student Name</span><span class="txn-val" id="s-name">-</span></div>
+      <div class="txn-row"><span class="txn-key">Payment Method</span><span class="txn-val" id="s-method">-</span></div>
+      <div class="txn-row"><span class="txn-key">Phone Number</span><span class="txn-val" id="s-phone">-</span></div>
+      <div class="txn-row"><span class="txn-key">Amount</span><span class="txn-val" id="s-amount">-</span></div>
       <div class="txn-row"><span class="txn-key">Status</span><span class="txn-val ok">SUCCESS</span></div>
     </div>
     <a class="btn-continue" href="https://kayesmd.com">← Back to Home</a>
@@ -1048,7 +1048,7 @@
 
 <script>
 /* ══════════════════════════════════════
-   CONFIG — update before going live
+   CONFIG - update before going live
 ══════════════════════════════════════ */
 const N8N_POLL_URL   = 'https://dqfll391.n8n.runn.to/webhook/payment-check';
 // n8n should accept: GET ?phone=01XXX&amount=500&method=nagad&name=Raihan
@@ -1134,17 +1134,17 @@ function proceedPayment() {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
-      student_name: name  || '—',
+      student_name: name  || '-',
       phone:        phone,
       amount:       String(Math.round(amount)),
       method:       activeMethod,
       duration:     String(document.getElementById('months').value || ''),
     })
-  }).catch(() => {}); // silent fail — never block the user
+  }).catch(() => {}); // silent fail - never block the user
 
   document.getElementById('step-form').style.display = 'none';
 
-  const displayName = name || '—';
+  const displayName = name || '-';
   payData = { phone, amount, name };
 
   if (activeMethod === 'bkash') {
@@ -1211,8 +1211,8 @@ function confirmAndPoll(method, waitingId, forceLast4 = null) {
       match_key:    matchKey,
       amount:       amountInt,
       last4:        last4,
-      student_name: payData.name  || '—',
-      phone:        payData.phone || '—',
+      student_name: payData.name  || '-',
+      phone:        payData.phone || '-',
       method:       method,
       duration:     String(document.getElementById('months').value || ''),
       confirmed:    false
@@ -1234,7 +1234,7 @@ async function startPolling(phone, amount, method, name, forceLast4 = null) {
     pollCount++;
     if (pollCount > POLL_MAX) {
       clearInterval(pollTimer);
-      showToast('⏱ Time out — please contact us on Telegram if you already paid');
+      showToast('⏱ Time out - please contact us on Telegram if you already paid');
       return;
     }
     try {
@@ -1248,7 +1248,7 @@ async function startPolling(phone, amount, method, name, forceLast4 = null) {
         clearInterval(pollTimer);
         showSuccess(name, phone, amount, method);
       }
-    } catch (_) { /* silent — keep polling */ }
+    } catch (_) { /* silent - keep polling */ }
   }, POLL_INTERVAL);
 }
 
@@ -1257,7 +1257,7 @@ async function startPolling(phone, amount, method, name, forceLast4 = null) {
 ══════════════════════════════════════ */
 function showSuccess(name, phone, amount, method) {
   const labels = { bkash: 'bKash Scan & Pay', 'bkash-send': 'bKash Send Money', nagad: 'Nagad', cellfin: 'Cellfin', bank: 'Islami Bank Transfer' };
-  document.getElementById('s-name').textContent   = name || '—';
+  document.getElementById('s-name').textContent   = name || '-';
   document.getElementById('s-method').textContent = labels[method] || method;
   document.getElementById('s-phone').textContent  = fmtPhone(phone);
   document.getElementById('s-amount').textContent = fmt(amount);
@@ -1288,7 +1288,7 @@ function copyNum(val, btnId) {
     btn.textContent = 'Copied!';
     btn.classList.add('copied');
     setTimeout(() => { btn.textContent = orig; btn.classList.remove('copied'); }, 2000);
-  }).catch(() => showToast('Copy failed — please copy manually'));
+  }).catch(() => showToast('Copy failed - please copy manually'));
 }
 </script>
 </body>
