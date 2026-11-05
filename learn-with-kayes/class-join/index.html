@@ -1,0 +1,438 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Join Class | Learn with Kayes</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+    :root {
+      color-scheme: light;
+      font-family: 'DM Sans', sans-serif;
+      color: #1A1208;
+      background: #FDFAF5;
+      font-synthesis: none;
+      --brown: #3E2005;
+      --brown-mid: #6B3A0F;
+      --teal: #00B4C8;
+      --teal-dark: #008FA0;
+      --amber: #F5A623;
+      --cream: #FDFAF5;
+      --cream-dark: #F0EAD6;
+      --text: #1A1208;
+      --text-mid: #4A3520;
+      --text-light: #7A6248;
+      --white: #FFFFFF;
+      --red: #E03030;
+      --green: #2A7A2A;
+      --shadow: 0 12px 48px rgba(62,32,5,0.15);
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 24px 16px;
+      background: radial-gradient(circle at 12% 8%, rgba(0,180,200,0.10), transparent 28rem), var(--cream);
+      color: var(--text);
+    }
+    main {
+      width: min(100%, 480px);
+      padding: 30px 28px 24px;
+      border: 1px solid rgba(62,32,5,0.10);
+      border-radius: 20px;
+      background: var(--white);
+      box-shadow: var(--shadow);
+    }
+    .brand-lockup { display: flex; align-items: center; justify-content: center; gap: 11px; margin: 0 auto 22px; }
+    .brand-logo { display: block; width: 46px; height: 46px; flex: 0 0 46px; object-fit: contain; }
+    .brand-copy { min-width: 0; }
+    h1 { margin: 0; color: var(--brown); font-family: 'Playfair Display', Georgia, serif; font-size: 21px; line-height: 1.15; letter-spacing: -.35px; }
+    .brand-tagline { display: block; margin-top: 4px; color: var(--text-light); font-size: 10px; font-weight: 600; letter-spacing: .09em; text-transform: uppercase; }
+    p.sub { margin: 0 0 26px; color: var(--text-mid); text-align: center; font-size: 14px; line-height: 1.55; }
+    label { display: block; margin-bottom: 8px; color: var(--brown); font-size: 14px; font-weight: 600; }
+    select, input {
+      display: block;
+      width: 100%;
+      min-height: 48px;
+      padding: 12px 14px;
+      border: 1px solid rgba(62,32,5,0.24);
+      border-radius: 11px;
+      outline: none;
+      background: var(--white);
+      color: var(--text);
+      font: inherit;
+      font-size: 16px;
+      transition: border-color .18s, box-shadow .18s;
+    }
+    select:focus, input:focus { border-color: var(--teal-dark); box-shadow: 0 0 0 3px rgba(0,180,200,0.18); }
+    select:disabled, input:disabled { background: var(--cream); color: var(--text-light); }
+    .field { margin-bottom: 20px; }
+    .picker { position: relative; }
+    .suggestions {
+      position: relative;
+      z-index: 1;
+      max-height: 234px;
+      overflow: auto;
+      margin: 6px 0 0;
+      padding: 5px;
+      border: 1px solid rgba(62,32,5,0.14);
+      border-radius: 12px;
+      background: var(--white);
+      box-shadow: 0 8px 22px rgba(62,32,5,0.10);
+      list-style: none;
+    }
+    .suggestions[hidden] { display: none; }
+    .suggestions button {
+      display: block;
+      width: 100%;
+      padding: 12px 10px;
+      border: 0;
+      border-radius: 8px;
+      background: var(--white);
+      color: var(--text-mid);
+      font: inherit;
+      text-align: left;
+      cursor: pointer;
+    }
+    .suggestions button:hover, .suggestions button:focus { outline: none; background: rgba(0,180,200,0.10); color: var(--brown); }
+    .hint { margin: 7px 1px; color: var(--text-light); font-size: 12px; line-height: 1.45; }
+    .primary {
+      width: 100%;
+      min-height: 50px;
+      padding: 14px 16px;
+      border: 0;
+      border-radius: 11px;
+      background: var(--brown);
+      color: var(--white);
+      font: inherit;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background .18s, transform .18s, box-shadow .18s;
+    }
+    .primary:hover:not(:disabled) { background: var(--brown-mid); transform: translateY(-1px); box-shadow: 0 6px 16px rgba(62,32,5,0.18); }
+    .primary:focus-visible, .meet-backup:focus-visible { outline: 3px solid rgba(0,180,200,0.45); outline-offset: 2px; }
+    .primary:disabled { background: rgba(62,32,5,0.35); cursor: not-allowed; }
+    .message { min-height: 18px; margin: 13px 0 0; color: var(--teal-dark); font-size: 13px; line-height: 1.5; }
+    .message.error { color: var(--red); }
+    .meet-backup {
+      display: block;
+      margin-top: 13px;
+      padding: 12px;
+      border: 1px solid var(--teal-dark);
+      border-radius: 11px;
+      color: var(--teal-dark);
+      font-weight: 700;
+      text-align: center;
+      text-decoration: none;
+      transition: background .18s, color .18s;
+    }
+    .meet-backup:hover { background: var(--teal-dark); color: var(--white); }
+    .meet-backup[hidden] { display: none; }
+    .footer { margin: 20px 0 0; color: var(--text-light); font-size: 12px; line-height: 1.5; text-align: center; }
+    @media (max-width: 420px) {
+      body { padding: 12px; }
+      main { padding: 24px 18px 20px; border-radius: 16px; }
+      h1 { font-size: 19px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+<main>
+  <header class="brand-lockup">
+    <img class="brand-logo" src="/Learn%20with%20Kayes%20Logo.png" alt="" />
+    <div class="brand-copy">
+      <h1>Learn with Kayes</h1>
+      <span class="brand-tagline">Enrich your Knowledge</span>
+    </div>
+  </header>
+  <p class="sub">Select your batch, search your name, and join class.</p>
+  <form id="join" autocomplete="off">
+    <div class="field"><label for="batch">Batch</label>
+      <select id="batch" name="batch" required disabled>
+        <option value="">Loading available batches...</option>
+      </select>
+    </div>
+    <div class="field"><label for="studentSearch">Student name</label>
+      <div class="picker"><input id="studentSearch" placeholder="Type at least 2 letters to search" aria-autocomplete="list" aria-controls="suggestions" aria-expanded="false" required maxlength="100" />
+        <ul id="suggestions" class="suggestions" hidden role="listbox"></ul>
+      </div><div class="hint">Choose your name from the matching results.</div>
+    </div>
+    <button id="joinButton" type="submit" class="primary" disabled>Join Class</button>
+    <p id="message" class="message" aria-live="polite"></p>
+    <a id="meetBackup" class="meet-backup" href="#" hidden target="_blank" rel="noopener noreferrer">Open Google Meet</a>
+  </form>
+  <p class="footer">Join time is recorded automatically in Bangladesh time.</p>
+</main>
+<script>
+  // Learn with Kayes — Student Class Join, dynamic batch version.
+  // Only the backend talks to ClickUp; its API key is never exposed here.
+  const SEARCH_API  = 'https://dqfll391.n8n.runn.to/webhook/lwk-student-search';
+  const JOIN_API    = 'https://dqfll391.n8n.runn.to/webhook/lwk-student-join';
+  const BATCHES_API = 'https://dqfll391.n8n.runn.to/webhook/lwk-active-batches';
+  const TEST_MODE = false;
+
+  const $ = id => document.getElementById(id);
+  const form = $('join');
+  const batch = $('batch');
+  const input = $('studentSearch');
+  const list = $('suggestions');
+  const message = $('message');
+  const submit = $('joinButton');
+  const meetBackup = $('meetBackup');
+  const requestedBatchCode = new URLSearchParams(location.search).get('batch');
+  const normalizeBatch = value => String(value || '').trim().replace(/\s+/g, '').toUpperCase();
+  const friendlyBatch = () => batch.value;
+
+  let selected = null;
+  let debounceTimer;
+  let searchController;
+  let searchVersion = 0;
+  let joining = false;
+
+  function report(text, error = false) {
+    message.textContent = text;
+    message.classList.toggle('error', error);
+  }
+
+  function clearSelection() {
+    meetBackup.hidden = true;
+    selected = null;
+    submit.disabled = true;
+    list.hidden = true;
+    list.replaceChildren();
+    input.setAttribute('aria-expanded', 'false');
+  }
+
+  function cancelSearch() {
+    searchVersion++;
+    clearTimeout(debounceTimer);
+    if (searchController) searchController.abort();
+    searchController = null;
+  }
+
+  // Batch options come from public, read-only n8n endpoint backed by ClickUp.
+  async function loadBatches() {
+    batch.disabled = true;
+    input.disabled = true;
+    clearSelection();
+    report('Loading available batches...');
+    try {
+      const response = await fetch(BATCHES_API, {
+        method: 'GET', mode: 'cors', cache: 'no-store', credentials: 'omit'
+      });
+      if (!response.ok) throw new Error('Batch API HTTP ' + response.status);
+      const data = await response.json();
+      if (!Array.isArray(data?.batches)) throw new Error('Invalid batch response');
+
+      const choices = data.batches.filter(item =>
+        item && typeof item.name === 'string' &&
+        /^LTE\s*\d+$/i.test(item.name.trim()) &&
+        typeof item.code === 'string' &&
+        normalizeBatch(item.name) === normalizeBatch(item.code)
+      );
+      const unique = new Set();
+      batch.replaceChildren(new Option('Select your batch', ''));
+      for (const item of choices) {
+        const code = normalizeBatch(item.name);
+        if (unique.has(code)) continue;
+        unique.add(code);
+        batch.add(new Option(item.name.trim(), item.name.trim()));
+      }
+      if (unique.size === 0) throw new Error('No active configured batches');
+
+      if (requestedBatchCode) {
+        const found = [...batch.options].find(option =>
+          normalizeBatch(option.value) === normalizeBatch(requestedBatchCode)
+        );
+        if (!found) {
+          report('This batch link is not active. Please contact your teacher.', true);
+          return; // Fail closed rather than silently switching to another batch.
+        }
+        batch.value = found.value;
+        batch.disabled = true; // Keep class-specific share links locked.
+      } else {
+        batch.disabled = false;
+      }
+      input.disabled = false;
+      report('Select a student from your batch to join class.');
+    } catch (err) {
+      console.error('Could not load active batches:', err);
+      batch.replaceChildren(new Option('Batches unavailable', ''));
+      report('Cannot load batches. Please refresh or contact your teacher.', true);
+    }
+  }
+
+  function showOptions(students) {
+    list.replaceChildren();
+    if (!students.length) {
+      report('No matching student found. Check the spelling or contact your teacher.');
+      return;
+    }
+    for (const person of students) {
+      if (typeof person?.name !== 'string' || typeof person?.optionId !== 'string') continue;
+      const li = document.createElement('li');
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.setAttribute('role', 'option');
+      button.textContent = person.name; // textContent prevents HTML injection.
+      button.addEventListener('click', () => {
+        cancelSearch();
+        selected = { name: person.name, optionId: person.optionId, batch: friendlyBatch() };
+        input.value = person.name;
+        submit.disabled = false;
+        list.hidden = true;
+        input.setAttribute('aria-expanded', 'false');
+        report('Name selected. Tap Join Class to continue.');
+      });
+      li.append(button);
+      list.append(li);
+    }
+    list.hidden = !list.children.length;
+    input.setAttribute('aria-expanded', String(!list.hidden));
+    if (list.children.length) report('Choose your name from the results.');
+    else report('No valid results received from the search service.', true);
+  }
+
+  async function searchNames() {
+    const q = input.value.trim();
+    const requestedBatch = friendlyBatch();
+    if (!requestedBatch) return report('Please select a batch first.', true);
+    if (q.length < 2) return report('Type at least 2 letters to search.');
+    if (searchController) searchController.abort();
+    searchController = new AbortController();
+    const version = ++searchVersion;
+    report('Searching...');
+    try {
+      const url = new URL(SEARCH_API);
+      url.searchParams.set('q', q);
+      url.searchParams.set('batch', requestedBatch);
+      const response = await fetch(url, {
+        method: 'GET', signal: searchController.signal,
+        mode: 'cors', cache: 'no-store', credentials: 'omit'
+      });
+      if (!response.ok) throw new Error('Search HTTP ' + response.status);
+      const data = await response.json();
+      if (version !== searchVersion || q !== input.value.trim() ||
+          requestedBatch !== friendlyBatch()) return;
+      showOptions(Array.isArray(data?.students) ? data.students : []);
+    } catch (err) {
+      if (err.name === 'AbortError' || version !== searchVersion) return;
+      console.error('Student search failed:', err);
+      report(TEST_MODE
+        ? 'Search failed. Check the Search Students test webhook and CORS.'
+        : 'Student search is unavailable. Please contact your teacher.', true);
+    }
+  }
+
+  input.addEventListener('input', () => {
+    cancelSearch();
+    clearSelection();
+    if (!friendlyBatch()) return report('Please select a batch first.');
+    if (input.value.trim().length >= 2) debounceTimer = setTimeout(searchNames, 300);
+    else report('Type at least 2 letters to search.');
+  });
+
+  batch.addEventListener('change', () => {
+    cancelSearch();
+    input.value = '';
+    clearSelection();
+    report(batch.value ? 'Search your name.' : 'Select your batch first.');
+  });
+
+  document.addEventListener('click', event => {
+    if (!event.target.closest('.picker')) {
+      list.hidden = true;
+      input.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  input.addEventListener('keydown', event => {
+    if (event.key === 'Escape') {
+      list.hidden = true;
+      input.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  // The Meet URL comes from the verified join response, never a hardcoded map.
+  function validMeetUrl(value) {
+    const url = new URL(String(value || ''));
+    if (url.protocol !== 'https:' || url.hostname !== 'meet.google.com' ||
+        url.username || url.password || url.search || url.hash ||
+        !/^\/[a-z]{3}-[a-z]{4}-[a-z]{3}\/?$/i.test(url.pathname)) {
+      throw new Error('Join API returned an invalid Google Meet URL');
+    }
+    return url.href;
+  }
+
+  form.addEventListener('submit', async event => {
+    event.preventDefault();
+    if (joining) return;
+    const submittedBatch = friendlyBatch();
+    if (!submittedBatch || !selected || selected.batch !== submittedBatch ||
+        input.value !== selected.name) {
+      return report('Please select your name from the search results.', true);
+    }
+
+    joining = true;
+    cancelSearch();
+    submit.disabled = true;
+    batch.disabled = true;
+    input.disabled = true;
+    meetBackup.hidden = true;
+    report('Recording attendance...');
+
+    try {
+      // URL-encoded submission is compatible with n8n and avoids JSON preflight.
+      const body = new URLSearchParams({
+        batch: submittedBatch,
+        optionId: selected.optionId,
+        name: selected.name
+      });
+      const response = await fetch(JOIN_API, {
+        method: 'POST', mode: 'cors', credentials: 'omit', cache: 'no-store',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
+        body: body.toString()
+      });
+
+      const responseText = await response.text();
+      let parsed = null;
+      try { parsed = responseText ? JSON.parse(responseText) : null; }
+      catch { console.warn('Student Join response was not JSON:', responseText.slice(0, 300)); }
+      if (!response.ok) throw new Error('Join HTTP ' + response.status);
+
+      const candidate = Array.isArray(parsed) ? parsed[0] : parsed;
+      const data = candidate?.json || candidate?.data || candidate;
+      if (!data || data.success !== true || data.error) {
+        throw new Error('Join API did not confirm attendance');
+      }
+      if (data.batch && normalizeBatch(data.batch) !== normalizeBatch(submittedBatch)) {
+        throw new Error('Join API returned the wrong batch');
+      }
+      const meetUrl = validMeetUrl(data.redirectUrl || data.meetUrl || data.meetingUrl);
+      report(data.pending === true
+        ? 'Join recorded before the teacher started. Opening Google Meet...'
+        : 'Attendance recorded. Opening Google Meet...');
+      meetBackup.href = meetUrl;
+      meetBackup.hidden = false;
+      window.location.assign(meetUrl);
+    } catch (err) {
+      console.error('Student Join failed after submission:', err);
+      // A ClickUp task might have been created already. Prevent duplicate submits.
+      report('Attendance confirmation could not be received. Your attendance may already be recorded. Do not submit again; contact your teacher if needed.', true);
+      joining = false;
+      // Only show a Meet backup if the backend returned and validated a URL.
+    }
+  });
+
+  loadBatches();
+</script>
+</body>
+</html>
