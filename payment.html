@@ -6,7 +6,7 @@
 <title>Payment - Learn with Kayes</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@400;500;600;700&family=Noto+Sans+Bengali:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
     --brown:        #3E2005;
@@ -338,6 +338,7 @@
     white-space: nowrap; flex-shrink: 0;
   }
   .copy-btn:hover  { background: var(--teal-dark); }
+  .copy-btn:focus-visible { outline: 3px solid var(--teal-dark); outline-offset: 3px; }
   .copy-btn.copied { background: var(--success); }
   .send-to-amount {
     margin-top: 8px; padding-top: 8px;
@@ -365,11 +366,31 @@
   }
   .qr-merchant-row {
     display: flex; align-items: center; justify-content: center;
-    gap: 10px; margin-top: 2px;
+    gap: 12px; margin-top: 2px; flex-wrap: wrap;
   }
   .qr-merchant-num {
-    font-size: 0.88rem; font-weight: 800; color: var(--brown);
-    letter-spacing: 0.03em;
+    font-size: 1.4rem; font-weight: 900; color: var(--brown);
+    letter-spacing: 0.03em; font-variant-numeric: tabular-nums;
+  }
+  .qr-copy-btn { min-height: 44px; padding: 10px 18px; font-size: 0.86rem; font-family: 'Noto Sans Bengali', 'Inter', sans-serif; }
+  .copy-feedback { min-height: 1.5em; margin-top: 8px; color: var(--success); font-size: 0.82rem; font-weight: 700; font-family: 'Noto Sans Bengali', 'Inter', sans-serif; }
+
+  /* Same-phone bKash instructions */
+  .same-phone-box {
+    background: #FFF5F9; border: 1px solid rgba(226,19,110,0.24);
+    border-left: 4px solid var(--bkash); border-radius: var(--radius-md);
+    padding: 18px; margin-bottom: 16px;
+    font-family: 'Noto Sans Bengali', 'Inter', sans-serif;
+    color: var(--text-mid); line-height: 1.7;
+  }
+  .same-phone-box h3 { color: #8B1050; font-size: 1.08rem; line-height: 1.45; margin-bottom: 8px; }
+  .same-phone-box p { font-size: 0.84rem; margin-bottom: 12px; }
+  .same-phone-box .step-item { font-size: 0.83rem; line-height: 1.65; }
+  .same-phone-box .step-num { background: var(--bkash); }
+  .same-phone-warning {
+    margin-top: 14px; margin-bottom: 0 !important; padding: 10px 12px;
+    background: var(--white); border-radius: var(--radius-sm);
+    color: #8B1050; font-weight: 600;
   }
 
   /* step-by-step instructions */
@@ -395,6 +416,15 @@
     font-size: 0.65rem; font-weight: 800;
   }
   .step-item strong { color: var(--brown); }
+  #panel-bkash .panel-brand-subtitle,
+  #panel-bkash .qr-box-lbl,
+  #panel-bkash .retailer-note,
+  #panel-bkash .steps-box,
+  #panel-bkash .step-note,
+  #panel-bkash-send .panel-brand-subtitle,
+  #panel-bkash-send .send-to-lbl,
+  #panel-bkash-send .steps-box,
+  #panel-bkash-send .step-note { font-family: 'Noto Sans Bengali', 'Inter', sans-serif; }
 
   /* waiting */
   .btn-waiting {
@@ -425,7 +455,7 @@
     display: block; width: 100%; padding: 15px; margin-top: 4px;
     background: var(--success); color: var(--white);
     border: none; border-radius: var(--radius-pill);
-    font-family: 'Inter', sans-serif; font-size: 0.95rem; font-weight: 700;
+    font-family: 'Noto Sans Bengali', 'Inter', sans-serif; font-size: 0.95rem; font-weight: 700;
     cursor: pointer; transition: all 0.2s;
     box-shadow: 0 4px 16px rgba(26,158,90,0.30);
   }
@@ -477,13 +507,17 @@
   }
   .btn-telegram:hover { opacity: 0.9; transform: translateY(-1px); }
 
-  /* back link */
+  /* back and edit button */
   .btn-back {
-    display: block; text-align: center; margin-top: 14px;
-    font-size: 0.76rem; color: var(--text-light); cursor: pointer;
-    text-decoration: underline; transition: color 0.2s;
+    display: block; width: 100%; min-height: 44px; margin-top: 14px;
+    padding: 11px 16px; text-align: center;
+    background: rgba(0,180,200,0.08); border: 2px solid var(--teal-dark);
+    border-radius: var(--radius-pill); color: var(--teal-dark);
+    font-family: 'Inter', sans-serif; font-size: 0.88rem; font-weight: 700;
+    cursor: pointer; transition: background 0.2s, box-shadow 0.2s;
   }
-  .btn-back:hover { color: var(--brown); }
+  .btn-back:hover { background: rgba(0,180,200,0.16); box-shadow: 0 3px 12px rgba(0,100,120,0.15); }
+  .btn-back:focus-visible { outline: 3px solid var(--teal-dark); outline-offset: 3px; }
 
   /* ══════════════════════════════════
      SUCCESS OVERLAY
@@ -580,6 +614,9 @@
     .bank-acc-row { flex-wrap: wrap; }
     .hero-logo-card { flex-direction: column; text-align: center; gap: 8px; }
     .qr-img { width: 170px; }
+    .qr-merchant-row { flex-direction: column; gap: 8px; }
+    .qr-copy-btn { width: 100%; max-width: 260px; }
+    .same-phone-box { padding: 15px; }
   }
 </style>
 </head>
@@ -614,7 +651,7 @@
   </div>
 
   <h1>Complete Your <span>Payment</span> Securely</h1>
-  <p style="font-size:0.88rem;color:rgba(255,255,255,0.45);margin-top:10px;line-height:1.6;max-width:400px;margin-left:auto;margin-right:auto;">Fast, simple, and trusted. Choose your preferred method and we'll confirm your payment automatically.</p>
+  <p style="font-size:0.88rem;color:rgba(255,255,255,0.45);margin-top:10px;line-height:1.6;max-width:400px;margin-left:auto;margin-right:auto;">Choose your preferred method, complete the transfer, then check its status here.</p>
 
   <!-- Quran quote on fulfilling financial obligations -->
   <div class="quran-quote">
@@ -670,6 +707,7 @@
             <option value="1">1 Month</option>
             <option value="3">3 Months</option>
             <option value="6">6 Months</option>
+            <option value="12">12 Months (Whole Year)</option>
           </select>
           <div class="field-hint">Choose your preferred payment period</div>
         </div>
@@ -748,7 +786,7 @@
         <div class="panel-brand-logo"><span class="pbadge pbadge-bkash">bKash</span></div>
         <div>
           <div class="panel-brand-title">bKash Scan & Pay</div>
-          <div class="panel-brand-subtitle">Scan the QR code below - confirmation is automatic</div>
+          <div class="panel-brand-subtitle" lang="bn">নিচের QR কোড স্ক্যান করুন অথবা বিকাশ নম্বরটি কপি করুন</div>
         </div>
       </div>
 
@@ -760,41 +798,56 @@
       </div>
 
       <div class="qr-box">
-        <div class="qr-box-lbl">Scan This QR With Your bKash App</div>
+        <div class="qr-box-lbl" lang="bn">বিকাশ অ্যাপ দিয়ে এই QR কোড স্ক্যান করুন</div>
         <img src="./bkash-merchant-qr.png" alt="bKash Merchant QR Code" class="qr-img">
         <div class="qr-merchant-row">
           <div class="qr-merchant-num">01601-064195</div>
-          <button class="copy-btn" id="copy-bk-qr" onclick="copyNum('01601064195','copy-bk-qr')">Copy</button>
+          <button type="button" class="copy-btn qr-copy-btn" id="copy-bk-qr" aria-label="বিকাশ পেমেন্ট নম্বর কপি করুন" onclick="copyNum('01601064195','copy-bk-qr','bk-copy-status')">নম্বর কপি করুন (Copy)</button>
         </div>
+        <p class="copy-feedback" id="bk-copy-status" role="status" aria-live="polite"></p>
       </div>
 
-      <div class="retailer-note">
-        ⚠️ <strong>Important:</strong> This is a fixed QR - after scanning, enter the amount manually. Type exactly <strong id="bk-amount2">৳0</strong>.<br><br>
-        In the <strong>Reference</strong> field - write the <strong>student's full name</strong> if paying a student fee, so we can match your payment correctly.
+      <section class="same-phone-box" lang="bn" aria-labelledby="same-phone-title">
+        <h3 id="same-phone-title">একই মোবাইল থেকে বিকাশে পেমেন্ট করবেন?</h3>
+        <p>এই মোবাইল থেকেই পেমেন্ট করতে পারবেন। QR কোড স্ক্যানের বদলে উপরের bKash নম্বরটি কপি করুন। অ্যাপের Payment (পেমেন্ট) অপশনে যেয়ে নম্বরটি পেস্ট করুন।</p>
+        <ol class="steps-list">
+          <li class="step-item"><span class="step-num">1</span><span><strong>নম্বর কপি করুন:</strong> উপরে দেওয়া বিকাশ পেমেন্ট নম্বরটি Copy করুন।</span></li>
+          <li class="step-item"><span class="step-num">2</span><span><strong>বিকাশ অ্যাপ খুলুন:</strong> bKash অ্যাপ থাকলে চালু করুন।</span></li>
+          <li class="step-item"><span class="step-num">3</span><span><strong>Payment নির্বাচন করুন:</strong> অ্যাপের Payment (পেমেন্ট) অপশনে যান। bKash অ্যাপ না থাকলে মোবাইলে <strong>*247# ডায়াল করুন → Merchant Payment</strong> সিলেক্ট করুন।</span></li>
+          <li class="step-item"><span class="step-num">4</span><span><strong>নম্বর পেস্ট করুন:</strong> bKash অ্যাপ থাকলে পেমেন্টে যেয়ে উপরের নম্বরটি পেস্ট করুন।</span></li>
+          <li class="step-item"><span class="step-num">5</span><span><strong>টাকার পরিমাণ লিখুন:</strong> উপরে Amount to Pay-তে দেখানো নির্ধারিত পরিমাণ লিখুন।</span></li>
+          <li class="step-item"><span class="step-num">6</span><span><strong>Reference লিখুন:</strong> শিক্ষার্থীর ফি হলে Reference ঘরে শিক্ষার্থীর পূর্ণ নাম লিখুন।</span></li>
+          <li class="step-item"><span class="step-num">7</span><span><strong>পেমেন্ট সম্পন্ন করুন:</strong> বিকাশের নির্দেশনা অনুসরণ করে পেমেন্ট নিশ্চিত করুন। পেমেন্ট সম্পন্ন হওয়ার পরই নিচের “পেমেন্ট করেছি” বাটনে চাপুন, আগে নয়।</span></li>
+        </ol>
+        <p class="same-phone-warning">পেমেন্টের পর Transaction ID সংরক্ষণ করুন। পেমেন্ট নিশ্চিত হতে দেরি হলে Telegram-এ যোগাযোগ করুন। PIN বা OTP কাউকে দেবেন না।</p>
+      </section>
+
+      <div class="retailer-note" lang="bn">
+        ⚠️ <strong>গুরুত্বপূর্ণ:</strong> এটি একটি নির্দিষ্ট QR কোড। স্ক্যান করার পর টাকার পরিমাণ নিজে লিখুন: ঠিক <strong id="bk-amount2">৳0</strong>।<br><br>
+        শিক্ষার্থীর ফি দিলে <strong>Reference</strong> ঘরে শিক্ষার্থীর <strong>পূর্ণ নাম</strong> লিখুন, যাতে পেমেন্টটি মিলিয়ে দেখা যায়।
       </div>
 
-      <div class="steps-box">
-        <div class="steps-box-title">📋 How to pay via bKash QR</div>
+      <div class="steps-box" lang="bn">
+        <div class="steps-box-title">📋 বিকাশ QR দিয়ে পেমেন্ট করার নিয়ম</div>
         <ul class="steps-list">
-          <li class="step-item"><span class="step-num">1</span><span>Open your <strong>bKash app</strong></span></li>
-          <li class="step-item"><span class="step-num">2</span><span>Tap <strong>Scan QR</strong> at the bottom of the bKash app - or select <strong>"Payment"</strong> and tap to scan QR code
-            <div class="step-note">📱 <strong>Paying from this same phone?</strong> You can't scan your own screen - tap <strong>"Payment"</strong> instead and paste the number using the <strong>Copy</strong> button below the QR.</div>
-          </span></li>
-          <li class="step-item"><span class="step-num">3</span><span>Scan the QR code above (skip this step if you used "Payment")</span></li>
-          <li class="step-item"><span class="step-num">4</span><span>Enter amount: <strong id="bk-amount3">৳0</strong></span></li>
-          <li class="step-item"><span class="step-num">5</span><span>In the <strong>Reference</strong> field, write the student's name: <strong id="bk-ref-name">-</strong></span></li>
-          <li class="step-item"><span class="step-num">6</span><span>Enter your <strong>bKash PIN</strong> to confirm</span></li>
-          <li class="step-item"><span class="step-num">7</span><span>bKash will send you a <strong>confirmation SMS</strong> - your payment will be verified automatically ✅</span></li>
+          <li class="step-item"><span class="step-num">1</span><span><strong>বিকাশ অ্যাপ</strong> খুলুন।</span></li>
+          <li class="step-item"><span class="step-num">2</span><span>অ্যাপে <strong>Scan QR</strong> অপশনে চাপুন।</span></li>
+          <li class="step-item"><span class="step-num">3</span><span>উপরের QR কোডটি স্ক্যান করুন।</span></li>
+          <li class="step-item"><span class="step-num">4</span><span>টাকার পরিমাণ লিখুন: <strong id="bk-amount3">৳0</strong>।</span></li>
+          <li class="step-item"><span class="step-num">5</span><span><strong>Reference</strong> ঘরে শিক্ষার্থীর নাম লিখুন: <strong id="bk-ref-name">-</strong>।</span></li>
+          <li class="step-item"><span class="step-num">6</span><span>বিকাশের নির্দেশনা অনুসরণ করে <strong>PIN</strong> দিয়ে পেমেন্ট নিশ্চিত করুন।</span></li>
+          <li class="step-item"><span class="step-num">7</span><span>পেমেন্ট সম্পন্ন হলে <strong>Transaction ID</strong> সংরক্ষণ করুন। তারপরই নিচের “পেমেন্ট করেছি” বাটনে চাপুন।</span></li>
         </ul>
       </div>
 
-      <button class="btn-confirm-pay" onclick="confirmAndPoll('bkash','bkash-waiting')">Press here &amp; Pay via bKash →</button>
+      <p class="step-note" lang="bn">পেমেন্ট সম্পন্ন হওয়ার আগে “পেমেন্ট করেছি” বাটনে চাপবেন না।</p>
+      <button class="btn-confirm-pay" onclick="confirmAndPoll('bkash','bkash-waiting')">পেমেন্ট করেছি — স্ট্যাটাস চেক করুন</button>
       <div class="btn-waiting" id="bkash-waiting" style="display:none;margin-top:12px">
         <div class="spinner"></div>
         <span>Waiting for confirmation...</span>
       </div>
 
-      <span class="btn-back" onclick="goBack()">← Change details</span>
+      <button type="button" class="btn-back" onclick="goBack()">← Back and Change Details</button>
     </div>
 
     <!-- ══ PANEL: bKash Send Money (polling) ══ -->
@@ -803,7 +856,7 @@
         <div class="panel-brand-logo"><span class="pbadge pbadge-bkash">bKash</span></div>
         <div>
           <div class="panel-brand-title">bKash Send Money</div>
-          <div class="panel-brand-subtitle">Send to the number below - confirmation is automatic</div>
+          <div class="panel-brand-subtitle" lang="bn">নিচের নম্বরে Send Money করুন, তারপর পেমেন্টের স্ট্যাটাস দেখুন</div>
         </div>
       </div>
 
@@ -815,7 +868,7 @@
       </div>
 
       <div class="send-to-box">
-        <div class="send-to-lbl">Send Money to This bKash Number</div>
+        <div class="send-to-lbl" lang="bn">এই বিকাশ নম্বরে Send Money করুন</div>
         <div class="send-to-num-row">
           <div class="send-to-num">01701-064194</div>
           <button class="copy-btn" id="copy-bks" onclick="copyNum('01701064194','copy-bks')">Copy</button>
@@ -825,26 +878,27 @@
         </div>
       </div>
 
-      <div class="steps-box">
-        <div class="steps-box-title">📋 How to send via bKash</div>
+      <div class="steps-box" lang="bn">
+        <div class="steps-box-title">📋 বিকাশ Send Money করার নিয়ম</div>
         <ul class="steps-list">
-          <li class="step-item"><span class="step-num">1</span><span>Open your <strong>bKash app</strong> or dial <strong>*247#</strong></span></li>
-          <li class="step-item"><span class="step-num">2</span><span>Tap <strong>"Send Money"</strong></span></li>
-          <li class="step-item"><span class="step-num">3</span><span>Paste the number: <strong>01701064194</strong> (use Copy button above)</span></li>
-          <li class="step-item"><span class="step-num">4</span><span>Enter amount: <strong id="bks-amount3">৳0</strong></span></li>
-          <li class="step-item"><span class="step-num">5</span><span>In the <strong>Reference</strong> field, write the student's name: <strong id="bks-ref-name">-</strong></span></li>
-          <li class="step-item"><span class="step-num">6</span><span>Enter your <strong>bKash PIN</strong> to confirm</span></li>
-          <li class="step-item"><span class="step-num">7</span><span>bKash will send you a <strong>confirmation SMS</strong> - your payment will be verified automatically ✅</span></li>
+          <li class="step-item"><span class="step-num">1</span><span><strong>বিকাশ অ্যাপ</strong> খুলুন অথবা <strong>*247#</strong> ডায়াল করুন।</span></li>
+          <li class="step-item"><span class="step-num">2</span><span><strong>Send Money</strong> অপশন নির্বাচন করুন।</span></li>
+          <li class="step-item"><span class="step-num">3</span><span>উপরের Copy বাটনে চাপুন। অ্যাপে <strong>01701064194</strong> নম্বরটি পেস্ট করুন; *247# ব্যবহার করলে নম্বরটি লিখুন।</span></li>
+          <li class="step-item"><span class="step-num">4</span><span>টাকার পরিমাণ লিখুন: <strong id="bks-amount3">৳0</strong>।</span></li>
+          <li class="step-item"><span class="step-num">5</span><span><strong>Reference</strong> ঘরে শিক্ষার্থীর নাম লিখুন: <strong id="bks-ref-name">-</strong>।</span></li>
+          <li class="step-item"><span class="step-num">6</span><span>বিকাশের নির্দেশনা অনুসরণ করে <strong>PIN</strong> দিয়ে পেমেন্ট নিশ্চিত করুন।</span></li>
+          <li class="step-item"><span class="step-num">7</span><span>পেমেন্ট সম্পন্ন হলে <strong>Transaction ID</strong> সংরক্ষণ করুন। তারপরই নিচের “পেমেন্ট করেছি” বাটনে চাপুন।</span></li>
         </ul>
       </div>
 
-      <button class="btn-confirm-pay" onclick="confirmAndPoll('bkash-send','bks-waiting')">Press here &amp; Pay via bKash →</button>
+      <p class="step-note" lang="bn">পেমেন্ট সম্পন্ন হওয়ার আগে “পেমেন্ট করেছি” বাটনে চাপবেন না।</p>
+      <button class="btn-confirm-pay" onclick="confirmAndPoll('bkash-send','bks-waiting')">পেমেন্ট করেছি — স্ট্যাটাস চেক করুন</button>
       <div class="btn-waiting" id="bks-waiting" style="display:none;margin-top:12px">
         <div class="spinner"></div>
         <span>Waiting for confirmation...</span>
       </div>
 
-      <span class="btn-back" onclick="goBack()">← Change details</span>
+      <button type="button" class="btn-back" onclick="goBack()">← Back and Change Details</button>
     </div>
 
     <!-- ══ PANEL: Nagad Send Money (polling) ══ -->
@@ -853,7 +907,7 @@
         <div class="panel-brand-logo"><span class="pbadge pbadge-nagad">নগদ</span></div>
         <div>
           <div class="panel-brand-title">Nagad Send Money</div>
-          <div class="panel-brand-subtitle">Send to the number below - confirmation is automatic</div>
+          <div class="panel-brand-subtitle">Send to the number below, then check payment status</div>
         </div>
       </div>
 
@@ -884,17 +938,17 @@
           <li class="step-item"><span class="step-num">4</span><span>Enter amount: <strong id="ng-amount3">৳0</strong></span></li>
           <li class="step-item"><span class="step-num">5</span><span>In the <strong>Reference</strong> field, write the student's name: <strong id="ng-ref-name">-</strong></span></li>
           <li class="step-item"><span class="step-num">6</span><span>Enter your <strong>Nagad PIN</strong> to confirm</span></li>
-          <li class="step-item"><span class="step-num">7</span><span>Nagad will send you a <strong>confirmation SMS</strong> - your payment will be verified automatically ✅</span></li>
+          <li class="step-item"><span class="step-num">7</span><span>Keep the Nagad Transaction ID, then check payment status below</span></li>
         </ul>
       </div>
 
-      <button class="btn-confirm-pay" onclick="confirmAndPoll('nagad','ng-waiting')">Press here &amp; Pay via Nagad →</button>
+      <button class="btn-confirm-pay" onclick="confirmAndPoll('nagad','ng-waiting')">পেমেন্ট করেছি — স্ট্যাটাস চেক করুন</button>
       <div class="btn-waiting" id="ng-waiting" style="display:none;margin-top:12px">
         <div class="spinner"></div>
         <span>Waiting for confirmation...</span>
       </div>
 
-      <span class="btn-back" onclick="goBack()">← Change details</span>
+      <button type="button" class="btn-back" onclick="goBack()">← Back and Change Details</button>
     </div>
 
     <!-- ══ PANEL: Cellfin ══ -->
@@ -932,17 +986,17 @@
           <li class="step-item"><span class="step-num">3</span><span>Paste the number: <strong>01701064194</strong></span></li>
           <li class="step-item"><span class="step-num">4</span><span>Enter amount: <strong id="cf-amount3">৳0</strong></span></li>
           <li class="step-item"><span class="step-num">5</span><span>Confirm with your <strong>Cellfin PIN</strong></span></li>
-          <li class="step-item"><span class="step-num">6</span><span>You will receive a confirmation SMS - payment will be verified automatically ✅</span></li>
+          <li class="step-item"><span class="step-num">6</span><span>Keep the transaction ID, then check payment status below</span></li>
         </ul>
       </div>
 
-      <button class="btn-confirm-pay" onclick="confirmAndPoll('cellfin','cf-waiting')">Press here &amp; Pay via Cellfin →</button>
+      <button class="btn-confirm-pay" onclick="confirmAndPoll('cellfin','cf-waiting')">পেমেন্ট করেছি — স্ট্যাটাস চেক করুন</button>
       <div class="btn-waiting" id="cf-waiting" style="display:none;margin-top:12px">
         <div class="spinner"></div>
         <span>Waiting for confirmation...</span>
       </div>
 
-      <span class="btn-back" onclick="goBack()">← Change details</span>
+      <button type="button" class="btn-back" onclick="goBack()">← Back and Change Details</button>
     </div>
 
     <!-- ══ PANEL: Islami Bank Transfer ══ -->
@@ -1002,7 +1056,7 @@
         </ul>
       </div>
 
-      <button class="btn-confirm-pay" onclick="confirmAndPoll('bank','bnk-waiting','bank')">Press here &amp; Pay via Islami Bank →</button>
+      <button class="btn-confirm-pay" onclick="confirmAndPoll('bank','bnk-waiting','bank')">পেমেন্ট করেছি — স্ট্যাটাস চেক করুন</button>
       <div class="btn-waiting" id="bnk-waiting" style="display:none;margin-top:12px">
         <div class="spinner"></div>
         <span>Waiting for confirmation...</span>
@@ -1012,7 +1066,7 @@
         📤 Send Payment Screenshot on Telegram
       </a>
 
-      <span class="btn-back" onclick="goBack()">← Change details</span>
+      <button type="button" class="btn-back" onclick="goBack()">← Back and Change Details</button>
     </div>
 
   </div><!-- /pay-card -->
@@ -1086,7 +1140,7 @@ function fmtPhone(p) {
 /* ══════════════════════════════════════
    MONTHS → AUTO-FILL AMOUNT
 ══════════════════════════════════════ */
-const MONTH_PRICES = { '1': 2200, '3': 6000, '6': 11000 };
+const MONTH_PRICES = { '1': 2200, '3': 6000, '6': 11000, '12': 20000 };
 
 function onMonthsChange() {
   const months = document.getElementById('months').value;
@@ -1281,14 +1335,48 @@ function goBack() {
 /* ══════════════════════════════════════
    COPY
 ══════════════════════════════════════ */
-function copyNum(val, btnId) {
-  navigator.clipboard.writeText(val).then(() => {
-    const btn = document.getElementById(btnId);
-    const orig = btn.textContent;
-    btn.textContent = 'Copied!';
-    btn.classList.add('copied');
-    setTimeout(() => { btn.textContent = orig; btn.classList.remove('copied'); }, 2000);
-  }).catch(() => showToast('Copy failed - please copy manually'));
+async function copyNum(val, btnId, statusId) {
+  const btn = document.getElementById(btnId);
+  const number = String(val).replace(/[\s-]/g, '');
+  try {
+    if (!navigator.clipboard?.writeText) throw new Error('Clipboard API unavailable');
+    await navigator.clipboard.writeText(number);
+  } catch (_) {
+    // Older mobile browsers may need the selection-based fallback.
+    const field = document.createElement('textarea');
+    field.value = number;
+    field.setAttribute('readonly', '');
+    field.style.position = 'fixed';
+    field.style.opacity = '0';
+    let copied = false;
+    try {
+      document.body.appendChild(field);
+      field.focus();
+      field.select();
+      field.setSelectionRange(0, number.length);
+      copied = document.execCommand('copy');
+    } catch (_) {
+      copied = false;
+    } finally {
+      field.remove();
+      btn.focus();
+    }
+    if (!copied) {
+      showToast('Copy failed - please copy manually');
+      return;
+    }
+  }
+  const original = btn.dataset.originalLabel || btn.textContent;
+  btn.dataset.originalLabel = original;
+  btn.textContent = statusId ? 'নম্বর কপি হয়েছে!' : 'Copied!';
+  btn.classList.add('copied');
+  if (statusId) document.getElementById(statusId).textContent = 'নম্বর কপি হয়েছে!';
+  clearTimeout(btn.copyResetTimer);
+  btn.copyResetTimer = setTimeout(() => {
+    btn.textContent = original;
+    btn.classList.remove('copied');
+    if (statusId) document.getElementById(statusId).textContent = '';
+  }, 2500);
 }
 </script>
 </body>
