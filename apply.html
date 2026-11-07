@@ -179,12 +179,12 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(253,250,245,
 @keyframes spin{to{transform:rotate(360deg)}}
 
 /* Consent */
-.consent{display:flex;align-items:flex-start;gap:11px;background:rgba(62,32,5,0.03);border:1px solid rgba(62,32,5,0.09);border-radius:10px;padding:13px;cursor:pointer;transition:border-color .2s;margin-top:4px}
-.consent:hover,.consent.on{border-color:var(--teal)}
-.cbox{width:19px;height:19px;border:2px solid rgba(62,32,5,0.22);border-radius:5px;flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center;transition:all .2s;background:#fff}
-.cbox.on{background:var(--teal);border-color:var(--teal)}
-.cbox.on::after{content:'✓';color:#fff;font-size:0.72rem;font-weight:700}
+.consent{display:flex;align-items:flex-start;gap:11px;background:rgba(62,32,5,0.03);border:1px solid rgba(62,32,5,0.09);border-radius:10px;padding:13px;transition:border-color .2s;margin-top:4px}
+.consent:hover,.consent:focus-within,.consent.on{border-color:var(--teal)}
+.consent-check{width:19px;height:19px;flex-shrink:0;margin:2px 0 0;accent-color:var(--teal);cursor:pointer}
+.consent-check:focus-visible{outline:3px solid var(--teal-dark);outline-offset:3px}
 .consent-txt{font-size:0.78rem;color:var(--text-mid);line-height:1.6}
+.consent-txt label{cursor:pointer}
 .consent-txt a{color:var(--teal-dark);font-weight:600;text-decoration:underline}
 .cerr{font-size:0.71rem;color:var(--red);margin-top:5px;display:none}
 
@@ -714,16 +714,15 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(253,250,245,
           </div>
 
           <!-- Consent -->
-          <div class="consent" id="consentBox" onclick="toggleConsent()">
-            <div class="cbox" id="cbox"></div>
+          <div class="consent" id="consentBox">
+            <input class="consent-check" type="checkbox" id="termsConsent" required aria-describedby="consentHelp cerr" onchange="toggleConsent()">
             <div class="consent-txt">
-              I confirm that the information above is correct and I agree to the
-              <a href="https://kayes26.notion.site/Learn-with-Kayes-Terms-Conditions-4115705a435d812c8ececa7381044452?source=copy_link" target="_blank" onclick="event.stopPropagation()">Terms &amp; Conditions</a>
-              of Learn with Kayes.
-              <br><span style="font-size:0.72rem;color:var(--text-light)">আমি নিশ্চিত করছি যে উপরের সকল তথ্য সঠিক এবং আমি Terms &amp; Conditions-এ সম্মত।</span>
+              <label for="termsConsent">I confirm that the information above is correct and I agree to the Terms &amp; Conditions of Learn with Kayes.</label>
+              <br><a href="https://kayesmd.com/learn/terms/" target="_blank" rel="noopener noreferrer">Read Terms &amp; Conditions (opens in a new tab)</a>
+              <br><span id="consentHelp" lang="bn" style="font-size:0.72rem;color:var(--text-light)">আমি নিশ্চিত করছি যে উপরের সকল তথ্য সঠিক এবং আমি Terms &amp; Conditions-এ সম্মত।</span>
             </div>
           </div>
-          <div class="cerr" id="cerr">Please accept the Terms &amp; Conditions to continue.</div>
+          <div class="cerr" id="cerr" role="alert">Please accept the Terms &amp; Conditions to continue.</div>
 
           <div class="step-nav">
             <button class="btn-back" onclick="goBack(2)">← Back</button>
@@ -765,7 +764,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(253,250,245,
       <button class="btn-pay" id="payBtn" onclick="openModal()" disabled>
         💳 Submit Form First - Payment Unlocks
       </button>
-      <div class="pay-note">By proceeding you agree to our <a href="https://kayes26.notion.site/Learn-with-Kayes-Terms-Conditions-4115705a435d812c8ececa7381044452?source=copy_link" target="_blank">Terms &amp; Conditions</a>.</div>
+      <div class="pay-note">By proceeding you agree to our <a href="https://kayesmd.com/learn/terms/" target="_blank" rel="noopener noreferrer">Terms &amp; Conditions</a>.</div>
     </div>
 
   </div>
@@ -888,7 +887,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(253,250,245,
 <script>
 /* ── STATE ── */
 let step = 0;
-let agreed = false;
 let submitted = false;
 let feeAmt = '২,২০০৳';
 
@@ -939,11 +937,15 @@ function validateStep(n) {
     ok = vField('payOnce','g-payOnce', v=>v!=='') && ok;
     ok = vField('payMethod','g-payMethod', v=>v!=='') && ok;
     ok = vField('version','g-version', v=>v!=='') && ok;
-    if(!agreed){
+    const consent=document.getElementById('termsConsent');
+    if(!consent.checked){
       document.getElementById('cerr').style.display='block';
+      consent.setAttribute('aria-invalid','true');
+      if(ok) consent.focus();
       ok = false;
     } else {
       document.getElementById('cerr').style.display='none';
+      consent.removeAttribute('aria-invalid');
     }
   }
   return ok;
@@ -967,10 +969,12 @@ function goBack(n) { setStep(n-1); }
 
 /* ── CONSENT ── */
 function toggleConsent(){
-  agreed=!agreed;
-  document.getElementById('cbox').classList.toggle('on',agreed);
-  document.getElementById('consentBox').classList.toggle('on',agreed);
-  if(agreed) document.getElementById('cerr').style.display='none';
+  const consent=document.getElementById('termsConsent');
+  document.getElementById('consentBox').classList.toggle('on',consent.checked);
+  if(consent.checked){
+    document.getElementById('cerr').style.display='none';
+    consent.removeAttribute('aria-invalid');
+  }
 }
 
 /* ── SUBMIT ── */
