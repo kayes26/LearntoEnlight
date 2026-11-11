@@ -181,12 +181,15 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(253,250,245,
 /* Consent */
 .consent{display:flex;align-items:flex-start;gap:11px;background:rgba(62,32,5,0.03);border:1px solid rgba(62,32,5,0.09);border-radius:10px;padding:13px;transition:border-color .2s;margin-top:4px}
 .consent:hover,.consent:focus-within,.consent.on{border-color:var(--teal)}
-.consent-check{width:19px;height:19px;flex-shrink:0;margin:2px 0 0;accent-color:var(--teal);cursor:pointer}
+.consent.has-err{border-color:var(--red);background:rgba(180,50,40,0.07)}
+.consent-check{width:24px;height:24px;flex-shrink:0;margin:10px 0 0;accent-color:var(--teal);cursor:pointer}
 .consent-check:focus-visible{outline:3px solid var(--teal-dark);outline-offset:3px}
-.consent-txt{font-size:0.78rem;color:var(--text-mid);line-height:1.6}
-.consent-txt label{cursor:pointer}
+.consent-txt{flex:1;font-size:0.78rem;color:var(--text-mid);line-height:1.6}
+.consent-txt label{display:flex;align-items:center;min-height:44px;font-size:0.85rem;cursor:pointer}
 .consent-txt a{color:var(--teal-dark);font-weight:600;text-decoration:underline}
+.consent-note{margin:8px 0 0;color:var(--text-mid)}
 .cerr{font-size:0.71rem;color:var(--red);margin-top:5px;display:none}
+.consent + .cerr{font-size:0.82rem;font-weight:600;line-height:1.5}
 
 /* Success */
 .success-wrap{display:none;padding:40px;text-align:center}
@@ -715,14 +718,15 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(253,250,245,
 
           <!-- Consent -->
           <div class="consent" id="consentBox">
-            <input class="consent-check" type="checkbox" id="termsConsent" required aria-describedby="consentHelp cerr" onchange="toggleConsent()">
+            <input class="consent-check" type="checkbox" id="termsConsent" required autocomplete="off" aria-describedby="consentHelp consentNote cerr" onchange="toggleConsent()">
             <div class="consent-txt">
               <label for="termsConsent">I confirm that the information above is correct and I agree to the Terms &amp; Conditions of Learn with Kayes.</label>
               <br><a href="https://kayesmd.com/learn/terms/" target="_blank" rel="noopener noreferrer">Read Terms &amp; Conditions (opens in a new tab)</a>
               <br><span id="consentHelp" lang="bn" style="font-size:0.72rem;color:var(--text-light)">আমি নিশ্চিত করছি যে উপরের সকল তথ্য সঠিক এবং আমি Terms &amp; Conditions-এ সম্মত।</span>
+              <p class="consent-note" id="consentNote" lang="bn">শুধু ফর্ম পূরণ করলে আপনার তথ্য জমা হয় না। “Submit Application” চাপলে তথ্য পাঠানোর চেষ্টা করা হয়।</p>
             </div>
           </div>
-          <div class="cerr" id="cerr" role="alert">Please accept the Terms &amp; Conditions to continue.</div>
+          <div class="cerr" id="cerr" role="alert" lang="bn">আবেদন জমা দিতে শর্তাবলি পড়ে সম্মতির ঘরে টিক দিন।</div>
 
           <div class="step-nav">
             <button class="btn-back" onclick="goBack(2)">← Back</button>
@@ -731,6 +735,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(253,250,245,
               <div class="spinner"></div>
             </button>
           </div>
+          <div class="cerr" id="submitError" role="alert"></div>
         </div>
 
       </div><!-- /form-body -->
@@ -938,13 +943,17 @@ function validateStep(n) {
     ok = vField('payMethod','g-payMethod', v=>v!=='') && ok;
     ok = vField('version','g-version', v=>v!=='') && ok;
     const consent=document.getElementById('termsConsent');
+    const consentBox=document.getElementById('consentBox');
     if(!consent.checked){
       document.getElementById('cerr').style.display='block';
+      consentBox.classList.add('has-err');
       consent.setAttribute('aria-invalid','true');
-      if(ok) consent.focus();
+      consentBox.scrollIntoView({behavior:'smooth',block:'center'});
+      consent.focus({preventScroll:true});
       ok = false;
     } else {
       document.getElementById('cerr').style.display='none';
+      consentBox.classList.remove('has-err');
       consent.removeAttribute('aria-invalid');
     }
   }
@@ -970,8 +979,10 @@ function goBack(n) { setStep(n-1); }
 /* ── CONSENT ── */
 function toggleConsent(){
   const consent=document.getElementById('termsConsent');
-  document.getElementById('consentBox').classList.toggle('on',consent.checked);
+  const consentBox=document.getElementById('consentBox');
+  consentBox.classList.toggle('on',consent.checked);
   if(consent.checked){
+    consentBox.classList.remove('has-err');
     document.getElementById('cerr').style.display='none';
     consent.removeAttribute('aria-invalid');
   }
@@ -979,8 +990,12 @@ function toggleConsent(){
 
 /* ── SUBMIT ── */
 async function submitForm(){
-  if(!validateStep(2)) return;
   const btn=document.getElementById('subBtn');
+  if(submitted || btn.disabled) return;
+  if(!validateStep(2)) return;
+  const error=document.getElementById('submitError');
+  error.textContent='';
+  error.style.display='none';
   btn.classList.add('loading'); btn.disabled=true;
 
   const data={
@@ -999,13 +1014,32 @@ async function submitForm(){
     submittedAt: new Date().toISOString(),
   };
 
-  // n8n webhook - replace with your actual URL when ready
   const WEBHOOK = 'https://dqfll391.n8n.runn.to/webhook/admissio-form';
-  // Fire and forget - don't await, show success immediately
-  fetch(WEBHOOK, {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)}).catch(()=>{});
-
-  btn.classList.remove('loading'); btn.disabled=false;
-  showSuccess(data);
+  const controller=new AbortController();
+  const timeout=setTimeout(()=>controller.abort(),20000);
+  let confirmed=false;
+  try {
+    const response=await fetch(WEBHOOK, {method:'POST',body:new URLSearchParams(data),signal:controller.signal});
+    const result=await response.json();
+    // n8n must return this only after ClickUp confirms task creation.
+    if(response.ok && result && result.success===true && typeof result.clickupTaskId==='string' && result.clickupTaskId.trim()){
+      confirmed=true;
+    }
+    // Only an explicit no-write response makes another submission safe.
+    else if(result && result.success===false && result.clickupTaskCreated===false){
+      btn.disabled=false;
+      error.textContent='আবেদন জমা হয়নি। অনুগ্রহ করে আবার চেষ্টা করুন।';
+    } else {
+      error.textContent='আবেদনের অবস্থা নিশ্চিত করা যায়নি। আবার Submit চাপবেন না। অনুগ্রহ করে আমাদের সাথে যোগাযোগ করুন।';
+    }
+  } catch(e) {
+    error.textContent='আবেদনের অবস্থা নিশ্চিত করা যায়নি। আবার Submit চাপবেন না। অনুগ্রহ করে আমাদের সাথে যোগাযোগ করুন।';
+  } finally {
+    clearTimeout(timeout);
+    btn.classList.remove('loading');
+    if(error.textContent) error.style.display='block';
+  }
+  if(confirmed) showSuccess(data);
 }
 
 function showSuccess(d){
