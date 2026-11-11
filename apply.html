@@ -190,6 +190,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(253,250,245,
 .consent-note{margin:8px 0 0;color:var(--text-mid)}
 .cerr{font-size:0.71rem;color:var(--red);margin-top:5px;display:none}
 .consent + .cerr{font-size:0.82rem;font-weight:600;line-height:1.5}
+#submitError{font-size:0.83rem;line-height:1.6}
 
 /* Success */
 .success-wrap{display:none;padding:40px;text-align:center}
@@ -1017,6 +1018,7 @@ async function submitForm(){
   const WEBHOOK = 'https://dqfll391.n8n.runn.to/webhook/admissio-form';
   const controller=new AbortController();
   const timeout=setTimeout(()=>controller.abort(),20000);
+  const uncertainMessage='⚠️ আপনার আবেদনের অবস্থা নিশ্চিত করা যায়নি। অনুগ্রহ করে আবার Submit করবেন না।<br><br>💬 সাহায্যের জন্য পেজের ডান পাশে থাকা <strong>Chat বাটনে</strong> ক্লিক করুন।';
   let confirmed=false;
   try {
     const response=await fetch(WEBHOOK, {method:'POST',body:new URLSearchParams(data),signal:controller.signal});
@@ -1030,10 +1032,10 @@ async function submitForm(){
       btn.disabled=false;
       error.textContent='আবেদন জমা হয়নি। অনুগ্রহ করে আবার চেষ্টা করুন।';
     } else {
-      error.textContent='আবেদনের অবস্থা নিশ্চিত করা যায়নি। আবার Submit চাপবেন না। অনুগ্রহ করে আমাদের সাথে যোগাযোগ করুন।';
+      error.innerHTML=uncertainMessage;
     }
   } catch(e) {
-    error.textContent='আবেদনের অবস্থা নিশ্চিত করা যায়নি। আবার Submit চাপবেন না। অনুগ্রহ করে আমাদের সাথে যোগাযোগ করুন।';
+    error.innerHTML=uncertainMessage;
   } finally {
     clearTimeout(timeout);
     btn.classList.remove('loading');
