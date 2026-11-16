@@ -539,6 +539,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(253,250,245,
         <h2>Admission Application Form</h2>
         <p>সব তারকা (*) চিহ্নিত ঘর পূরণ করুন · Fill all required fields carefully</p>
       </div>
+      <p style="padding:18px 40px 0;color:var(--text-mid);font-size:0.88rem;font-weight:600;line-height:1.6">A parent or legal guardian should complete this form on behalf of the student.</p>
 
       <!-- Progress -->
       <div class="form-progress" id="fProgress">
@@ -626,9 +627,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(253,250,245,
             <div class="fgroup" id="g-district">
               <label class="flabel">
                 <span class="flabel-main">আপনার বাসার বিস্তারিত ঠিকানা দিন <span class="req">*</span></span>
-                <span class="flabel-hint">Used for sending student info and rewards if any</span>
+                <span class="flabel-hint">We use this address to deliver gifts or rewards to students.</span>
               </label>
-              <input class="finput" id="district" type="text" placeholder="Enter your full address">
+              <input class="finput" id="district" type="text" placeholder="Enter your full address" required>
               <span class="ferr">Please enter your address.</span>
             </div>
           </div>
@@ -721,8 +722,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(253,250,245,
           <div class="consent" id="consentBox">
             <input class="consent-check" type="checkbox" id="termsConsent" required autocomplete="off" aria-describedby="consentHelp consentNote cerr" onchange="toggleConsent()">
             <div class="consent-txt">
-              <label for="termsConsent">I confirm that the information above is correct and I agree to the Terms &amp; Conditions of Learn to Enlight.</label>
-              <br><a href="https://kayesmd.com/learn/terms/" target="_blank" rel="noopener noreferrer">Read Terms &amp; Conditions (opens in a new tab)</a>
+              <label for="termsConsent">I confirm that I am the student’s parent or legal guardian. I agree to the <a href="https://kayesmd.com/learn/terms/" target="_blank" rel="noopener noreferrer">Terms &amp; Conditions</a> and consent to the use of the student’s information as described in the <a href="https://kayesmd.com/learn/privacy/" target="_blank" rel="noopener noreferrer">Privacy Policy</a>.</label>
               <br><span id="consentHelp" lang="bn" style="font-size:0.72rem;color:var(--text-light)">আমি নিশ্চিত করছি যে উপরের সকল তথ্য সঠিক এবং আমি Terms &amp; Conditions-এ সম্মত।</span>
               <p class="consent-note" id="consentNote" lang="bn">শুধু ফর্ম পূরণ করলে আপনার তথ্য জমা হয় না। “Submit Application” চাপলে তথ্য পাঠানোর চেষ্টা করা হয়।</p>
             </div>
@@ -770,7 +770,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(253,250,245,
       <button class="btn-pay" id="payBtn" onclick="openModal()" disabled>
         💳 Submit Form First - Payment Unlocks
       </button>
-      <div class="pay-note">By proceeding you agree to our <a href="https://kayesmd.com/learn/terms/" target="_blank" rel="noopener noreferrer">Terms &amp; Conditions</a>.</div>
+      <div class="pay-note">By proceeding you agree to our <a href="https://kayesmd.com/learn/terms/" target="_blank" rel="noopener noreferrer">Terms &amp; Conditions</a> and <a href="https://kayesmd.com/learn/privacy/" target="_blank" rel="noopener noreferrer">Privacy Policy</a>.</div>
     </div>
 
   </div>
@@ -1116,5 +1116,23 @@ document.addEventListener('click',e=>{
 });
 </script>
 
+<style>
+.site-footer{display:grid;grid-template-columns:1fr auto;align-items:center;gap:24px;padding:40px 5%;background:#1A0C03;color:rgba(255,255,255,.55)}
+.site-footer .footer-name{margin-bottom:4px;color:#fff;font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:900}
+.site-footer .footer-tagline{color:rgba(255,255,255,.35);font-size:.78rem;letter-spacing:.08em}
+.site-footer .footer-address{margin-top:8px;color:rgba(255,255,255,.55);font-size:.78rem}
+.site-footer .footer-links{display:flex;flex-wrap:wrap;gap:24px}
+.site-footer .footer-links a{color:rgba(255,255,255,.45);text-decoration:none;font-size:.82rem}
+.site-footer .footer-links a:hover{color:#00B4C8}
+.site-footer .footer-copy{grid-column:1/-1;padding-top:24px;border-top:1px solid rgba(255,255,255,.08);font-size:.75rem;text-align:center}
+.site-footer .footer-copy a{color:rgba(255,255,255,.55);text-decoration:underline}
+@media (max-width:900px){.site-footer{grid-template-columns:1fr}}
+@media (max-width:600px){.site-footer{padding:34px 16px}.site-footer .footer-links{gap:14px 18px}}
+</style>
+<footer class="site-footer">
+  <div class="footer-brand"><div class="footer-name">Learn to Enlight</div><div class="footer-tagline">Enrich Your knowledge</div><div class="footer-address">Dhaka, Bangladesh - 1207</div></div>
+  <nav class="footer-links" aria-label="Learn to Enlight sections"><a href="/learn/about/">About Us</a><a href="/learn/privacy/">Privacy Policy</a><a href="/learn/terms/">Terms &amp; Conditions</a><a href="/">Home</a></nav>
+  <div class="footer-copy">© 2026 Learn to Enlight. All rights reserved. · +880 1701 064194 · <a href="/learn/terms/">Terms &amp; Conditions</a></div>
+</footer>
 </body>
 </html>
