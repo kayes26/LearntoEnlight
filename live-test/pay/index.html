@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow,noarchive">
+  <meta name="theme-color" content="#3E2005">
+  <title>Private live test checkout · Learn to Enlight</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+  <style>
+    :root{--brown:#3E2005;--brown-mid:#7A4010;--teal:#00B4C8;--teal-dark:#007A8A;--cream:#FAF7F2;--cream-dark:#F2EDE4;--white:#fff;--muted:#765E4D;--line:#E7D8C8;--danger:#B42318;--success:#16794C;--shadow:0 18px 60px rgba(62,32,5,.12)}
+    *{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--brown);font-family:Inter,system-ui,sans-serif}a{color:inherit}button,input,select{font:inherit}
+    .shell{width:min(100% - 32px,980px);margin:auto}.topbar{padding:20px 0;display:flex;align-items:center;justify-content:space-between}.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:800}.brand img{width:42px;height:42px;border-radius:12px}.brand small{display:block;color:var(--muted);font-size:11px;font-weight:500;margin-top:2px}.support{font-size:12px;color:var(--muted);text-decoration:none}
+    main{padding:24px 0 70px}.eyebrow{margin:0 0 10px;color:var(--teal-dark);font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase}.intro{max-width:650px;margin-bottom:24px}.intro h1{font-family:"Playfair Display",serif;font-size:clamp(36px,8vw,62px);line-height:1.02;margin:0 0 14px}.intro p{color:var(--muted);line-height:1.7;margin:0}.grid{display:grid;gap:18px}.card{background:var(--white);border:1px solid rgba(62,32,5,.08);border-radius:22px;box-shadow:var(--shadow);padding:22px}.student-card{display:flex;gap:14px;align-items:center;background:linear-gradient(135deg,#fff,#f7fbfb);border-color:rgba(0,180,200,.22)}.avatar{width:46px;height:46px;display:grid;place-items:center;border-radius:50%;background:var(--brown);color:#fff;font-weight:800}.label{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:700}.student-name{font-size:20px;font-weight:800;margin-top:4px}.field{margin-top:18px}.field label{display:flex;justify-content:space-between;gap:12px;font-size:13px;font-weight:700;margin-bottom:8px}.hint{color:var(--muted);font-size:11px;font-weight:500}.input,select{width:100%;border:1px solid var(--line);border-radius:12px;padding:13px 14px;background:#fff;color:var(--brown);outline:none}.input:focus,select:focus{border-color:var(--teal);box-shadow:0 0 0 3px rgba(0,180,200,.14)}.amount-wrap{position:relative}.amount-wrap span{position:absolute;left:14px;top:13px;font-weight:700;color:var(--muted)}.amount-wrap input{padding-left:52px;font-weight:800;font-size:18px}.summary{background:var(--brown);color:#fff}.summary h2{margin:0 0 18px;font-size:17px}.summary-row{display:flex;justify-content:space-between;gap:16px;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.14);font-size:13px}.summary-row:last-of-type{border:0}.summary .value{font-weight:700;text-align:right}.total{display:flex;align-items:end;justify-content:space-between;gap:12px;margin-top:18px;padding-top:18px;border-top:1px solid rgba(255,255,255,.28)}.total strong{font-size:30px;line-height:1}.btn{width:100%;border:0;border-radius:999px;padding:15px 18px;font-weight:800;cursor:pointer}.btn-primary{background:var(--teal);color:var(--brown);margin-top:20px}.btn-primary:hover{background:#19c9d9}.btn:disabled{opacity:.55;cursor:not-allowed}.secure{font-size:11px;color:rgba(255,255,255,.72);line-height:1.6;margin:16px 0 0}.notice{display:none;padding:13px 15px;border-radius:12px;margin:16px 0;font-size:13px;line-height:1.5}.notice.show{display:block}.notice.error{background:#fff1f0;color:var(--danger);border:1px solid #ffd2ce}.notice.success{background:#effaf4;color:var(--success);border:1px solid #c9efd9}.loading{display:flex;gap:10px;align-items:center;color:var(--muted);padding:16px 0}.dot{width:8px;height:8px;border-radius:50%;background:var(--teal);animation:pulse 1s infinite alternate}@keyframes pulse{to{opacity:.25;transform:scale(.7)}}footer{color:var(--muted);font-size:12px;text-align:center;margin-top:30px}.hidden{display:none!important}
+    @media(min-width:760px){main{padding-top:54px}.grid{grid-template-columns:1.05fr .95fr;align-items:start}.card{padding:28px}.summary{position:sticky;top:18px}.topbar{padding-top:28px}}
+  </style>
+</head>
+<body>
+  <header class="shell topbar"><a class="brand" href="/"><img src="/assets/learn-to-enlight-logo.png" alt=""><span>Learn to Enlight<small>Enrich your knowledge</small></span></a><a class="support" href="https://t.me/LearntoEnlightbot" target="_blank" rel="noopener">Need help? Telegram ↗</a></header>
+  <main class="shell">
+    <section class="intro"><p class="eyebrow">Private payment link</p><h1>Complete your tuition payment.</h1><p>Review the student details, choose the billing duration, and continue to PayStation. Your payment is verified automatically after checkout.</p></section>
+    <div id="loading" class="loading"><span class="dot"></span><span>Loading your secure payment details…</span></div>
+    <div id="notice" class="notice" role="status"></div>
+    <section id="checkout" class="grid hidden" aria-live="polite">
+      <div>
+        <div class="card student-card"><div id="avatar" class="avatar">L</div><div><div class="label">Student</div><div id="studentName" class="student-name">—</div></div></div>
+        <div class="card" style="margin-top:18px"><div class="field" style="margin-top:0"><label for="phone">Phone number <span class="hint">You can edit this</span></label><input id="phone" class="input" type="tel" autocomplete="tel" required></div><div class="field"><label for="duration">Payment duration <span class="hint">You can edit this</span></label><select id="duration" required></select></div><div class="field"><label for="amount">Server-priced amount <span class="hint">From ClickUp Program Pricing</span></label><div class="amount-wrap"><span>৳</span><input id="amount" class="input" type="number" min="1" step="1" inputmode="numeric" readonly aria-readonly="true" required></div></div></div>
+      </div>
+      <aside class="card summary"><h2>Payment summary</h2><div class="summary-row"><span>Package</span><span id="package" class="value">Tuition</span></div><div class="summary-row"><span>Billing cycle</span><span id="summaryDuration" class="value">—</span></div><div class="summary-row"><span>Payment method</span><span class="value">PayStation hosted checkout</span></div><div class="total"><span>Total</span><strong id="total">৳0</strong></div><button id="payButton" class="btn btn-primary" type="button" disabled>Continue to secure checkout →</button><p class="secure">You will be redirected to PayStation. Learn to Enlight never sees your card, wallet PIN, or OTP. There is no “I Paid” button and no transaction-ID form on this page.</p></aside>
+    </section>
+    <footer>Existing direct bKash payments remain available on the <a href="/payment.html">payment page</a>.</footer>
+  </main>
+  <script>
+    const CONFIG = Object.freeze({
+      lookupUrl: 'https://dqfll391.n8n.runn.to/webhook/lte-pay-lookup-live',
+      createUrl: 'https://dqfll391.n8n.runn.to/webhook/lte-pay-create-live'
+    });
+    const params = new URLSearchParams(location.search);
+    const token = params.get('token') || params.get('ref') || '';
+    const state = { lookup: null };
+    const $ = id => document.getElementById(id);
+    const money = value => { const n=Number(value); return Number.isFinite(n) ? `৳${n.toLocaleString('en-BD')}` : '—'; };
+    function showNotice(message, type='error'){ const el=$('notice'); el.textContent=message; el.className=`notice show ${type}`; }
+    function initials(name){ return String(name || 'L').trim().split(/\s+/).slice(0,2).map(x=>x[0]).join('').toUpperCase() || 'L'; }
+    function setAmountFromDuration(){ const option=$('duration').selectedOptions[0]; if(!option) return; const configured=option.dataset.amount; if(configured) $('amount').value=configured; updateSummary(); }
+    function updateSummary(){ $('summaryDuration').textContent=$('duration').selectedOptions[0]?.textContent || '—'; $('total').textContent=money($('amount').value); }
+    async function postJson(url, body){ const response=await fetch(url,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(body)}); let data={}; try{data=await response.json()}catch{} if(!response.ok || data.success===false) throw new Error(data.message || 'The payment service is unavailable.'); return data; }
+    function render(data){
+      state.lookup=data; const customer=data.customer || data; const pricing=data.pricing || {};
+      const suppliedAmount=Number(customer.amount); const options=Array.isArray(pricing.options) && pricing.options.length ? pricing.options : (Number.isFinite(suppliedAmount) && suppliedAmount>0 ? [{label:customer.billingCycle || 'Monthly',value:customer.billingCycle || 'Monthly',amount:suppliedAmount}] : []);
+      if(!options.length || !options.every(o=>Number.isFinite(Number(o.amount)) && Number(o.amount)>0)) throw new Error('The payment service did not return a valid amount. Please try again shortly.');
+      $('studentName').textContent=customer.studentName || 'Student'; $('avatar').textContent=initials(customer.studentName); $('phone').value=customer.phone || '';
+      $('package').textContent=customer.packageName || 'Tuition';
+      $('duration').innerHTML=options.map(o=>`<option value="${String(o.value ?? o.label).replace(/"/g,'&quot;')}" data-amount="${Number(o.amount)}">${String(o.label ?? o.value)}</option>`).join('');
+      const preferred=customer.billingCycle && [...$('duration').options].find(o=>o.value===customer.billingCycle || o.textContent===customer.billingCycle); if(preferred) $('duration').value=preferred.value;
+      $('amount').value=Number.isFinite(suppliedAmount) && suppliedAmount>0 ? suppliedAmount : Number($('duration').selectedOptions[0]?.dataset.amount); if(!(Number($('amount').value)>0)) throw new Error('The payment service did not return a payable amount. Please try again shortly.');
+      $('duration').addEventListener('change',setAmountFromDuration); $('amount').addEventListener('input',updateSummary); updateSummary(); $('payButton').classList.remove('hidden'); $('payButton').disabled=false; $('loading').classList.add('hidden'); $('checkout').classList.remove('hidden');
+    }
+    function renderAlreadyPaid(data){
+      const customer=data.customer || data; const paidAmount=Number(data.paidAmount ?? data.amount); if(!(paidAmount>0)) throw new Error('The payment was marked received but its paid amount is missing.'); state.lookup=data; $('studentName').textContent=customer.studentName || 'Student'; $('avatar').textContent=initials(customer.studentName); $('package').textContent=customer.packageName || 'Tuition'; $('summaryDuration').textContent='Payment already received'; $('total').textContent=money(paidAmount); $('phone').closest('.field').classList.add('hidden'); $('duration').closest('.field').classList.add('hidden'); $('amount').closest('.field').classList.add('hidden'); $('payButton').classList.add('hidden'); $('payButton').disabled=true; $('loading').classList.add('hidden'); $('checkout').classList.remove('hidden'); showNotice(`Payment already received. Verified amount: ${money(paidAmount)}.`, 'success');
+    }
+    async function init(){
+      if(!token){ $('loading').classList.add('hidden'); showNotice('This is a private payment link. Please open the link sent to you by Learn to Enlight.'); return; }
+      if(!CONFIG.lookupUrl || !CONFIG.createUrl){ $('loading').classList.add('hidden'); showNotice('Checkout is prepared but not connected yet. Configure the n8n webhook URLs in /pay/index.html before going live.'); return; }
+      try{ const data=await postJson(CONFIG.lookupUrl,{token,productType:'tuition'}); if(data.alreadyPaid===true || data.status==='already_paid') renderAlreadyPaid(data); else render(data); }catch(error){ $('loading').classList.add('hidden'); $('checkout').classList.add('hidden'); $('payButton').disabled=true; showNotice(error.message || 'Payment details could not be loaded. Please try again shortly.'); }
+    }
+    $('payButton').addEventListener('click',async()=>{
+      const button=$('payButton'); if(!state.lookup || button.disabled) return; const amount=Number($('amount').value); if(!$('phone').value.trim() || !amount || amount<1){ showNotice('Please enter a phone number and a valid amount.'); return; }
+      button.disabled=true; button.textContent='Preparing secure checkout…';
+      try{ const result=await postJson(CONFIG.createUrl,{token,productType:'tuition',studentName:state.lookup.customer?.studentName || $('studentName').textContent,phone:$('phone').value.trim(),billingCycle:$('duration').value,returnUrl:`${location.origin}/live-test/pay/`}); if(!result.paymentUrl) throw new Error('PayStation did not return a checkout URL.'); location.assign(result.paymentUrl); }catch(error){ showNotice(error.message); button.disabled=false; button.textContent='Continue to secure checkout →'; }
+    });
+    init();
+  </script>
+</body>
+</html>
